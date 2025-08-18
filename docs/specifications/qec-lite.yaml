@@ -1,0 +1,5 @@
+id: QEC-LITE-01
+scheme: repetition
+code_distance: 3
+cycle_time_ns: 1000
+threshold: 0.01

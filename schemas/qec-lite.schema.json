@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id","scheme","code_distance","cycle_time_ns","threshold"],
+  "properties": {
+    "id": {"type":"string"},
+    "scheme": {"type":"string", "enum":["repetition","surface","bacon-shor"]},
+    "code_distance": {"type":"integer", "minimum": 1},
+    "cycle_time_ns": {"type":"integer", "minimum": 10},
+    "threshold": {"type":"number", "minimum": 0, "maximum": 0.5}
+  }
+}

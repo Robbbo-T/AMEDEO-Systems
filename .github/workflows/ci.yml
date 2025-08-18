@@ -1,0 +1,95 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate UTCS manifest
+        run: |
+          python3 tools/manifest_check.py
+      - name: Validate YAML specs via JSON Schema
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema pyyaml
+          python - <<'PY'
+          import json, yaml, sys
+          from jsonschema import Draft7Validator
+          pairs = [
+            ("docs/specifications/aqua-nisq-chip.yaml","schemas/aqua-nisq-chip.schema.json"),
+            ("docs/specifications/qec-lite.yaml","schemas/qec-lite.schema.json"),
+            ("docs/specifications/control-plane.yaml","schemas/control-plane.schema.json"),
+            ("docs/specifications/qal-backend-aqua.yaml","schemas/qal-backend-aqua.schema.json"),
+          ]
+          ok=True
+          for y,s in pairs:
+            data=yaml.safe_load(open(y))
+            schema=json.load(open(s))
+            v=Draft7Validator(schema)
+            errs=list(v.iter_errors(data))
+            if errs:
+              ok=False
+              print(f"[SCHEMA FAIL] {y}")
+              for e in errs: print(" -", e.message)
+          sys.exit(0 if ok else 1)
+          PY
+      - name: Install build tools
+        run: sudo apt-get update && sudo apt-get install -y cmake build-essential cppcheck
+      - name: Configure
+        run: cmake -S . -B out
+      - name: Build
+        run: cmake --build out --config Release -- -j2
+      - name: Run test binary
+        run: ./out/tests_ata27_flight_ctrl_host
+      - name: SAST (cppcheck)
+        run: cppcheck --enable=warning,style,performance,portability --error-exitcode=1 src include tests
+
+  diagrams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Render Mermaid diagrams
+        run: |
+          npm -g i @mermaid-js/mermaid-cli
+          mkdir -p out/diagrams
+          for f in docs/diagrams/*.mmd; do
+            n=$(basename "$f" .mmd)
+            mmdc -i "$f" -o "out/diagrams/$n.svg"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: diagrams
+          path: out/diagrams/*.svg
+
+  latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install TeX Live minimal
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-bibtex-extra texlive-latex-extra
+      - name: Build Elsevier
+        run: |
+          mkdir -p out/latex
+          pdflatex -interaction=nonstopmode -output-directory out/latex latex/amedeo_elsevier.tex || true
+          bibtex out/latex/amedeo_elsevier || true
+          pdflatex -interaction=nonstopmode -output-directory out/latex latex/amedeo_elsevier.tex || true
+          pdflatex -interaction=nonstopmode -output-directory out/latex latex/amedeo_elsevier.tex || true
+      - name: Build IEEE
+        run: |
+          pdflatex -interaction=nonstopmode -output-directory out/latex latex/main_ieee.tex || true
+          bibtex out/latex/main_ieee || true
+          pdflatex -interaction=nonstopmode -output-directory out/latex latex/main_ieee.tex || true
+          pdflatex -interaction=nonstopmode -output-directory out/latex latex/main_ieee.tex || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: latex-pdfs
+          path: out/latex/*.pdf

@@ -1,0 +1,19 @@
+graph TD
+  A[Mission Apps] -->|ATD/HTS| C1[CPU Lane]
+  A -->|ATD/HTS| C2[FPGA Lane]
+  A -->|ATD/HTS| C3[DSP Lane]
+  C1 --> V{2oo3 Voter}
+  C2 --> V
+  C3 --> V
+  V --> FDI[Fault Detection and Isolation]
+  FDI --> ACT[Deterministic Actuation]
+  subgraph Photonic_TSN_Backplane
+    P1[Optical Modulators and Detectors]
+    P2[TSN Switch Fabric]
+  end
+  A --> P1 --> P2 --> V
+  subgraph Organic_Domain_RnD_NoFlight
+    O1[Bio Interfaces]
+    O2[Self Healing Modules]
+  end
+  O1 --> O2

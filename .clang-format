@@ -1,0 +1,8 @@
+BasedOnStyle: LLVM
+ColumnLimit: 100
+IndentWidth: 4
+AlignConsecutiveDeclarations: true
+AccessModifierOffset: -2
+AllowShortIfStatementsOnASingleLine: false
+BreakBeforeBraces: Allman
+SortIncludes: false
