@@ -1,0 +1,7 @@
+graph LR
+  K[Kernel Tracepoints] --> ECA[Evidence Collector Agent]
+  ECA --> WORM[Immutable Log]
+  WORM --> HSM[Hash and PQC Sign]
+  HSM --> DLT[Distributed Ledger Anchor]
+  DLT --> REPO[Evidence Repository]
+  REPO --> CERT[Audit and Certification]

@@ -1,0 +1,8 @@
+id: QAL-BACKEND-AQUA-01
+language: QAL
+version: 0.1
+backend: aqua
+features:
+  - pulses
+  - schedules
+  - measurement

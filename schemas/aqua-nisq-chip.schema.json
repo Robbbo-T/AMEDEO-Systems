@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id","vendor","qubits","error_rate_1q","error_rate_2q","topology","control"],
+  "properties": {
+    "id": {"type":"string"},
+    "vendor": {"type":"string"},
+    "qubits": {"type":"integer", "minimum": 1},
+    "error_rate_1q": {"type":"number", "minimum": 0, "maximum": 0.2},
+    "error_rate_2q": {"type":"number", "minimum": 0, "maximum": 0.5},
+    "topology": {"type":"string", "enum": ["linear","grid","full"]},
+    "control": {
+      "type":"object",
+      "additionalProperties": false,
+      "required":["sample_rate_hz","pulse_resolution_ns","calibration_interval_s"],
+      "properties":{
+        "sample_rate_hz":{"type":"integer","minimum":1000000},
+        "pulse_resolution_ns":{"type":"integer","minimum":1},
+        "calibration_interval_s":{"type":"integer","minimum":60}
+      }
+    },
+    "notes": {"type":"string"}
+  }
+}

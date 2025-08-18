@@ -1,0 +1,28 @@
+# Build outputs
+/out/
+/build/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/Makefile
+*.o
+*.obj
+*.exe
+*.log
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.toc
+*.out
+*.synctex.gz
+node_modules/
+
+# IDE/editor
+.vscode/
+.idea/
+.DS_Store
+
+# Artifacts
+*.svg
+*.png

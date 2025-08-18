@@ -1,0 +1,5 @@
+id: CTRL-PLANE-01
+transport: tsn
+clock_sync: ptp
+max_jitter_us: 1000
+safety_mode: 2oo3

@@ -1,0 +1,11 @@
+id: AQUA-NISQ-01
+vendor: AMEDEO
+qubits: 64
+error_rate_1q: 0.001
+error_rate_2q: 0.01
+topology: linear
+control:
+  sample_rate_hz: 100000000
+  pulse_resolution_ns: 2
+  calibration_interval_s: 3600
+notes: Minimal NISQ chip spec for AQUA-OS backend
