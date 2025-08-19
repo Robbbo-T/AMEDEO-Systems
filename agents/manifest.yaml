@@ -1,0 +1,76 @@
+version: "5.0+"
+artifacts:
+  - id: AQUART-AGT-MANIFEST-core_agents-v1.0
+    path: agents/manifest.yaml
+    type: Gobernanza
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    
+  - id: AQUART-AGT-DOC-POLICY-agent_governance-v1.0
+    path: agents/POLICY.md
+    type: Documento
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    
+  - id: AQUART-AGT-CODE-base_agent-v1.0
+    path: agents/base_agent.py
+    type: Codigo
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    
+  - id: AQUART-AGT-CODE-intents-v1.0
+    path: agents/intents.py
+    type: Codigo
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    
+  - id: AQUART-AGT-CODE-planner_agent-v1.0
+    path: agents/planner_agent.py
+    type: Codigo
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    depth: changes_decision_horizons
+    min_productivity_delta: 3.0
+    
+  - id: AQUART-AGT-CODE-buyer_agent-v1.0
+    path: agents/buyer_agent.py
+    type: Codigo
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    depth: changes_procurement_rhythms
+    min_productivity_delta: 3.0
+    
+  - id: AQUART-AGT-CODE-scheduler_agent-v1.0
+    path: agents/scheduler_agent.py
+    type: Codigo
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    depth: changes_capacity_limits
+    min_productivity_delta: 3.0
+    
+  - id: AQUART-AGT-CODE-ops_pilot_agent-v1.0
+    path: agents/ops_pilot_agent.py
+    type: Codigo
+    origin: Manual
+    hash: sha256:placeholder
+    state: Desarrollo
+    depth: changes_operational_envelopes
+    min_productivity_delta: 3.0
+
+orchestrator:
+  id: AQUART-AGT-ORCHESTRATOR-core_system-v1.0
+  min_individual_depth: 3.0
+  min_total_impact: 81.0
+  cascade_requirement: "3^4 minimum"
+  agents:
+    - StrategicPlannerAgent
+    - SupplyBuyerAgent
+    - ResourceSchedulerAgent
+    - OpsPilotAgent
