@@ -26,3 +26,22 @@ node_modules/
 # Artifacts
 *.svg
 *.png
+
+# Python artifacts
+*.pyc
+*.pyo
+*__pycache__*
+.coverage
+coverage.xml
+.pytest_cache/
+bandit.json
+det_evidence.json
+signatures.json
+sbom.spdx.json
+.env
+.venv
+venv/
+env/
+dist/
+*.egg-info/
+.tox/
