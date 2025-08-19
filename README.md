@@ -236,8 +236,6 @@ graph LR
 ---
 # Appendix A
 
-Here’s a **drop-in addition** to your repo and README for the **AMEDEO Quantum Resonance Algorithm (AQRA)**—a resonance-based error detection & correction (EDC) method that augments CQEA/QEC.
-
 ---
 
 ## ▲ README — New Section
