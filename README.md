@@ -5,459 +5,295 @@
 
 ---
 
-## Scope (P0)
+# AMEDEO Systems — PROGRAM
 
-* Infrastructure: CMake, CI (GitHub Actions/Jenkins), code style/configs.
-* **UTCS-MI v5.0** enforcement (manifest + checker + pre-commit).
-* Specs (YAML + JSON Schema) with CI validation.
-* Core C components:
+**Scope.** Umbrella program to deliver a certifiable, assemble-ready **BWB-Q100** aircraft stack and its full digital/operational infrastructure, integrating **AQUA-OS/ADT** (digital transponder), GAIA AIR-RTOS, quantum/classical CQEA stack, security/evidence, manufacturing/maintenance, and mission systems.
 
-  * **2oo3 voter**, **HAL\_Sim**, **DET** (stub), **PQC** (Kyber/Dilithium mock), **TSN** simulator (deterministic), **POAE** loop.
-* **ATA-27** host test: **1 kHz**, **1000 steps**, DET traces, 2oo3 assertions.
-* Mermaid diagrams + minimal LaTeX (Elsevier + IEEE) built in CI.
+**Governance.** All artifacts carry **UTCS-MI v5.0+** identifiers; program gates enforce DO-178C/DO-254/ARP4754A/DO-326A/CS-25 compliance where applicable.
 
 ---
 
-## Build
+## 1) Systems Catalog (with Exit Criteria)
 
-```bash
-cmake -S . -B out
-cmake --build out --config Release
-./out/tests_ata27_flight_ctrl_host
-```
+> Legend — **P**: priority batch (P0–P9) • **Owner**: workstream lead • **Path**: top dir • **IF**: key interfaces • **DoD**: Definition of Done (exit criteria)
 
----
+### A. Core OS & Runtime
 
-## Pre-commit hook
+1. **AQUA-OS / ADT (Aerospace Digital Transponder)**
+   **P:** P0–P2 • **Path:** `/kernel`, `/framework/cqea`, `/integration/system-of-systems`
+   **IF:** ARINC 653 partitions, QAL, AEIC, SEAL, DET, UTCS-MI
+   **DoD:**
 
-```bash
-git config core.hooksPath .githooks
-```
+   * Boots on HAL\_Sim; passes **ATA-27** host test @1 kHz/1000 steps with 2oo3 consensus = 100%
+   * ARINC 653-like scheduling demo; worst-case jitter ≤ **50 µs** (host profile)
+   * UTCS-MI coverage = **100%** of P0–P1 binaries/configs
+   * SAST (`-Wall -Wextra -Werror`, cppcheck) no high findings
 
-* Hook runs: `python3 tools/manifest_check.py`
+2. **GAIA AIR-RTOS (Deterministic Kernel)**
+   **P:** P0–P3 • **Path:** `/kernel/core`, `/kernel/config`
+   **IF:** ADT, AEIC, SEAL, POAE loop
+   **DoD:**
 
----
+   * Time/space partitioning verified on host; WCET profiles recorded
+   * Safety monitor + fallback (Simplex) operational; envelope checker unit-tested
+   * DO-178C Objective trace matrix A-1..A-7 (draft) populated
 
-## UTCS-MI v5.0
+3. **HAL\_Sim & Drivers (I/O, timers, TSN sim)**
+   **P:** P0–P2 • **Path:** `/drivers`, `/kernel/io`
+   **IF:** Voter, QAL backend, DET logger
+   **DoD:**
 
-* **Canonical identifier** (for this document):
+   * Deterministic timer @1 kHz; jitter ≤ **1 ms** (host)
+   * TSN photonic **sim** lanes (deterministic scheduling) passing latency ≤ **200 µs** scenario
 
-```
-EstándarUniversal:Documento-Desarrollo-DO178C-00.00-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionHumana-CROSS-AmedeoPelliccia-7f3c9a2b-RestoDeVidaUtil
-```
+4. **2oo3 Voter & FDI**
+   **P:** P0–P1 • **Path:** `/kernel/core/voter`, `/domains/.../ATA-27-00`
+   **IF:** Flight-law replicas (CPU/FPGA/DSP stubs)
+   **DoD:**
 
-* **Manifest**: `UTCS/manifest.json` (map: `path → canonical id`)
-* **Checker**: `tools/manifest_check.py` validates structure + file existence.
-
----
-
-## CI
-
-* **GitHub Actions**: `.github/workflows/ci.yml`
-
-  * Build + tests + UTCS-MI + schema validation + Mermaid render + LaTeX (Elsevier/IEEE) → artifacts.
-* **Jenkins**: `Jenkinsfile` mirrors core stages for on-prem runs.
-
----
-
-## Quality Gates (P0)
-
-* **UTCS-MI**: 100% artifacts listed and passing checker.
-* **Build**: `-Wall -Wextra -Werror -O2 -pedantic` clean.
-* **Test**: 1000 steps @1 kHz, **no voter mismatches**; sim jitter ≤ **1 ms**.
-* **Schemas**: All YAML pass JSON Schema.
-* **SAST**: `cppcheck` — no high findings.
+   * Byte-wise compare + consensus; fault injection suite (single-lane drop/mismatch) green
+   * Coverage ≥ **95%** unit lines
 
 ---
 
-## Directory (top-level)
+### B. Quantum / CQEA Stack
 
-```text
-AMEDEO-Systems/
-├─ README.md
-├─ CMakeLists.txt          ── Build system
-├─ .github/workflows/ci.yml── CI pipeline
-├─ UTCS/manifest.json      ── UTCS-MI registry
-├─ docs/
-│  ├─ diagrams/            ── Mermaid sources (TCA, POAE, DET)
-│  └─ latex/               ── Elsevier/IEEE templates + refs.bib
-├─ include/amedeo/         ── Public headers (voter, HAL, DET, PQC, TSN, POAE)
-├─ src/amedeo/             ── Core C modules (voter_logic, hal_sim, etc.)
-├─ domains/AIR_CIVIL_AVIATION/ATA-27-00/bwb-flight-control.cpp
-├─ drivers/qpu/            ── QPU shim (aqua_nisq)
-├─ kernel/quantum/         ── QAL backend (aqua)
-└─ tests/ata27_flight_ctrl_host.c
-```
+5. **QAL (Quantum Abstraction Layer)**
+   **P:** P1–P2 • **Path:** `/kernel/quantum`, `/drivers/qpu`
+   **IF:** AQUA\_NISQ backend, QEC-lite, AEIC
+   **DoD:**
 
----
+   * Submit/poll/abort API stable; back-pressure & budgets enforced
+   * Latency p99 submit→start ≤ **500 µs** (sim), readout→result ≤ **800 µs**
 
-## Diagrams (Mermaid)
+6. **AQUA\_NISQ Backend (64q spec)**
+   **P:** P1–P2 • **Path:** `/docs/specifications/aqua-nisq-chip.yaml`
+   **IF:** QAL, control-plane, DET
+   **DoD:**
 
-> **Note:** Titles use quotes to ensure GitHub Mermaid renders correctly.
+   * Spec passes schema; validation plan (`tests/validation-plan.yaml`) in CI
+   * Targets recorded: RB 1q ≥ 0.999, 2q ≥ 0.992 (lab placeholder)
 
-**TCA — Triadic Computational Architecture**
+7. **QEC-Lite & Control-Plane**
+   **P:** P2–P3 • **Path:** `/docs/specifications/qec-lite.yaml`, `control-plane.yaml`
+   **IF:** QAL, AEIC, TSN hybrid
+   **DoD:**
 
-```mermaid
-graph TD
-  A[Mission Apps & Services] -->|ATD/HTS| C1[CPU Lane]
-  A -->|ATD/HTS| C2[FPGA Lane]
-  A -->|ATD/HTS| C3[DSP Lane]
+   * Mitigations (ZNE/RC/DD) wired; syndrome/log pipeline to DET
+   * “Stabilizer layer” design review complete (CQEA-hybrid bus)
 
-  C1 --> V{2oo3 Voter}
-  C2 --> V
-  C3 --> V
-  V --> FDI[Fault Detection & Isolation]
-  FDI --> ACT[Deterministic Actuation]
+8. **AEIC (Sync) & SEAL (Atomic Security/Actuation)**
+   **P:** P2–P4 • **Path:** `/framework/cqea`, `/framework/amores`
+   **IF:** ADT, QAL, GAIA AIR-RTOS
+   **DoD:**
 
-  subgraph P["Photonic TSN Backplane"]
-    P1[Optical I/O] --> P2[TSN Switch Fabric]
-  end
-  A --> P1
-  P2 --> V
+   * **φ\_sync** trace-norm metric implemented; bounded-latency guard `τ_ctl ≤ τ_max` enforced in MPC demo
+   * SEAL gate simulation (energy/temp/clock) with safe-stop; audit trail in DET
 
-  subgraph O["Organic R&D Domain (No-Flight)"]
-    O1[Bio-Interfaces] --> O2[Self-Healing Modules]
-  end
-```
+9. **QASI-AERIAL (Bloch competency control)**
+   **P:** P3–P4 • **Path:** `/framework/cqea/algorithms`
+   **IF:** AEIC/SEAL, Hybrid MPC
+   **DoD:**
 
-**POAE — Perceive → Observe → Actuate → Evolve**
-
-```mermaid
-flowchart LR
-  P[Perceive] --> O[Observe]
-  O --> A[Actuate]
-  A --> E[Evolve]
-  E --> P
-```
-
-**DET — Digital Evidence Twin Pipeline**
-
-```mermaid
-graph LR
-  K[Kernel Tracepoints] --> ECA[Evidence Collector Agent]
-  ECA --> WORM[WORM Storage]
-  WORM --> H[HSM Hash + PQC Signature]
-  H --> DLT[Distributed Ledger Anchor]
-  DLT --> REPO[Evidence Repository]
-  REPO --> CERT[Certification Audits]
-```
+   * Hybrid MPC sample closes loop; attitude demo meets ±0.1° (sim)
+   * Fidelity calc + pulse planner unit-tested
 
 ---
 
-## Comparative Table — AMEDEO vs. IMA
+### C. Security, Evidence, Standards
 
-| Dimension      | IMA (ARINC 653/RTOS)   | **AMEDEO Systems (AQUA-OS/ADT)**                 |
-| -------------- | ---------------------- | ------------------------------------------------ |
-| Architecture   | Homogeneous electronic | **Triadic**: CPU+FPGA+DSP, photonic, organic     |
-| Determinism    | Static time partitions | **2oo3 + Hybrid Task Scheduler (HTS)**           |
-| Adaptability   | Limited updates        | **POAE loop + WEE (gated)**                      |
-| Networking     | AFDX                   | **TSN photonic**, jitter ≤ **1 µs**              |
-| Security       | Classical crypto       | **Zero-Trust + PQC (Kyber/Dilithium) + HSM/FAT** |
-| Evidence       | Docs/logs manual       | **DET**: safety-cases-as-code, PQC-anchored      |
-| Sustainability | Indirect KPIs          | **EaP**: energy/CO₂ budgets at runtime           |
-| Legacy         | Costly porting         | **FORTRAN interpreter + Ada/SPARK/C**            |
+10. **AMEDEO AI-SPEC (AI Security Platform)**
+    **P:** P2–P4 • **Path:** `/docs/ai-spec`, `/security`
+    **IF:** DET, UTCS-MI, PQC, AQUA-OS/ADT
+    **DoD:**
 
----
+    * Policy engine MVP; UTCS-MI validators pass ≥ 99% AI artifacts
+    * PQ readiness index ≥ 0.8 (alg agility + fallbacks)
 
-## Tests — ATA-27 Host (1 kHz)
+11. **PQC Module (Kyber/Dilithium)**
+    **P:** P3–P4 • **Path:** `/kernel/security`, `/standards/quantum/nist-pqc`
+    **IF:** SEAL, DET, CI signing
+    **DoD:**
 
-* **Path**: `tests/ata27_flight_ctrl_host.c`
-* **Run**: 1000 steps @1 kHz with deterministic `HAL_Sim`, **DET** trace stubs, **2oo3** consensus assertions.
+    * Keygen/sign/verify APIs; CI artifacts signed; perf budget documented
 
----
+12. **DET (Digital Evidence Twin)**
+    **P:** P2–P3 • **Path:** `/tools/det`, `/var/logs`
+    **IF:** All subsystems
+    **DoD:**
 
-## LaTeX (Docs)
+    * Immutable store + UTCS-MI linkage; evidence hash anchored; replayable audits
 
-* Elsevier: `docs/latex/amedeo_elsevier.tex`
-* IEEE: `docs/latex/main_ieee.tex`
-* BibTeX: `docs/latex/refs.bib`
-* Built by CI and published as artifacts.
+13. **UTCS-MI v5.0+ (Content Standard)**
+    **P:** P0–P1 • **Path:** `/UTCS`, `/tools/manifest_check.py`
+    **IF:** Pre-commit, CI
+    **DoD:**
 
----
-
-## License & Contact
-
-* License: see `LICENSE`
-* Contact: `info@aqua.aerospace`
+    * 100% P0–P1 artifacts carry valid IDs; **OriginCriteria** field populated; CI gate blocks drift
 
 ---
 
-## Acronyms & Glossary (Project-Scoped)
+### D. Mission, Optimization, Governance
 
-* **ADT** — *Aerospace Digital Transponder* (AQUA-OS core role).
-* **AEIC** — *Application Entangling Interfaced Context* (sync coupling).
-* **AFDX** — *Avionics Full-Duplex Switched Ethernet*.
-* **AGGI** — *Artificial General Global Intelligence* (system-of-systems orchestration).
-* **AMEDEO** — *Aerospace Main Evolution of Digital, Environmental and Operating Systems* (umbrella program).
-* **AMOReS** — *Aerospace Master Operative Regulating System* (governance/compliance).
-* **ARINC 653** — Avionics partitioning standard (temporal/spatial isolation).
-* **ATD** — *Autonomous Task Dispatcher* (workload decomposition/dispatch).
-* **AQUA-OS** — *Aerospace and Quantum United Applications — Operating System* (this repo’s OS).
-* **AQMC** — *Aerospace & Quantum Main Cluster* (legacy label; subsumed by AMEDEO).
-* **BWB** — *Blended-Wing Body* (aircraft configuration; e.g., BWB-Q100).
-* **CQEA** — *Classical Quantum-Extensible Applications* (hybrid app layer).
-* **CS-25** — EASA Certification Specifications for Large Aeroplanes.
-* **CMake/CI/CD** — Build system / Continuous Integration/Delivery.
-* **DET** — *Digital Evidence Twin* (immutable, PQC-signed runtime evidence).
-* **DeMOS** — *Dual-Engined Metrics Operational System* (KPIs/utility).
-* **DO-178C** — Software considerations for airborne systems (DAL-A/B/C…).
-* **DO-254** — Design assurance for airborne electronic hardware.
-* **DO-326A** — Airworthiness security process specification (cyber).
-* **EaP** — *Energy-as-Policy* (runtime energy/CO₂ budgets).
-* **FDI / FDIR** — *Fault Detection (Isolation/Recovery)*.
-* **FAT** — *Flight Authorization Token* (authZ token for flight ops).
-* **GAIA AIR-RTOS** — Intelligent real-time OS (deterministic kernel).
-* **HAL / HAL\_Sim** — *Hardware Abstraction Layer* / deterministic host sim.
-* **HSM** — *Hardware Security Module*.
-* **HTS** — *Hybrid Task Scheduler* (tri-substrate scheduling).
-* **IMA** — *Integrated Modular Avionics*.
-* **ISO/IEC/ETSI/IEEE** — Standards bodies (e.g., ISO 9001, ETSI QKD, IEEE TSN).
-* **Kyber / Dilithium** — NIST PQC KEM / signature algorithms.
-* **Mermaid** — Markdown diagrams (GitHub-native rendering).
-* **NISQ** — *Noisy Intermediate-Scale Quantum* (era/hardware class).
-* **P0…P9** — Priority batches (incremental roadmap).
-* **PPOA / MMRO / MROR** — *Predictive & Preventive Overall Overhaul* / *Monitoring, Maintenance, Repair & Overhaul* / *Material Recycling Over Retirement* (lifecycle).
-* **PQC** — *Post-Quantum Cryptography*.
-* **POAE** — *Perceive–Observe–Actuate–Evolve* loop.
-* **QAL** — *Quantum Abstraction Layer*.
-* **QASI-AERIAL** — *Quantum-API Structured Implementation for Aerial Autonomy*.
-* **QEC / ZNE / RC / DD** — *Quantum Error Correction* / *Zero-Noise Extrapolation* / *Randomized Compiling* / *Dynamical Decoupling*.
-* **QKD** — *Quantum Key Distribution*.
-* **SICOCA** — *Sustainable Industrial Chain Optimisation Circuit* (supply chain as QUBO/Ising circuit).
-* **SEAL** — *Serving Entanglement API Locking* (atomic verify+actuate).
-* **SPARK/Ada** — Language/toolset for formal verification.
-* **TSN** — *Time-Sensitive Networking* (deterministic networking).
-* **TSP** — *Temporal Sync Protocol* (time/phase telemetry; `TSP@AEIC`).
-* **UTCS-MI** — *Universal Technical Content Standard — Machine-Interpretable* (13-field identifier).
-* **WEE** — *Wisdom Evolution Engine* (learning/evolution engine).
-* **2oo3** — *Two-out-of-Three* voting (heterogeneous redundancy).
-* **AQRA** — *AMEDEO Quantum Resonance Algorithm*: resonance-based error detection & correction across photonic/QAL layers, fused with QEC and 2oo3 voting.
+14. **DeMOS (Utility Optimizer)**
+    **P:** P3–P4 • **Path:** `/framework/demos`
+    **IF:** AMOReS, WEE, AGGI
+    **DoD:**
 
----
-# Appendix A
+    * Objective + constraints solved on scenarios; KPIs exported to DET
+
+15. **AMOReS (Governance/Compliance)**
+    **P:** P3–P5 • **Path:** `/framework/amores`
+    **IF:** DO-178C/254/326A, CS-25 matrices
+    **DoD:**
+
+    * Compliance monitors live; safety-cases-as-code ≥ 95% coverage (draft)
+
+16. **WEE (Wisdom Evolution Engine)**
+    **P:** P3–P5 • **Path:** `/framework/wee`
+    **IF:** POAE loop, GAIA AIR-RTOS
+    **DoD:**
+
+    * Offline learning / online inference separation; guardrails (RTA) verified
+
+17. **AGGI Orchestrator (System-of-Systems)**
+    **P:** P3–P5 • **Path:** `/integration/system-of-systems`
+    **IF:** DeMOS, GAIA, platforms
+    **DoD:**
+
+    * Global objective solved across missions; integration tests green
+
+18. **SICOCA (Supply Chain QUBO)**
+    **P:** P4–P6 • **Path:** `/framework/cqea/algorithms/sicoca`
+    **IF:** QAL/AEIC, logistics ops
+    **DoD:**
+
+    * QUBO mapping & hybrid solve demo; baseline vs quantum-assisted report
+
+19. **PPOA-MMRO-MROR (Maintenance & Recycling)**
+    **P:** P5–P7 • **Path:** `/domains/.../lifecycle`
+    **IF:** DeMOS KPIs, ops
+    **DoD:**
+
+    * Predictive + preventive pipelines; materials recycling plans validated
 
 ---
 
-## ▲ README — New Section
+### E. Platforms & Domain (BWB-Q100)
 
-### AMEDEO Quantum Resonance Algorithm (AQRA)
+20. **BWB-Q100 Avionics & Flight Controls (ATA-27)**
+    **P:** P3–P6 • **Path:** `/domains/AIR_CIVIL_AVIATION/ATA-27-00`
+    **IF:** Voter/FDI, QASI-AERIAL, GAIA AIR-RTOS
+    **DoD:**
 
-**Purpose.** Resonance-driven EDC that detects faults via **phase/frequency response anomalies** and applies **syndrome-guided recovery**. AQRA complements QEC-lite (surface-like) and operates across the **Photonic TSN hybrid backplane** and **QAL**.
+    * HIL scenario passes; CS-25 §25.1301/1309 evidence assembled (draft→final)
 
-**Principle.**
+21. **Propulsion & Power (ATA-71/24)**
+    **P:** P3–P6 • **Path:** `/domains/.../ATA-71-00`, `/ATA-24-00`
+    **IF:** DeMOS energy, EaP
+    **DoD:**
 
-1. **Probe:** inject calibrated micro-pulses at reference resonances $f_r$ (per qubit/lane).
-2. **Sense:** measure complex response $H(f)=A(f)e^{j\phi(f)}$.
-3. **Detect:** compute residuals vs. golden $H^\*$ → $\Delta A,\ \Delta\phi$, lock error if $\|\Delta\|>\tau$.
-4. **Syndrome:** map locked errors to stabilizers; fuse with QEC parity checks.
-5. **Correct:** apply Pauli $\{X,Z,Y\}$ or discard lane; escalate to 2oo3 voter if needed.
+    * Energy budgets enforced; safety interlocks verified; data → DET
 
-**Latency budget.** Probe+fit ≤ **100 µs**, classify ≤ **30 µs**, correct ≤ **20 µs** (≤ **150 µs** total, fits TSN ≤200 µs).
+22. **AMEDEO SAF System (Sustainable Fuel)**
+    **P:** P4–P7 • **Path:** `/domains/.../saf`
+    **IF:** DeMOS, lifecycle, ops
+    **DoD:**
 
-**Targets (P0/P1).**
+    * Fuel handling, emissions tracking, safety docs (ops manuals) complete
 
-* Detection $P_D$ ≥ **0.995**, False Alarm $P_{FA}$ ≤ **1e-3** (lab).
-* Phase-lock RMS ≤ **500 ps** (TSP).
-* Net QAOA-8 gain with ZNE ≥ **1.5×** (with AQRA active).
+23. **Ground Segment, GSE & Training**
+    **P:** P4–P7 • **Path:** `/domains/.../operations`, `/training`
+    **IF:** GAIA, DET, CaaS/DiQIaaS
+    **DoD:**
 
----
-
-## ▲ Mermaid (safe labels)
-
-```mermaid
-flowchart LR
-  P["Probe @ resonance f_r"] --> S["Sense: H(f)=A·e^{jφ}"]
-  S --> D["Detect: Δ vs golden H*"]
-  D -->|syndromes| F["Fuse: QEC parity + AQRA"]
-  F --> C["Correct: Pauli / discard lane"]
-  C --> T["Telemeter to DET (PQC-signed)"]
-  T --> P
-```
+    * Simulators + procedures published; training KPIs met
 
 ---
 
-## ▲ Spec (add to `docs/specifications/aqra.yaml`)
+### F. Infra & CI/CD
 
-```yaml
-spec_id: AQRA-V1
-version: 1.0
-owner: AMEDEO Systems
-purpose: "Resonance-based error detection & correction for CQEA/QEC-lite."
-interfaces:
-  sync: TSP@AEIC
-  control_plane: CTRL-PLANE-V2
-  evidence: DET@PQC
-resonance_probe:
-  fr_grid_ghz: [4.8, 6.2]
-  dwell_us: 10
-  amp_dbm: -40
-  sweep_points: 17
-detection:
-  fit_model: lorentzian_complex
-  thresholds:
-    amp_db: 0.5
-    phase_deg: 3.0
-    chisq_max: 2.0
-fusion:
-  qec: surface_like_demo
-  policy: "apply_pauli_else_discard_lane"
-latency_budget_us:
-  probe_fit: 100
-  classify: 30
-  correct: 20
-telemetry:
-  det_fields: [fr, amp, phase, chisq, syndrome, action, ts]
-  sign: pqc_dilithium3
-```
+24. **Build/CI (GitHub Actions & Jenkins)**
+    **P:** P0–P1 • **Path:** `/.github/workflows`, `/Jenkinsfile`
+    **IF:** UTCS-MI, schema, tests, docs, LaTeX
+    **DoD:**
+
+    * One-click pipeline builds, tests, renders Mermaid, compiles LaTeX; artifacts published
+
+25. **Schemas & Repos (YAML/JSON Schema, SBOM, Artifacts)**
+    **P:** P0–P2 • **Path:** `/docs/specifications`, `/schemas`, `/dist`
+    **IF:** CI validation, DET
+    **DoD:**
+
+    * All specs validated; SBOM generated; artifact repo signed
 
 ---
 
-## ▲ C API (add `include/amedeo/aqra.h`)
+## 2) Program Phases & Gates
 
-```c
-#pragma once
-#include <stdint.h>
-#ifdef __cplusplus
-extern "C" {
-#endif
+| Phase                   | Batches | Gate (Exit)                                                  |
+| ----------------------- | ------- | ------------------------------------------------------------ |
+| **Foundations**         | P0–P1   | CI green; UTCS-MI 100% on P0/P1; ATA-27 host test passes     |
+| **Core Expansion**      | P2–P3   | AEIC/SEAL demos; DET live; QAL/QEC-lite integrated           |
+| **Mission & Platform**  | P3–P5   | DeMOS/AMOReS/WEE integrated; BWB subsystems HIL passing      |
+| **Certification Drive** | P5–P7   | DO-178C/254 artifacts ≥90% complete; CS-25 partial approvals |
+| **Ops & Scale**         | P7–P9   | Full ops manuals; training; lifecycle & SAF in place         |
 
-typedef struct {
-  float fr_min_ghz, fr_max_ghz;
-  uint16_t sweep_points;
-  float dwell_us, amp_dbm;
-  float thr_amp_db, thr_phase_deg, chisq_max;
-} aqra_conf_t;
-
-typedef struct { float amp_db; float phase_deg; float chisq; } aqra_feat_t;
-typedef enum { AQRA_OK=0, AQRA_ALERT=1, AQRA_FAULT=2 } aqra_flag_t;
-typedef enum { AQRA_ACT_NONE=0, AQRA_ACT_PX, AQRA_ACT_PZ, AQRA_ACT_PY, AQRA_ACT_DROP } aqra_action_t;
-
-typedef struct {
-  aqra_feat_t feat;
-  aqra_flag_t flag;
-  aqra_action_t action;
-  uint32_t syndrome_mask;
-} aqra_result_t;
-
-int aqra_init(const aqra_conf_t* cfg);
-int aqra_probe_and_fit(uint16_t lane_id, aqra_feat_t* out);     // probe H(f), fit features
-int aqra_detect(const aqra_feat_t* f, aqra_flag_t* flag);       // compare vs golden
-int aqra_fuse_syndrome(uint32_t qec_mask, aqra_flag_t* flag, uint32_t* out_mask);
-int aqra_correct(uint16_t lane_id, uint32_t synd, aqra_action_t* action); // apply Pauli/drop
-int aqra_step(uint16_t lane_id, uint32_t qec_mask, aqra_result_t* out);   // end-to-end
-#ifdef __cplusplus
-}
-#endif
-```
+**Regulatory gates:** DO-178C (DAL-A for flight-critical), DO-254, DO-326A, ARP4754A/4761, **CS-25** compliance packages.
 
 ---
 
-## ▲ C stub (add `src/amedeo/aqra.c`)
+## 3) BWB-Q100 Assemble-Ready Checklist
 
-```c
-#include "amedeo/aqra.h"
-#include <math.h>
-static aqra_conf_t G;
-
-int aqra_init(const aqra_conf_t* cfg){ G=*cfg; return 0; }
-
-static float s_abs(float x){ return x < 0 ? -x : x; }
-
-int aqra_probe_and_fit(uint16_t lane_id, aqra_feat_t* out){
-  (void)lane_id;
-  // TODO: acquire IQ frames from CTRL-PLANE-V2, fit Lorentzian
-  out->amp_db = 0.0f; out->phase_deg = 0.0f; out->chisq = 1.0f;
-  return 0;
-}
-
-int aqra_detect(const aqra_feat_t* f, aqra_flag_t* flag){
-  *flag = (s_abs(f->amp_db) > G.thr_amp_db || s_abs(f->phase_deg) > G.thr_phase_deg || f->chisq > G.chisq_max)
-          ? AQRA_ALERT : AQRA_OK;
-  return 0;
-}
-
-int aqra_fuse_syndrome(uint32_t qec_mask, aqra_flag_t* flag, uint32_t* out_mask){
-  *out_mask = qec_mask;                 // placeholder fusion
-  if (*flag==AQRA_ALERT && qec_mask)    // alert + parity → escalate
-    *flag = AQRA_FAULT;
-  return 0;
-}
-
-int aqra_correct(uint16_t lane_id, uint32_t synd, aqra_action_t* action){
-  (void)lane_id;
-  if (synd & 0x1u) *action = AQRA_ACT_PX;
-  else if (synd & 0x2u) *action = AQRA_ACT_PZ;
-  else if (synd & 0x4u) *action = AQRA_ACT_PY;
-  else *action = AQRA_ACT_DROP;
-  return 0;
-}
-
-int aqra_step(uint16_t lane_id, uint32_t qec_mask, aqra_result_t* out){
-  aqra_feat_t f; aqra_flag_t fl; uint32_t sm; aqra_action_t act;
-  aqra_probe_and_fit(lane_id,&f);
-  aqra_detect(&f,&fl);
-  aqra_fuse_syndrome(qec_mask,&fl,&sm);
-  aqra_correct(lane_id,sm,&act);
-  out->feat=f; out->flag=fl; out->action=act; out->syndrome_mask=sm;
-  return 0;
-}
-```
+* **Avionics kernel** (GAIA AIR-RTOS + ADT) DAL-A verified (sim/HIL evidence)
+* **Flight controls (ATA-27)**: 2oo3 + fallback logic; HIL & envelope tests PASS
+* **Power/propulsion (ATA-24/71)**: interlocks, energy budgets (EaP), safety docs
+* **Comms/network**: TSN deterministic; security (PQC + SEAL) attested
+* **Evidence**: DET repository complete; safety-cases-as-code linked to UTCS-MI
+* **Ops/training**: simulators, procedures, emergency drills approved
+* **Manufacturing & support**: MRL, spares, GSE, maintenance & recycling (MMRO/MROR)
 
 ---
 
-## ▲ Test hook (add `tests/aqra_host.c`)
+## 4) UTCS-MI v5.0+ (Program Rules)
 
-```c
-#include "amedeo/aqra.h"
-#include <assert.h>
-int main(void){
-  aqra_conf_t cfg = {.fr_min_ghz=4.8f,.fr_max_ghz=6.2f,.sweep_points=17,.dwell_us=10,
-                     .amp_dbm=-40,.thr_amp_db=0.5f,.thr_phase_deg=3.0f,.chisq_max=2.0f};
-  aqra_init(&cfg);
-  aqra_result_t r;
-  for(int i=0;i<1000;i++){
-    aqra_step(0 /*lane*/, 0x3 /*mock syndrome*/, &r);
-    assert(r.action==AQRA_ACT_PX || r.action==AQRA_ACT_PZ || r.action==AQRA_ACT_PY || r.action==AQRA_ACT_DROP);
-  }
-  return 0;
-}
-```
+* **13 mandatory fields** (v5.0) + **OriginCriteria** (v5.0+): `{Manual|Assisted|Autogenesis}`, with provenance `(Author|Tool|Pipeline)` and commit hash.
+* **Deliverable types (IA-generable):** `Documento|Especificacion|Codigo|Prueba|Build|Validacion|Runtime|Operacion|Gobernanza|Modelo|Esquema|Evidencia|Script|Dataset|SBOM|Artefacto`.
+* **Manifest:** `/UTCS/manifest.json` maps `path → id`; CI gate via `tools/manifest_check.py`.
 
 ---
 
-## ▲ Build integration
+## 5) Quality Gates (per release)
 
-* **CMakeLists.txt** — add sources:
-
-```cmake
-target_sources(amedeo PRIVATE src/amedeo/aqra.c)
-target_include_directories(amedeo PUBLIC include)
-add_executable(tests_aqra_host tests/aqra_host.c)
-target_link_libraries(tests_aqra_host amedeo)
-```
-
-* **CI** — run `tests_aqra_host` alongside ATA-27 host test.
+* **Build:** `-Wall -Wextra -Werror -O2 -pedantic` clean; cppcheck no HIGH
+* **Tests:** unit ≥ 90% lines; ATA-27 host 1 kHz/1000 steps green; latency/jitter within spec
+* **Security:** PQC signatures on artifacts; SBOM complete; zero critical vulns
+* **Evidence:** DET audit replayable; UTCS-MI coverage ≥ 99%
+* **Docs:** Mermaid rendered, LaTeX PDFs built; CS-25/DO-178C matrices updated
 
 ---
 
-## ▲ DET fields (append to collector)
+## 6) KPIs (program)
 
-```
-aqra.fr, aqra.amp_db, aqra.phase_deg, aqra.chisq, aqra.flag, aqra.syndrome, aqra.action, ts
-```
+* **Determinism:** DAL-A jitter ≤ 50 µs (sim/HIL)
+* **Sync:** AEIC `φ_sync` within bound; `τ_ctl ≤ τ_max`
+* **Energy:** EaP +20→40% efficiency gains vs baseline
+* **Compliance:** audit pass ≥ 95%; artifacts traceable 100%
+* **Readiness:** TRL/MRL per subsystem ≥ planned phase target
+
+---
+
+## 7) References
+
+* Standards: DO-178C, DO-254, ARP4754A/4761, DO-326A, CS-25, IEEE 802.1 TSN, NIST PQC
+* Internal specs: `docs/specifications/*`, `docs/architecture/*`
+* Diagrams: `docs/diagrams/*.mmd` (rendered in CI)
+* LaTeX: `latex/amedeo_elsevier.tex`, `latex/main_ieee.tex`, `latex/refs.bib`
 
 ---
 
-## ▲ UTCS-MI ID (register in `UTCS/manifest.json`)
-
-```
-"docs/specifications/aqra.yaml":
-"EstándarUniversal:[Especificacion][Desarrollo][AQUA][AQRA][ResonanceEDC][0007][v1.0][AMEDEO][GeneracionHumana][CROSS][AQRA][<hash>][Vigente]"
-```
-
-*(compute `<hash>` with your existing checker on commit)*
-
----
+**Owner:** Program Management Office (PMO)
+**Change control:** PR + UTCS-MI update + DET evidence link per change
 
 
 
