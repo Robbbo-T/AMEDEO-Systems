@@ -21,5 +21,13 @@
   "latex/main_ieee.tex": "EstándarUniversal:Documento-Desarrollo-DO178C-00.00-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionHumana-CROSS-AmedeoPelliccia-7f3c9a2b-RestoDeVidaUtil",
   "latex/refs.bib": "EstándarUniversal:Documento-Desarrollo-DO178C-00.00-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionHumana-CROSS-AmedeoPelliccia-7f3c9a2b-RestoDeVidaUtil",
   "latex/README_ieee.txt": "EstándarUniversal:Documento-Desarrollo-DO178C-00.00-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionHumana-CROSS-AmedeoPelliccia-7f3c9a2b-RestoDeVidaUtil",
-  "latex/README_elsevier.txt": "EstándarUniversal:Documento-Desarrollo-DO178C-00.00-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionHumana-CROSS-AmedeoPelliccia-7f3c9a2b-RestoDeVidaUtil"
+  "latex/README_elsevier.txt": "EstándarUniversal:Documento-Desarrollo-DO178C-00.00-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionHumana-CROSS-AmedeoPelliccia-7f3c9a2b-RestoDeVidaUtil",
+  "agents/base_agent.py": "EstándarUniversal:Agente-Desarrollo-AQUART-00.01-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-cfbc1ebd-AgenteProfundo",
+  "agents/planner_agent.py": "EstándarUniversal:Agente-Desarrollo-AQUART-00.02-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-f2ac5b86-PlanificadorEstrategico",
+  "agents/buyer_agent.py": "EstándarUniversal:Agente-Desarrollo-AQUART-00.03-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-a9a7fd1f-CompradorCadena",
+  "agents/scheduler_agent.py": "EstándarUniversal:Agente-Desarrollo-AQUART-00.04-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-758e4940-ProgramadorRecursos",
+  "agents/ops_pilot_agent.py": "EstándarUniversal:Agente-Desarrollo-AQUART-00.05-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-d90e683d-PilotoOperacional",
+  "agents/POLICY.md": "EstándarUniversal:Documento-Desarrollo-AQUART-00.06-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-0e4c58d4-PoliticaGobernanza",
+  "agents/manifest.yaml": "EstándarUniversal:Documento-Desarrollo-AQUART-00.07-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-manifest-ManifiestoAgentes",
+  "tests/test_depth.py": "EstándarUniversal:Prueba-Desarrollo-AQUART-00.08-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-testdpth-ValidacionProfundidad"
 }

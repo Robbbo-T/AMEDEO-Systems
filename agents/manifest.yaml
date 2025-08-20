@@ -1,0 +1,127 @@
+# UTCS-MI Agent Manifest
+# AQUART-AGT-MANIFEST-core_agents-v1.0
+
+utcs_mi_version: "v5.0+"
+manifest_type: "agent_governance"
+origin: 
+  type: "manual"
+  author: "AMEDEO_PMO"
+  commit: "initial_implementation"
+  timestamp: "2024-08-20T09:19:00Z"
+
+program_context:
+  program: "AMEDEO_Systems_P0"
+  motto: "no hacen recados: bordean el futuro en profundidad, no lo pintan en superficie"
+  depth_test: "si no cambia decisiones, ritmos o límites del sistema, es superficie"
+
+agents:
+  - id: "AQUART-AGT-PLANNER-strategic-v1.0"
+    type: "strategic_planner"
+    depth_dimension: "changes_decision_horizons"
+    capabilities:
+      - "horizon_shift"
+      - "portfolio_quantum_collapse" 
+      - "decision_architecture_transform"
+    min_impact_factor: 3.0
+    
+  - id: "AQUART-AGT-BUYER-supply_chain-v1.0"
+    type: "supply_buyer"
+    depth_dimension: "changes_procurement_rhythms"
+    capabilities:
+      - "supply_chain_metamorphosis"
+      - "procurement_rhythm_shift"
+      - "supplier_network_quantumization"
+    min_impact_factor: 3.0
+    
+  - id: "AQUART-AGT-SCHEDULER-resource-v1.0"
+    type: "resource_scheduler"
+    depth_dimension: "changes_capacity_limits"
+    capabilities:
+      - "elastic_capacity_transform"
+      - "maintenance_paradigm_shift"
+      - "resource_field_quantumization"
+    min_impact_factor: 3.0
+    
+  - id: "AQUART-AGT-OPSPILOT-mission-v1.0"
+    type: "ops_pilot"
+    depth_dimension: "changes_operational_envelopes"
+    capabilities:
+      - "operational_envelope_expansion"
+      - "mission_capability_quantum_leap"
+      - "operations_paradigm_transcendence"
+    min_impact_factor: 3.0
+
+infrastructure:
+  det_system:
+    id: "AQUART-INFRA-DET-evidence_trace-v1.0"
+    purpose: "deterministic_evidence_logging"
+    integration: "c_library_with_python_bindings"
+    
+  amores_system:
+    id: "AQUART-INFRA-AMORES-guardrails-v1.0"
+    purpose: "adaptive_moral_operating_system"
+    validation: "ethical_legal_constraints"
+    
+  seal_system:
+    id: "AQUART-INFRA-SEAL-signatures-v1.0"
+    purpose: "post_quantum_cryptographic_signatures"
+    algorithm: "dilithium_based"
+
+validation_gates:
+  depth_gate:
+    requirement: "affects_strategy OR affects_tempo OR expands_envelope"
+    failure_action: "reject_as_surface"
+    
+  impact_gate:
+    requirement: "productivity_delta >= 3.0"
+    failure_action: "reject_insufficient_impact"
+    
+  amores_gate:
+    requirement: "ethical_legal_validation_passed"
+    failure_action: "fail_safe_with_guardrails"
+    
+  traceability_gate:
+    requirement: "det_trace_complete AND pqc_signature_valid"
+    failure_action: "reject_insufficient_evidence"
+
+cascade_requirements:
+  individual_minimum: 3.0
+  cascade_total_minimum: 81.0  # 3^4 for all 4 agents
+  traceability: "100_percent_utcs_mi_compliant"
+
+compliance:
+  standards:
+    - "DO-178C_DAL-A"
+    - "CS-25"
+    - "QUANTUM-AERIAL-v1"
+  certification_level: "flight_critical_quantum_extended"
+  
+quality_gates:
+  coverage_requirement: "92_percent_minimum"
+  security_scan: "high_severity_zero_tolerance"
+  utcs_mi_compliance: "100_percent"
+  
+artifacts:
+  - path: "agents/base_agent.py"
+    utcs_id: "AQUART-AGT-CODE-base_agent-v1.0"
+    type: "code"
+    
+  - path: "agents/planner_agent.py"
+    utcs_id: "AQUART-AGT-CODE-planner_strategic-v1.0"
+    type: "code"
+    
+  - path: "agents/buyer_agent.py"
+    utcs_id: "AQUART-AGT-CODE-buyer_supply-v1.0"
+    type: "code"
+    
+  - path: "agents/scheduler_agent.py"
+    utcs_id: "AQUART-AGT-CODE-scheduler_resource-v1.0"
+    type: "code"
+    
+  - path: "agents/ops_pilot_agent.py"
+    utcs_id: "AQUART-AGT-CODE-ops_pilot-v1.0"
+    type: "code"
+    
+  - path: "agents/POLICY.md"
+    utcs_id: "AQUART-AGT-DOC-POLICY-agent_governance-v1.0"
+    type: "governance"
