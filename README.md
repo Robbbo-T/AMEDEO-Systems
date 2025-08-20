@@ -3,9 +3,215 @@
 **AMEDEO Systems** is a unified, certifiable framework for the **digital, environmental, and operational evolution** of aerospace systems.
 **AQUA-OS/ADT** acts as the **certifiable digital transponder**, bridging legacy avionics with multi-physics computing.
 
+# Systems Architecture Document (SAD)
+
+## The Convergence of Aerospace Integrity, Quantum Intelligence, and Autonomous Finance
+
+**Document ID:** AQUART-ARCH-SAD-AMEDEO-v1.0
+**Version:** 1.0
+**Date:** August 20, 2025
+**Classification:** Controlled Unclassified Information (CUI)
+**UTCS-MI v5.0+:** EstándarUniversal:Documento-Hibrida-AMEDEO-00.00-SystemArchitecture-0001-v1.0-AMEDEOSystems-GeneracionHibrida-CROSS-Architecture-a1b2c3d4-Certificacion
+
 ---
 
-# AMEDEO Systems — PROGRAM
+## 1.0 Introduction
+
+### 1.1 Purpose
+
+This document defines the system architecture for AMEDEO Systems, a unified, certifiable framework designed for the evolution of aerospace operations (BWB-Q100) and the genesis of autonomous, regenerative finance (P²AF). It outlines the integration of aerospace-grade integrity (DO-178C), quantum computation (CQEA), and deep agentic systems (3xI) to achieve unprecedented levels of efficiency, security, and impact.
+
+### 1.2 Scope
+
+The scope encompasses the BWB-Q100 aircraft stack, the underlying AQUA-OS/ADT (Aerospace Digital Transponder), GAIA AIR-RTOS, the Quantum stack, the 6-agent deep system, and the P²AF (Public-Private Autonomous Finance) system, initialized on August 20, 2025, from the Genesis Node in Madrid.
+
+### 1.3 Vision: The AMEDEO Doctrine
+
+AMEDEO is built upon a doctrine that transcends traditional technological boundaries, organized around three foundational pillars:
+
+1.  **Verdad Certificable (Certifiable Truth / The Integrity Stack):** Utilizing aerospace standards (2oo3 Voting, DO-178C) and immutable evidence (DET) to create a system where corruption is structurally impossible. Trust is mathematically verified, not assumed.
+2.  **Autonomía Regenerativa (Regenerative Autonomy / The Value Stack):** Implementing Business Safe Spaces (BSS) where resources saved by Integrity are multiplied (3x-10x) by Innovation agents (3xI), creating a regenerative economic cycle (P²AF).
+3.  **Prudencia Cuántica (Quantum Prudence / The Navigation Stack):** Employing quantum computation not just for optimization, but for anticipating systemic risks and navigating complexity, ensuring antifragility and long-term sustainability.
+
+## 2.0 System Architecture Overview (AQUA-BRIDGE-OS v22.0)
+
+AMEDEO employs a hybrid, multi-domain architecture bridging classical deterministic systems with quantum computational capabilities, orchestrated by deep agents.
+
+```mermaid
+flowchart TD
+
+    subgraph AL ["Application Layer - Domains"]
+        A1["BWB-Q100 Aerospace Operations"]
+        A2["P²AF Autonomous Finance"]
+        A3["Enterprise Business Safe Spaces"]
+    end
+
+    subgraph III ["3xI Engine - Deep Agents: >=729x Impact"]
+        B1["Intelligence: Planner, Capital Markets"]
+        B2["Integrity: Ethics Observer, Buyer"]
+        B3["Innovation: Ops Pilot, Scheduler"]
+    end
+
+    subgraph AQ ["AQUA-OS/ADT - The Bridge"]
+        C1["AQUA-BRIDGE Protocol"]
+        C2["Cross-Domain Validator, 2oo3"]
+        C3["AEIC/SEAL: Sync/Security"]
+    end
+
+    subgraph FL ["Foundation Layer"]
+        D1["GAIA AIR-RTOS: Deterministic DAL-A"]
+        D2["Quantum Stack: QAL, NISQ, QEC"]
+        D3["Aerospace Hardware"]
+    end
+
+    E["DET: Digital Evidence Twin"]
+
+    %% Connections
+    A1 & A2 & A3 --> B1 & B2 & B3
+    B1 & B2 & B3 --> C1
+    C1 --> C2 --> C3
+    C3 --> D1 & D2 & D3
+    D1 & D2 & D3 & C1 & B1 & B2 & B3 --> E
+```
+
+## 3.0 Core Components and Interactions
+
+### 3.1 AQUA-OS/ADT (The Digital Transponder)
+
+AQUA-OS serves as the certifiable bridge between legacy avionics, enterprise systems, and the quantum computational core.
+
+*   **Function:** Time/space partitioning (ARINC 653-like), cross-domain communication, system health monitoring.
+*   **Key Metric:** Jitter ≤ 50 µs (DAL-A requirement).
+*   **Integration:** Hosts the 3xI agents and manages the interface to GAIA AIR-RTOS and QAL.
+
+### 3.2 GAIA AIR-RTOS (The Deterministic Foundation)
+
+A hard real-time operating system ensuring deterministic execution for flight-critical and finance-critical operations.
+
+*   **Function:** WCET enforcement, safety monitoring, Simplex fallback.
+*   **Compliance:** DO-178C DAL-A targeted.
+
+### 3.3 The Quantum Stack (CQEA)
+
+The engine for solving classically intractable problems in optimization, risk analysis, and pattern recognition.
+
+*   **QAL (Quantum Abstraction Layer):** Manages access to quantum resources, ensuring latency bounds (submit→start ≤ 500 µs).
+*   **AQUA\_NISQ (64q spec):** The target hardware specification.
+*   **QEC-Lite & QASI-AERIAL:** Error mitigation and quantum control algorithms for aerospace applications.
+
+### 3.4 The 3xI Engine (Deep Agents)
+
+The orchestration layer composed of 6 specialized agents operating under the "depth over surface" mandate: *"Bordean el futuro en profundidad, no lo pintan en superficie."* Each agent must achieve ≥3x impact, resulting in a minimum systemic cascade impact of 729x (3^6).
+
+| Agent | Domain | Depth Mandate (What it Changes) |
+| :--- | :--- | :--- |
+| **Strategic Planner** | Intelligence | Decision Horizons (Strategy Architecture) |
+| **Supply Buyer** | Integrity/Innovation | Procurement Rhythms (Supply Chain Topology) |
+| **Resource Scheduler** | Innovation | Capacity Limits (Resource Elasticity) |
+| **Ops Pilot** | Innovation | Operational Envelopes (Mission Capabilities) |
+| **Capital Markets** | Intelligence/Innovation | Financial Paradigms (Capital Structures) |
+| **Ethics Observer** | Integrity | Integrity Fields (Ethical Paradigms) |
+
+**Coordination Mechanism:** Agents operate in a cascade, validated by AMOReS (Governance) and recorded in DET (Evidence).
+
+## 4.0 Cross-Cutting Concerns (The AMEDEO Differentiators)
+
+### 4.1 Aerospace Integrity Applied to Finance (Verdad Certificable)
+
+AMEDEO uniquely transfers aerospace safety standards to financial and business operations.
+
+#### 4.1.1 DO-178C DAL Mapping for Business/Finance
+
+We map Design Assurance Levels (DAL) from catastrophic aerospace failures to catastrophic business/financial impacts.
+
+| DAL | Aerospace Definition | AMEDEO Business/Finance Equivalent | Mitigation Required |
+| :--- | :--- | :--- | :--- |
+| **DAL-A** | Catastrophic | Major fraud, systemic corruption, market collapse | 2oo3 Voting, Formal Verification, PQC |
+| **DAL-B** | Hazardous | Significant financial loss (>10% revenue) | Redundancy, Exhaustive Testing, DET |
+| **DAL-C**| Major | Operational disruption (1-10% loss) | Comprehensive Testing, Monitoring |
+
+#### 4.1.2 2oo3 Voting for Financial Consensus
+
+Inspired by flight control computers, critical financial transactions (DAL-A/B) require consensus from three independent validation systems:
+
+1.  **Classical Validator:** Rule-based and ML analysis.
+2.  **Aerospace Validator:** Formal methods verification against integrity constraints.
+3.  **Quantum Validator:** Entanglement-based correlation detection for hidden patterns.
+
+A transaction is approved ONLY if 2 out of 3 validators agree, ensuring fault tolerance and eliminating single points of corruption.
+
+### 4.2 Quantum Advantage in Business (Prudencia Cuántica)
+
+Quantum computation is integrated deeply into the 3xI engine for navigation and risk management:
+
+*   **Optimization (SICOCA):** QUBO formulation for supply chain optimization.
+*   **Fraud Detection:** Utilizing quantum walks and entanglement to identify complex, correlated fraud patterns.
+*   **Market Analysis (Capital Markets Agent):** Modeling market states in superposition to identify systemic risks before they materialize.
+
+### 4.3 UTCS-MI v5.0+ and DET (Immutable Evidence)
+
+Every artifact, decision, and transaction within AMEDEO is traceable and immutable.
+
+*   **UTCS-MI v5.0+:** Universal standard for identifying and tracking all system artifacts, ensuring 100% traceability for certification.
+*   **DET (Digital Evidence Twin):** An immutable, cryptographically signed (PQC Dilithium) log of all system states and actions. DET provides the foundation for the "Verdad Certificable".
+
+### 4.4 Business Safe Spaces and P²AF (Autonomía Regenerativa)
+
+The operational manifestation of the 3xI doctrine. The Integrity agents create "Safe Spaces" where corruption is impossible, operated by the P²AF autonomous finance system.
+
+**The Regenerative Conversion Flow:**
+
+1.  **Prevention:** Integrity agents prevent fraud/corruption (e.g., Capgemini invoicing, Airbus inventories).
+2.  **Recovery:** Resources that would have been lost are quantified and captured.
+3.  **Multiplication:** Innovation agents allocate these resources using quantum optimization.
+4.  **Growth:** The system guarantees a 3x-10x ROI on the saved resources, fueling regenerative growth within P²AF.
+
+## 5.0 Operational Scenarios (Use Cases)
+
+### 5.1 P²AF Genesis (Madrid Node Zero)
+
+The initialization of the Public-Private Autonomous Finance system.
+
+*   **Date:** August 20, 2025.
+*   **Location:** Madrid, Spain (Genesis Node).
+*   **Action:** Deployment of the Genesis Block, activating the P²AF core, the 3xI engine, and the initial collective treasury.
+*   **Verification:** The P²AF Birth Certificate (`AQUA-FIN-GENESIS-20082025-001`) is immutably recorded in the DET and the genesis block.
+
+### 5.2 Integrity Agent Pilot: Cap Invoicing (P0.1)
+
+*   **Objective:** Detect and prevent anomalies, fraud, and inefficiencies in monthly invoicing reports.
+*   **Implementation:** Deployment of the Integrity Agent (Ethics Observer specialization) configured for DAL-B financial processes.
+*   **Mechanism:** 2oo3 voting applied to invoice validation.
+*   **Outcome:** Identified savings (€100K+/month) are automatically transferred to a Business Safe Space for innovation funding.
+
+### 5.3 Integrity Agent Pilot: Air Inventories (P0.2)
+
+*   **Objective:** Ensure integrity and optimize aerospace parts inventory, complying with DO-254 (hardware equivalent of DO-178C).
+*   **Implementation:** Integration of the Integrity Agent with the Supply Buyer Agent (utilizing SICOCA/QUBO).
+*   **Mechanism:** DET tracking of every part (UTCS-MI), quantum optimization of inventory levels.
+*   **Outcome:** Projected savings (€500K+/quarter) channeled into R&D Safe Spaces.
+
+### 5.4 BWB-Q100 Flight Control (The Aerospace Proof)
+
+*   **Objective:** Demonstrate certifiable, quantum-enhanced flight control.
+*   **Implementation:** GAIA AIR-RTOS running on 2oo3 hardware, utilizing QASI-AERIAL for hybrid MPC.
+*   **Mechanism:** Deterministic execution (jitter <50 µs), Simplex fallback, continuous DET recording.
+*   **Outcome:** Proof of AMEDEO's core capability to manage DAL-A critical systems.
+
+## 6.0 Roadmap and Governance
+
+The AMEDEO program follows a prioritized batch roadmap (P0-P9) governed by the UTCS-MI standard and strict CI/CD gates (92% coverage, PQC signing, SBOM generation).
+
+*   **P0-P1 (Foundations):** Genesis Node Madrid, 3xI Engine MVP, Active Pilots (Capgemini/Airbus), AQUA-OS Core, UTCS-MI implementation. **Goal: First Business Safe Space operational.**
+*   **P2-P3 (Core Expansion):** Quantum Stack integration (QAL/QEC), DET operational, P²AF network expansion (7 nodes). **Goal: Quantum advantage demonstrated.**
+*   **P3-P5 (Mission & Platform):** BWB-Q100 subsystem integration (HIL), DeMOS/AMOReS/WEE activation. **Goal: Full system integration.**
+*   **P5-P9 (Certification & Scale):** DO-178C/CS-25 certification packages, global P²AF operation, full BWB-Q100 assemble-ready. **Goal: Certified global operations.**
+
+---
+AQUART-ARCH-SAD-AMEDEO-v1.0
+---
+
+# AMEDEO PROGRAM: Not just an Aircraft, but the whole fleet digital, hybrid and physical ecosystem (ground, air, space, defense segments)
 
 **Scope.** Umbrella program to deliver a certifiable, assemble-ready **BWB-Q100** aircraft stack and its full digital/operational infrastructure, integrating **AQUA-OS/ADT** (digital transponder), GAIA AIR-RTOS, quantum/classical CQEA stack, security/evidence, manufacturing/maintenance, and mission systems.
 
