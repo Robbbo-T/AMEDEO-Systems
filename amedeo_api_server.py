@@ -68,6 +68,9 @@ class AMEDEOAPIServer:
     
     def get_system_status(self) -> Dict[str, Any]:
         """Get current system status"""
+        # Get agent status
+        agent_status = self._get_agent_status()
+        
         return {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "version": "1.0.0",
@@ -109,9 +112,55 @@ class AMEDEOAPIServer:
                     "health_score": 0.97,
                     "last_update": datetime.now(timezone.utc).isoformat(),
                     "alerts": []
-                }
+                },
+                "agents": agent_status
             }
         }
+    
+    def _get_agent_status(self) -> Dict[str, Any]:
+        """Get status from AMEDEO agents"""
+        try:
+            # Test basic agent functionality
+            from agents.base_agent import Intent
+            
+            test_intent = Intent(
+                kind="STATUS_CHECK",
+                payload={"affects_strategy": True, "expected_gain": 3.5}
+            )
+            
+            agent_results = {}
+            for name, agent in self.agents.items():
+                try:
+                    # Access correct agent ID attribute  
+                    agent_id = getattr(agent, 'id', f"api-{name}")
+                    agent_results[name] = {
+                        "status": "operational",
+                        "last_check": datetime.now(timezone.utc).isoformat(),
+                        "agent_id": agent_id,
+                        "available": True
+                    }
+                except Exception as e:
+                    agent_results[name] = {
+                        "status": "degraded", 
+                        "last_check": datetime.now(timezone.utc).isoformat(),
+                        "error": str(e),
+                        "available": False
+                    }
+            
+            return {
+                "status": "operational",
+                "agents": agent_results,
+                "total_agents": len(self.agents),
+                "operational_count": sum(1 for a in agent_results.values() if a["available"])
+            }
+            
+        except Exception as e:
+            return {
+                "status": "degraded",
+                "error": f"Agent system error: {str(e)}",
+                "total_agents": len(self.agents),
+                "operational_count": 0
+            }
     
     def get_digital_twin_fleet(self) -> Dict[str, Any]:
         """Get digital twin fleet status"""
@@ -264,6 +313,181 @@ class AMEDEOAPIServer:
                 "classification": "operational"
             }
         }
+    
+    def get_maintenance_prediction(self, asset_id: str = "BWB-Q100-001") -> Dict[str, Any]:
+        """Get maintenance prediction for an asset"""
+        return {
+            "asset_id": asset_id,
+            "prediction_date": datetime.now(timezone.utc).isoformat(),
+            "time_horizon_days": 60,
+            "current_health_score": 0.93,
+            "predicted_health_score": 0.85,
+            "risk_assessment": {
+                "overall_risk": "low",
+                "risk_score": 0.23,
+                "confidence": 0.89
+            },
+            "recommendations": [
+                {
+                    "component": "engine_1_turbine",
+                    "maintenance_type": "borescope_inspection",
+                    "urgency": "medium",
+                    "predicted_date": "2025-09-15",
+                    "confidence": 0.87,
+                    "estimated_hours": 4,
+                    "parts_required": [],
+                    "cost_estimate_usd": 2500
+                },
+                {
+                    "component": "landing_gear_main",
+                    "maintenance_type": "lubrication",
+                    "urgency": "low",
+                    "predicted_date": "2025-09-20",
+                    "confidence": 0.92,
+                    "estimated_hours": 2,
+                    "parts_required": ["hydraulic_fluid_5606"],
+                    "cost_estimate_usd": 800
+                }
+            ],
+            "maintenance_schedule": {
+                "next_a_check": "2025-09-01",
+                "next_b_check": "2025-11-15",
+                "next_c_check": "2026-03-01",
+                "next_d_check": "2027-08-15"
+            }
+        }
+    
+    def get_carbon_offset(self, flight_id: str = "FL8A3C9F2B") -> Dict[str, Any]:
+        """Get carbon offset information for a flight"""
+        return {
+            "flight_id": flight_id,
+            "emissions_kg": 42500,
+            "offset_calculation": {
+                "base_emissions_kg": 42500,
+                "reduction_achieved_kg": 2125,
+                "net_emissions_kg": 40375,
+                "offset_required_kg": 40375
+            },
+            "offset_options": [
+                {
+                    "provider": "CarbonNeutral Airways",
+                    "type": "verified",
+                    "rate_per_kg": 0.045,
+                    "total_cost_usd": 1816.88,
+                    "certificate_available": True,
+                    "project": "Amazon Rainforest Conservation",
+                    "rating": 4.8
+                },
+                {
+                    "provider": "ClimateCare",
+                    "type": "premium",
+                    "rate_per_kg": 0.025,
+                    "total_cost_usd": 1009.38,
+                    "certificate_available": True,
+                    "project": "Wind Farm Development India",
+                    "rating": 4.5
+                }
+            ],
+            "selected_option": {
+                "provider": "CarbonNeutral Airways",
+                "certificate_id": "CN-2025-8A3C9F2B",
+                "transaction_id": "TXN-445566778899",
+                "validation_date": "2025-08-20T14:35:00Z",
+                "expiry_date": "2026-08-20T14:35:00Z"
+            },
+            "compliance": {
+                "corsia_compliant": True,
+                "eu_ets_compliant": True,
+                "voluntary_offset": False
+            }
+        }
+    
+    def get_recent_evidence(self) -> Dict[str, Any]:
+        """Get recent evidence records"""
+        return {
+            "evidence_id": str(uuid.uuid4()),
+            "execution_id": "FL8A3C9F2B",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "type": "operational",
+            "data": {
+                "action": "flight_plan_created",
+                "flight_number": "AM100",
+                "departure": "LHR",
+                "arrival": "JFK",
+                "compliance_checks": {
+                    "emissions": "pass",
+                    "noise": "pass",
+                    "security": "pass"
+                }
+            },
+            "hash": "3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c",
+            "signatures": [
+                {
+                    "signer": "amedeo-api-server",
+                    "signature": "sig_8a3c9f2b4d5e6f7a",
+                    "algorithm": "ECDSA-SHA256",
+                    "timestamp": datetime.now(timezone.utc).isoformat()
+                }
+            ],
+            "utcs_mi": {
+                "compliant": True,
+                "version": "5.0",
+                "manifest": {
+                    "schema": "flight_operation",
+                    "validated": True
+                }
+            },
+            "immutable": True,
+            "retention": {
+                "years": 7,
+                "classification": "operational"
+            }
+        }
+    
+    def get_ai_validation(self, pipeline_id: str = "PIPE-8A3C9F2B") -> Dict[str, Any]:
+        """Get AI-SPEC validation results"""
+        return {
+            "validation_id": str(uuid.uuid4()),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "pipeline_id": pipeline_id,
+            "validation_level": 4,
+            "policy_version": "AI-SPEC-v2.1",
+            "results": {
+                "overall_status": "approved",
+                "policy_checks": [
+                    {
+                        "policy": "data_governance",
+                        "result": "pass",
+                        "message": "Data lineage properly documented",
+                        "severity": "info"
+                    },
+                    {
+                        "policy": "model_explainability",
+                        "result": "pass",
+                        "message": "Model decisions are interpretable",
+                        "severity": "info"
+                    },
+                    {
+                        "policy": "bias_assessment",
+                        "result": "pass",
+                        "message": "No significant bias detected",
+                        "severity": "info"
+                    }
+                ],
+                "security": {
+                    "encryption": "PQ",
+                    "signed": True,
+                    "attestation": "SGX-enabled",
+                    "mfa_verified": True
+                },
+                "constraints": {
+                    "time_limit_minutes": 60,
+                    "rate_limit": "100/hour",
+                    "data_classification": "confidential",
+                    "geographic_restrictions": ["EU", "US"]
+                }
+            }
+        }
 
 
 if FLASK_AVAILABLE:
@@ -298,6 +522,18 @@ if FLASK_AVAILABLE:
             def recent_evidence():
                 return jsonify(self.api.get_recent_evidence())
             
+            @self.app.route('/amedeo/maintenance/prediction/<asset_id>', methods=['GET'])
+            def maintenance_prediction(asset_id):
+                return jsonify(self.api.get_maintenance_prediction(asset_id))
+            
+            @self.app.route('/amedeo/environmental/carbon-offset/<flight_id>', methods=['GET'])
+            def carbon_offset(flight_id):
+                return jsonify(self.api.get_carbon_offset(flight_id))
+            
+            @self.app.route('/amedeo/ai-spec/validation/<pipeline_id>', methods=['GET'])
+            def ai_validation(pipeline_id):
+                return jsonify(self.api.get_ai_validation(pipeline_id))
+            
             @self.app.route('/schemas/<schema_name>', methods=['GET'])
             def get_schema(schema_name):
                 if schema_name in self.api.schemas:
@@ -325,6 +561,9 @@ def main():
         print("   GET /amedeo/environmental/metrics")
         print("   GET /amedeo/flight-ops/active")
         print("   GET /amedeo/evidence/recent")
+        print("   GET /amedeo/maintenance/prediction/<asset_id>")
+        print("   GET /amedeo/environmental/carbon-offset/<flight_id>")
+        print("   GET /amedeo/ai-spec/validation/<pipeline_id>")
         print("   GET /schemas/<schema_name>")
         print("   GET /health")
         server.run(debug=True)

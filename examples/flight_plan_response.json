@@ -1,0 +1,63 @@
+{
+  "flight_id": "FL8A3C9F2B",
+  "flight_number": "AM100",
+  "aircraft_id": "BWB-Q100-001",
+  "departure": "LHR",
+  "arrival": "JFK",
+  "departure_time": "2025-08-21T10:00:00Z",
+  "arrival_time": "2025-08-21T17:45:00Z",
+  "route": [
+    {
+      "waypoint": "LHR",
+      "altitude": 0,
+      "estimated_time": "2025-08-21T10:00:00Z",
+      "coordinates": {"lat": 51.4775, "lon": -0.4614}
+    },
+    {
+      "waypoint": "DVR",
+      "altitude": 35000,
+      "estimated_time": "2025-08-21T10:25:00Z",
+      "coordinates": {"lat": 51.1257, "lon": 1.3134}
+    },
+    {
+      "waypoint": "NATB",
+      "altitude": 39000,
+      "estimated_time": "2025-08-21T12:30:00Z",
+      "coordinates": {"lat": 52.0, "lon": -20.0}
+    },
+    {
+      "waypoint": "YQX",
+      "altitude": 39000,
+      "estimated_time": "2025-08-21T16:00:00Z",
+      "coordinates": {"lat": 48.9369, "lon": -54.5681}
+    },
+    {
+      "waypoint": "JFK",
+      "altitude": 0,
+      "estimated_time": "2025-08-21T17:45:00Z",
+      "coordinates": {"lat": 40.6413, "lon": -73.7781}
+    }
+  ],
+  "fuel_plan_kg": 45000,
+  "environmental_constraints": {
+    "max_altitude_ft": 41000,
+    "noise_abatement_zones": ["LHR", "JFK"],
+    "emission_reduction_mode": true,
+    "carbon_offset_required": true
+  },
+  "crew": [
+    {
+      "id": "CREW001",
+      "name": "Captain Smith",
+      "role": "captain",
+      "license": "ATPL-12345"
+    },
+    {
+      "id": "CREW002",
+      "name": "First Officer Johnson",
+      "role": "first_officer",
+      "license": "CPL-67890"
+    }
+  ],
+  "status": "scheduled"
+}

@@ -166,6 +166,7 @@ Examples:
     # Schema command
     schema_parser = subparsers.add_parser('schema', help='Get schema definition')
     schema_parser.add_argument('schema_name', help='Name of schema to retrieve')
+    schema_parser.add_argument('--compact', action='store_true', help='Output compact JSON')
     
     # Validate command
     validate_parser = subparsers.add_parser('validate', help='Validate JSON against schema')
