@@ -74,6 +74,654 @@ flowchart TD
     D1 & D2 & D3 & C1 & B1 & B2 & B3 --> E
 ```
 
+
+# AMEDEO Enhanced System Diagrams
+## With Digital, Environmental & Operational Components
+
+---
+
+## 1) Enhanced System-of-Systems Architecture
+
+```mermaid
+graph TB
+    subgraph "Mission Domains"
+        BWB[BWB-Q100 Ops]
+        P2AF[P2AF Finance]
+        BSS[Safe Spaces]
+        
+        subgraph "Intelligent Agents"
+            PLANNER[Strategic Planner]
+            BUYER[Supply Buyer]
+            SCHEDULER[Resource Scheduler]
+            OPSPILOT[Ops Pilot]
+            ENVAGENT[Environmental Agent]
+        end
+    end
+    
+    subgraph "Digital Services Layer"
+        DT[Digital Twin Fleet]
+        LAKE[Data Lake]
+        IOT[IoT Gateway]
+        ANALYTICS[Predictive Analytics]
+        API[API Management]
+    end
+    
+    subgraph "Environmental Systems"
+        WEATHER[Weather Integration]
+        EMISSIONS[Emissions Monitor]
+        NOISE[Noise Tracking]
+        SUSTAIN[Sustainability KPIs]
+        CARBON[Carbon Offset Engine]
+    end
+    
+    subgraph "Operational Systems"
+        FLIGHTOPS[Flight Operations]
+        MAINT[Maintenance Scheduler]
+        CREW[Crew Management]
+        GROUND[Ground Operations]
+        FUEL[Fuel Optimizer]
+        ATC[ATC Interface]
+    end
+    
+    subgraph "AQUA-OS / ADTT Bridges"
+        AQUA[AQUA-OS Kernel API]
+        ADTT[ADTT Digital Transponder]
+        XVAL[Cross-Domain Validator]
+    end
+    
+    subgraph "Secured Layer - AI-SPEC"
+        POL[AI-SPEC Policy Engine]
+        INTEG[Integrity & Anomaly Monitor]
+        UTCS[UTCS-MI v5.0 Validator]
+        CAP[Crypto PQ/HE Abstraction]
+    end
+    
+    subgraph "Foundation Stack"
+        GAIA[GAIA AIR-RTOS]
+        QAL[QAL Quantum Stack]
+        HW[Aerospace Hardware]
+        HSM[HSM/KMS]
+        SENSORS[Sensor Network]
+    end
+    
+    subgraph "Evidence & Governance"
+        DETWIN[DET Digital Evidence Twin]
+        REG[UTCS-MI Registry]
+        AUDIT[Audit & SIEM]
+        COMPLY[Compliance Engine]
+    end
+    
+    subgraph "Legacy Avionics"
+        ARINC[ARINC/AFDX Bus]
+        LRU[LRUs]
+    end
+    
+    %% Digital flows
+    DT --> ANALYTICS
+    ANALYTICS --> LAKE
+    IOT --> LAKE
+    API --> DT
+    API --> ANALYTICS
+    
+    %% Environmental flows
+    WEATHER --> ENVAGENT
+    EMISSIONS --> SUSTAIN
+    NOISE --> SUSTAIN
+    SUSTAIN --> CARBON
+    ENVAGENT --> PLANNER
+    SENSORS --> EMISSIONS
+    SENSORS --> NOISE
+    
+    %% Operational flows
+    FLIGHTOPS --> PLANNER
+    MAINT --> SCHEDULER
+    CREW --> SCHEDULER
+    GROUND --> OPSPILOT
+    FUEL --> PLANNER
+    ATC --> FLIGHTOPS
+    
+    %% Mission flows
+    BWB --> PLANNER
+    P2AF --> BUYER
+    BSS --> SCHEDULER
+    OPSPILOT --> PLANNER
+    
+    %% Agent flows
+    PLANNER --> POL
+    BUYER --> POL
+    SCHEDULER --> POL
+    ENVAGENT --> POL
+    
+    %% Digital integration
+    DT --> PLANNER
+    LAKE --> ANALYTICS
+    ANALYTICS --> PLANNER
+    API --> FLIGHTOPS
+    
+    %% Security flows
+    POL --> UTCS
+    POL --> INTEG
+    POL --> CAP
+    POL --> AQUA
+    POL --> XVAL
+    
+    %% Cross-domain flows
+    XVAL --> QAL
+    CAP --> HSM
+    
+    %% Legacy integration
+    ARINC --> ADTT
+    LRU --> ARINC
+    ADTT --> AQUA
+    
+    %% Foundation flows
+    AQUA --> GAIA
+    GAIA --> HW
+    SENSORS --> IOT
+    
+    %% Evidence flows
+    GAIA --> DETWIN
+    QAL --> DETWIN
+    UTCS --> REG
+    INTEG --> DETWIN
+    CAP --> DETWIN
+    DETWIN --> AUDIT
+    DETWIN --> COMPLY
+    
+    %% Environmental compliance
+    SUSTAIN --> COMPLY
+    CARBON --> COMPLY
+    
+    classDef digital fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    classDef env fill:#27AE60,stroke:#196F3D,stroke-width:2px,color:#fff  
+    classDef ops fill:#F39C12,stroke:#B68D0F,stroke-width:2px,color:#fff
+    classDef security fill:#E74C3C,stroke:#A93226,stroke-width:2px,color:#fff
+    classDef foundation fill:#8E44AD,stroke:#6C3483,stroke-width:2px,color:#fff
+    
+    class DT,LAKE,IOT,ANALYTICS,API digital
+    class WEATHER,EMISSIONS,NOISE,SUSTAIN,CARBON env
+    class FLIGHTOPS,MAINT,CREW,GROUND,FUEL,ATC ops
+    class POL,INTEG,UTCS,CAP security
+    class GAIA,QAL,HW,HSM,SENSORS foundation
+```
+
+
+### Alternative: Block Architecture Diagram
+
+```mermaid
+block-beta
+columns 9
+  block:domainBlock:3
+    columns 3
+    BWB["BWB-Q100 Ops"] P2AF["P2AF Finance"] BSS["Safe Spaces"]
+    block:agentBlock:3
+      columns 3
+      PLANNER["Strategic Planner"]
+      BUYER["Supply Buyer"]
+      SCHEDULER["Resource Scheduler"]
+    end
+  end
+  block:digitalBlock:3
+    columns 3
+    DT["Digital Twin"] LAKE["Data Lake"] IOT["IoT Gateway"]
+    ANALYTICS["Analytics"]:3
+    API["API Management"]:3
+  end
+  block:envBlock:3
+    columns 3
+    WEATHER["Weather"] EMISSIONS["Emissions"] NOISE["Noise"]
+    SUSTAIN["Sustainability"]:2 CARBON["Carbon Offset"]
+  end
+  block:opsBlock:3
+    columns 3
+    FLIGHTOPS["Flight Ops"] MAINT["Maintenance"] CREW["Crew Mgmt"]
+    GROUND["Ground Ops"] FUEL["Fuel Optimizer"] ATC["ATC Interface"]
+  end
+  block:bridgeBlock:3
+    columns 3
+    AQUA["AQUA-OS"]:3
+    ADTT["ADTT Bridge"] space XVAL["Cross-Domain"]
+  end
+  block:securityBlock:3
+    columns 3
+    POL["AI-SPEC Policy"]:3
+    INTEG["Integrity"] UTCS["UTCS-MI"] CAP["Crypto"]
+  end
+  space:9
+  block:foundationBlock:3
+    columns 3
+    GAIA["GAIA RTOS"] QAL["QAL Quantum"] HW["Hardware"]
+    HSM["HSM/KMS"] SENSORS["Sensors"]:2
+  end
+  block:evidenceBlock:3
+    columns 3
+    DETWIN["DET Evidence Twin"]:3
+    REG["Registry"] AUDIT["Audit"] COMPLY["Compliance"]
+  end
+  block:legacyBlock:3
+    columns 3
+    ARINC["ARINC Bus"]:2 LRU["LRUs"]
+  end
+  
+  style domainBlock fill:#E8F4F8,stroke:#2980B9
+  style digitalBlock fill:#E8F6FF,stroke:#4A90E2
+  style envBlock fill:#E8F8F0,stroke:#27AE60
+  style opsBlock fill:#FFF6E8,stroke:#F39C12
+  style bridgeBlock fill:#F0E8FF,stroke:#7B68EE
+  style securityBlock fill:#FFE8E8,stroke:#E74C3C
+  style foundationBlock fill:#F4E8FF,stroke:#8E44AD
+  style evidenceBlock fill:#F8F8E8,stroke:#95A5A6
+  style legacyBlock fill:#E8E8E8,stroke:#7F8C8D
+```
+
+---
+
+## 2) Enhanced C4 Context with Digital/Environmental/Operational
+
+```mermaid
+C4Context
+title AMEDEO Systems - Enhanced Context with Digital/Environmental/Operational
+Person(pilot, "Ops Pilot", "Uses mission services")
+Person(secops, "SecOps Analyst", "Queries evidence")
+Person(maint, "Maintenance Tech", "Updates maintenance logs")
+Person(atc, "ATC Controller", "Coordinates airspace")
+Person(regulator, "Environmental Regulator", "Monitors compliance")
+
+System_Ext(ext, "Legacy Avionics", "ARINC/AFDX LRUs")
+System_Ext(weather_ext, "Weather Services", "NOAA, ECMWF")
+System_Ext(atc_ext, "ATC Systems", "FAA NextGen, EUROCONTROL")
+System_Ext(carbon_ext, "Carbon Markets", "Offset trading platforms")
+
+System_Boundary(am, "AMEDEO Enhanced Systems"){
+  System(aqua, "AQUA-OS/ADTT", "Certifiable OS + transponder")
+  System(ai, "AI-SPEC", "Policy, attestation, crypto")
+  System(det, "DET Evidence Twin", "Immutable evidence store")
+  System(qal, "QAL", "Hybrid quantum validation")
+  System(gaia, "GAIA AIR-RTOS", "Avionics RTOS")
+  System(reg, "UTCS-MI Registry", "IDs, manifests")
+  System(digital, "Digital Services", "Fleet twin, analytics, IoT")
+  System(env, "Environmental Suite", "Emissions, noise, sustainability")
+  System(ops, "Operational Systems", "Flight ops, maintenance, crew")
+}
+
+Rel(pilot, ai, "AI requests")
+Rel(pilot, ops, "Flight plans")
+Rel(maint, ops, "Maintenance updates")
+Rel(atc, ops, "Clearances")
+Rel(regulator, env, "Compliance queries")
+
+Rel(ai, aqua, "Authorize/permit")
+Rel(aqua, gaia, "Schedule RT tasks")
+Rel(gaia, det, "Runtime evidence")
+Rel(ai, reg, "Validate manifests")
+Rel(ai, qal, "Validation hooks")
+
+Rel(digital, ai, "Analytics requests")
+Rel(env, det, "Environmental evidence")
+Rel(ops, digital, "Operational data")
+
+Rel(ext, aqua, "Data/commands via ADTT")
+Rel(weather_ext, env, "Weather data")
+Rel(atc_ext, ops, "Traffic data")
+Rel(carbon_ext, env, "Offset transactions")
+
+Rel(secops, det, "Audit queries")
+```
+
+---
+
+## 3) Enhanced Sequence — Operational Mission with Environmental Constraints
+
+```mermaid
+sequenceDiagram
+title Enhanced Mission Execution with Digital/Environmental/Operational Components
+actor Pilot
+participant FlightOps as Flight Operations
+participant EnvMon as Environmental Monitor
+participant Digital as Digital Twin
+participant Agent as Intelligent Agent
+participant AISPEC as AI-SPEC Policy
+participant Weather as Weather Service
+participant Fuel as Fuel Optimizer
+participant AQUA as AQUA-OS
+participant GAIA as GAIA AIR-RTOS
+participant Sensors as Sensor Network
+participant DET as DET Evidence Twin
+participant Carbon as Carbon Offset Engine
+participant Maint as Maintenance System
+
+Pilot->>FlightOps: Request flight plan
+FlightOps->>Weather: Get weather forecast
+Weather-->>FlightOps: Weather data + constraints
+FlightOps->>EnvMon: Check environmental limits
+EnvMon-->>FlightOps: Noise/emission windows
+
+par Digital simulation
+  FlightOps->>Digital: Simulate flight profile
+  Digital->>Fuel: Optimize fuel consumption
+  Fuel-->>Digital: Optimal fuel plan
+  Digital-->>FlightOps: Simulated metrics
+and Environmental check
+  EnvMon->>Carbon: Calculate carbon footprint
+  Carbon-->>EnvMon: Offset requirements
+end
+
+FlightOps->>Agent: Generate mission plan
+Agent->>AISPEC: Submit plan + constraints
+AISPEC->>AQUA: Authorize execution
+AQUA->>GAIA: Schedule mission tasks
+
+loop During Flight
+  GAIA->>Sensors: Read environmental data
+  Sensors-->>EnvMon: Real-time emissions/noise
+  EnvMon->>DET: Log environmental data
+  
+  alt Exceeds limits
+    EnvMon->>Agent: Adjust flight parameters
+    Agent->>AISPEC: Revalidate plan
+    AISPEC->>GAIA: Update constraints
+  end
+end
+
+GAIA->>Digital: Update fleet twin
+Digital->>DET: Store flight telemetry
+EnvMon->>Carbon: Final emissions report
+Carbon->>DET: Carbon offset record
+
+FlightOps->>Maint: Post-flight analysis
+Maint->>Digital: Update maintenance predictions
+Digital->>DET: Predictive maintenance record
+```
+
+---
+
+## 4) Enhanced ERD — Digital/Environmental/Operational Data Model
+
+```mermaid
+erDiagram
+  %% Original entities
+  AGENT ||--o{ EXECUTION : initiates
+  PIPELINE ||--o{ EXECUTION : is_run_as
+  EXECUTION ||--o{ ARTIFACT : produces
+  ARTIFACT }o--|| UTCSMI_RECORD : described_by
+  EXECUTION ||--o{ EVIDENCE : writes
+  EVIDENCE }o--o{ SIGNATURE : has
+  KEY ||--o{ SIGNATURE : generates
+  DEVICE ||--o{ EXECUTION : hosts
+  POLICY ||--o{ EXECUTION : governs
+  
+  %% Digital entities
+  DIGITAL_TWIN ||--o{ FLEET_ASSET : models
+  FLEET_ASSET ||--o{ TELEMETRY : generates
+  TELEMETRY }o--|| IOT_SENSOR : collected_by
+  DATA_LAKE ||--o{ TELEMETRY : stores
+  ANALYTICS ||--o{ PREDICTION : generates
+  PREDICTION }o--|| DIGITAL_TWIN : updates
+  
+  %% Environmental entities
+  ENVIRONMENTAL_METRIC ||--o{ EMISSION : tracks
+  EMISSION }o--|| FLIGHT : measured_during
+  NOISE_LEVEL }o--|| FLIGHT : measured_during
+  CARBON_FOOTPRINT ||--|| FLIGHT : calculated_for
+  CARBON_OFFSET ||--o{ CARBON_FOOTPRINT : compensates
+  WEATHER_DATA ||--o{ FLIGHT : influences
+  SUSTAINABILITY_KPI ||--o{ ENVIRONMENTAL_METRIC : aggregates
+  
+  %% Operational entities
+  FLIGHT ||--o{ EXECUTION : triggers
+  FLIGHT_PLAN ||--|| FLIGHT : defines
+  MAINTENANCE_TASK ||--o{ FLEET_ASSET : performed_on
+  CREW_MEMBER ||--o{ FLIGHT : assigned_to
+  GROUND_OPERATION ||--o{ FLIGHT : supports
+  FUEL_RECORD ||--|| FLIGHT : consumed_by
+  ATC_CLEARANCE ||--o{ FLIGHT : authorizes
+  
+  %% Relationships
+  DIGITAL_TWIN ||--o{ MAINTENANCE_TASK : predicts
+  ENVIRONMENTAL_METRIC ||--o{ EVIDENCE : included_in
+  FLIGHT ||--o{ EVIDENCE : generates
+  TELEMETRY ||--o{ EVIDENCE : contributes_to
+
+  DIGITAL_TWIN {
+    string twin_id PK
+    string asset_id FK
+    json model_state
+    datetime last_sync
+  }
+  
+  FLEET_ASSET {
+    string asset_id PK
+    string type
+    string registration
+    datetime commissioned
+  }
+  
+  TELEMETRY {
+    string telemetry_id PK
+    string asset_id FK
+    json data
+    datetime timestamp
+  }
+  
+  IOT_SENSOR {
+    string sensor_id PK
+    string type
+    string location
+    float sample_rate
+  }
+  
+  ENVIRONMENTAL_METRIC {
+    string metric_id PK
+    string type
+    float value
+    string unit
+    datetime measured_at
+  }
+  
+  EMISSION {
+    string emission_id PK
+    float co2_kg
+    float nox_kg
+    float pm_kg
+  }
+  
+  NOISE_LEVEL {
+    string noise_id PK
+    float db_level
+    string location
+    datetime measured_at
+  }
+  
+  CARBON_FOOTPRINT {
+    string footprint_id PK
+    float total_co2_kg
+    string calculation_method
+  }
+  
+  CARBON_OFFSET {
+    string offset_id PK
+    float amount_kg
+    string provider
+    string certificate_id
+  }
+  
+  WEATHER_DATA {
+    string weather_id PK
+    json conditions
+    string source
+    datetime valid_time
+  }
+  
+  FLIGHT {
+    string flight_id PK
+    string flight_number
+    datetime departure
+    datetime arrival
+    string route
+  }
+  
+  FLIGHT_PLAN {
+    string plan_id PK
+    string flight_id FK
+    json waypoints
+    float planned_fuel
+  }
+  
+  MAINTENANCE_TASK {
+    string task_id PK
+    string type
+    string status
+    datetime scheduled
+    datetime completed
+  }
+  
+  CREW_MEMBER {
+    string crew_id PK
+    string role
+    string qualification
+  }
+  
+  GROUND_OPERATION {
+    string operation_id PK
+    string type
+    datetime start_time
+    datetime end_time
+  }
+  
+  FUEL_RECORD {
+    string fuel_id PK
+    float quantity_kg
+    string type
+    float efficiency
+  }
+  
+  ATC_CLEARANCE {
+    string clearance_id PK
+    string type
+    datetime issued
+    string restrictions
+  }
+```
+
+---
+
+## 5) Digital Operations Dashboard Flow
+
+```mermaid
+graph TB
+    subgraph "Real-time Operations"
+        A[Aircraft Sensors] -->|Telemetry| B[IoT Gateway]
+        B --> C[Data Lake]
+        C --> D[Stream Processing]
+        D --> E[Digital Twin]
+    end
+    
+    subgraph "Environmental Monitoring"
+        F[Weather API] --> G[Environmental Agent]
+        H[Emissions Sensors] --> G
+        I[Noise Monitors] --> G
+        G --> J[Sustainability Dashboard]
+        J --> K[Carbon Calculator]
+        K --> L[Offset Platform]
+    end
+    
+    subgraph "Operational Intelligence"
+        E --> M[Predictive Analytics]
+        M --> N[Maintenance Prediction]
+        M --> O[Route Optimization]
+        M --> P[Fuel Efficiency]
+        N --> Q[Maintenance Scheduler]
+        O --> R[Flight Operations]
+        P --> R
+    end
+    
+    subgraph "Compliance & Reporting"
+        J --> S[Compliance Engine]
+        L --> S
+        S --> T[Regulatory Reports]
+        S --> U[DET Evidence]
+        U --> V[Audit Trail]
+    end
+    
+    R --> W[Mission Execution]
+    Q --> W
+    G --> W
+    W --> A
+```
+
+---
+
+## 6) Enhanced Gantt — Digital/Environmental/Operational Roadmap
+
+```mermaid
+gantt
+title AMEDEO Enhanced Roadmap - Digital/Environmental/Operational Integration
+dateFormat  YYYY-MM-DD
+axisFormat  %b %Y
+
+section Phase 1 - Baseline
+Schema and policy freeze            :milestone, m1, 2025-09-01, 1d
+UTCS-MI validators MVP              :active, p1a, 2025-09-02, 45d
+Evidence store DET MVP              :p1b, after p1a, 30d
+
+section Digital Services
+Digital Twin platform setup         :d1, 2025-10-01, 60d
+IoT gateway integration             :d2, after d1, 45d
+Data Lake infrastructure            :d3, 2025-10-15, 60d
+Analytics engine deployment         :d4, after d3, 45d
+API management layer                :d5, after d2, 30d
+
+section Environmental Systems
+Emissions monitoring sensors        :e1, 2025-11-01, 45d
+Noise tracking deployment           :e2, after e1, 30d
+Carbon calculator integration       :e3, 2025-12-01, 45d
+Weather service APIs                :e4, 2025-11-15, 30d
+Sustainability KPI dashboard        :e5, after e3, 45d
+
+section Operational Systems
+Flight ops integration              :o1, 2026-01-01, 60d
+Maintenance scheduler AI            :o2, after o1, 45d
+Crew management system              :o3, 2026-01-15, 45d
+Ground ops coordination             :o4, after o3, 30d
+Fuel optimization engine            :o5, 2026-02-01, 45d
+ATC interface certification         :o6, after o5, 60d
+
+section Phase 2 - Monitoring
+Integrity monitor GA                :p2a, 2025-11-01, 60d
+AQUA-OS/ADTT certified API v1       :p2b, after p2a, 45d
+
+section Phase 3 - Crypto
+Post-quantum crypto integration     :p3a, 2026-01-15, 60d
+HE inference pilot                  :p3b, after p3a, 45d
+SBOM enforcement in CI              :p3c, 2026-01-15, 60d
+
+section Phase 4 - Qualification
+Hybrid validation hooks QAL         :p4a, 2026-03-15, 60d
+DO-330 tool-qualification pkg       :p4b, after p4a, 45d
+Environmental compliance cert       :p4c, after e5, 60d
+Digital twin certification          :p4d, after d5, 90d
+External audit readiness            :milestone, m2, after p4b, 1d
+
+section Integration Testing
+Full system integration             :i1, 2026-05-01, 90d
+Environmental limits testing        :i2, after i1, 45d
+Digital services stress test        :i3, after i1, 45d
+Operational readiness               :milestone, m3, after i3, 1d
+```
+
+---
+
+## Suggested Filenames:
+
+* `docs/diagrams/architecture-enhanced.mmd`
+* `docs/diagrams/c4-context-enhanced.mmd`
+* `docs/diagrams/sequence-operational-mission.mmd`
+* `docs/diagrams/erd-digital-environmental-operational.mmd`
+* `docs/diagrams/digital-operations-flow.mmd`
+* `docs/diagrams/roadmap-enhanced.mmd`
+
+---
+
 ## 3.0 Core Components and Interactions
 
 ### 3.1 AQUA-OS/ADT (The Digital Transponder)
@@ -202,7 +850,7 @@ The initialization of the Public-Private Autonomous Finance system.
 
 The AMEDEO program follows a prioritized batch roadmap (P0-P9) governed by the UTCS-MI standard and strict CI/CD gates (92% coverage, PQC signing, SBOM generation).
 
-*   **P0-P1 (Foundations):** Genesis Node Madrid, 3xI Engine MVP, Active Pilots (Capgemini/Airbus), AQUA-OS Core, UTCS-MI implementation. **Goal: First Business Safe Space operational.**
+*   **P0-P1 (Foundations):** Genesis Node Madrid, 3xI Engine MVP, Active Pilots (Cap/Air), AQUA-OS Core, UTCS-MI implementation. **Goal: First Business Safe Space operational.**
 *   **P2-P3 (Core Expansion):** Quantum Stack integration (QAL/QEC), DET operational, P²AF network expansion (7 nodes). **Goal: Quantum advantage demonstrated.**
 *   **P3-P5 (Mission & Platform):** BWB-Q100 subsystem integration (HIL), DeMOS/AMOReS/WEE activation. **Goal: Full system integration.**
 *   **P5-P9 (Certification & Scale):** DO-178C/CS-25 certification packages, global P²AF operation, full BWB-Q100 assemble-ready. **Goal: Certified global operations.**
