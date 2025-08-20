@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI-SPEC Validation Result",
+  "type": "object",
+  "properties": {
+    "validation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "pipeline_id": {
+      "type": "string"
+    },
+    "validation_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "results": {
+      "type": "object",
+      "properties": {
+        "overall_status": {
+          "type": "string",
+          "enum": ["approved", "rejected", "conditional", "review_required"]
+        },
+        "policy_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "policy": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string",
+                "enum": ["pass", "fail", "warning", "skip"]
+              },
+              "message": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["info", "warning", "error", "critical"]
+              }
+            },
+            "required": ["policy", "result"]
+          }
+        },
+        "security": {
+          "type": "object",
+          "properties": {
+            "encryption": {
+              "type": "string",
+              "enum": ["PQ", "HE", "HYBRID", "AES-256", "RSA-4096"]
+            },
+            "signed": {
+              "type": "boolean"
+            },
+            "attestation": {
+              "type": "string"
+            },
+            "mfa_verified": {
+              "type": "boolean"
+            }
+          },
+          "required": ["encryption", "signed"]
+        },
+        "constraints": {
+          "type": "object",
+          "properties": {
+            "time_limit_minutes": {
+              "type": "integer"
+            },
+            "rate_limit": {
+              "type": "string"
+            },
+            "data_classification": {
+              "type": "string",
+              "enum": ["public", "internal", "confidential", "secret", "top_secret"]
+            },
+            "geographic_restrictions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": ["overall_status", "policy_checks", "security"]
+    }
+  },
+  "required": ["validation_id", "timestamp", "pipeline_id", "validation_level", "results"]
+}

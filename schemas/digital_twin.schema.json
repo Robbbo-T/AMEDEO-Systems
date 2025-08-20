@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Digital Twin State",
+  "type": "object",
+  "properties": {
+    "twin_id": {
+      "type": "string",
+      "pattern": "^twin_[A-Z0-9-]+$"
+    },
+    "asset_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}-[A-Z0-9]+-\\d{3}$"
+    },
+    "registration": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}-[A-Z]{3}-\\d{3}$"
+    },
+    "last_sync": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "telemetry": {
+      "type": "object",
+      "properties": {
+        "altitude_ft": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50000
+        },
+        "speed_knots": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 600
+        },
+        "heading_deg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "temperature_c": {
+          "type": "number",
+          "minimum": -60,
+          "maximum": 60
+        },
+        "pressure_psi": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fuel_remaining_kg": {
+          "type": "number",
+          "minimum": 0
+        },
+        "engine_status": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["nominal", "degraded", "failed", "maintenance"]
+          }
+        }
+      },
+      "required": ["altitude_ft", "speed_knots", "heading_deg"]
+    },
+    "predictions": {
+      "type": "object",
+      "properties": {
+        "fuel_efficiency": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "eta": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "maintenance_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "remaining_cycles": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "health_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "maintenance_due": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  },
+  "required": ["twin_id", "asset_id", "last_sync", "telemetry", "health_score"]
+}

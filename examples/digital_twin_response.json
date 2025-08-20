@@ -1,0 +1,23 @@
+{
+  "twin_id": "twin_BWB-Q100-001",
+  "asset_id": "BWB-Q100-001",
+  "registration": "AM-BWB-001",
+  "last_sync": "2025-08-20T14:30:00Z",
+  "telemetry": {
+    "altitude_ft": 39000,
+    "speed_knots": 485,
+    "heading_deg": 270,
+    "temperature_c": -56,
+    "pressure_psi": 14.7,
+    "fuel_remaining_kg": 22500,
+    "engine_status": ["nominal", "nominal", "nominal", "nominal"]
+  },
+  "predictions": {
+    "fuel_efficiency": 0.82,
+    "eta": "2025-08-20T17:45:00Z",
+    "maintenance_score": 0.91,
+    "remaining_cycles": 4250
+  },
+  "health_score": 0.93,
+  "maintenance_due": "2025-09-15T08:00:00Z"
+}
