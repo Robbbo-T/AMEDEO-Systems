@@ -18,6 +18,13 @@
 *.synctex.gz
 node_modules/
 
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
 # IDE/editor
 .vscode/
 .idea/
