@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-08-20T14:30:00Z",
+  "version": "1.0.0",
+  "uptime_seconds": 864000,
+  "overall_status": "operational",
+  "subsystems": {
+    "digital_twin": {
+      "status": "operational",
+      "health_score": 0.98,
+      "last_update": "2025-08-20T14:29:55Z",
+      "active_twins": 142,
+      "alerts": []
+    },
+    "environmental": {
+      "status": "operational",
+      "health_score": 0.96,
+      "last_update": "2025-08-20T14:29:58Z",
+      "active_monitors": 24,
+      "alerts": []
+    },
+    "flight_operations": {
+      "status": "operational",
+      "health_score": 0.94,
+      "last_update": "2025-08-20T14:29:50Z",
+      "active_flights": 37,
+      "alerts": []
+    },
+    "security": {
+      "status": "operational",
+      "health_score": 0.99,
+      "last_update": "2025-08-20T14:29:59Z",
+      "active_sessions": 285,
+      "alerts": []
+    },
+    "evidence_store": {
+      "status": "operational",
+      "health_score": 1.0,
+      "last_update": "2025-08-20T14:29:57Z",
+      "records_stored": 1847293,
+      "alerts": []
+    },
+    "compliance": {
+      "status": "operational",
+      "health_score": 0.97,
+      "last_update": "2025-08-20T14:29:45Z",
+      "compliance_score": 0.98,
+      "alerts": []
+    }
+  }
+}

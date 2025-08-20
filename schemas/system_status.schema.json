@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AMEDEO System Status",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "uptime_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": ["operational", "degraded", "maintenance", "emergency", "offline"]
+    },
+    "subsystems": {
+      "type": "object",
+      "properties": {
+        "digital_twin": {
+          "$ref": "#/definitions/subsystem_status"
+        },
+        "environmental": {
+          "$ref": "#/definitions/subsystem_status"
+        },
+        "flight_operations": {
+          "$ref": "#/definitions/subsystem_status"
+        },
+        "security": {
+          "$ref": "#/definitions/subsystem_status"
+        },
+        "evidence_store": {
+          "$ref": "#/definitions/subsystem_status"
+        },
+        "compliance": {
+          "$ref": "#/definitions/subsystem_status"
+        }
+      },
+      "required": ["digital_twin", "environmental", "flight_operations", "security", "evidence_store", "compliance"]
+    }
+  },
+  "required": ["timestamp", "version", "uptime_seconds", "overall_status", "subsystems"],
+  "definitions": {
+    "subsystem_status": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["operational", "degraded", "maintenance", "offline"]
+        },
+        "health_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "last_update": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["status"]
+    }
+  }
+}

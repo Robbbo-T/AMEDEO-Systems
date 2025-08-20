@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Flight Plan",
+  "type": "object",
+  "properties": {
+    "flight_id": {
+      "type": "string",
+      "pattern": "^FL[A-Z0-9]{8}$"
+    },
+    "flight_number": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}\\d{3,4}$"
+    },
+    "aircraft_id": {
+      "type": "string"
+    },
+    "departure": {
+      "type": "string",
+      "pattern": "^[A-Z]{3,4}$"
+    },
+    "arrival": {
+      "type": "string",
+      "pattern": "^[A-Z]{3,4}$"
+    },
+    "departure_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrival_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "route": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "waypoint": {
+            "type": "string"
+          },
+          "altitude": {
+            "type": "number"
+          },
+          "estimated_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "coordinates": {
+            "type": "object",
+            "properties": {
+              "lat": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "lon": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              }
+            },
+            "required": ["lat", "lon"]
+          }
+        },
+        "required": ["waypoint"]
+      }
+    },
+    "fuel_plan_kg": {
+      "type": "number",
+      "minimum": 0
+    },
+    "environmental_constraints": {
+      "type": "object",
+      "properties": {
+        "max_altitude_ft": {
+          "type": "number"
+        },
+        "noise_abatement_zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emission_reduction_mode": {
+          "type": "boolean"
+        },
+        "carbon_offset_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "crew": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["captain", "first_officer", "flight_engineer", "cabin_crew"]
+          },
+          "license": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "role"]
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["scheduled", "boarding", "departed", "airborne", "landed", "completed", "cancelled", "delayed"]
+    }
+  },
+  "required": ["flight_id", "flight_number", "aircraft_id", "departure", "arrival", "departure_time", "status"]
+}

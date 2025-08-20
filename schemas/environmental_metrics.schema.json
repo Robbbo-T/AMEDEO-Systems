@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Environmental Metrics",
+  "type": "object",
+  "properties": {
+    "metric_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "airport_code": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lon": {
+          "type": "number"
+        },
+        "altitude_m": {
+          "type": "number"
+        }
+      },
+      "required": ["lat", "lon"]
+    },
+    "emissions": {
+      "type": "object",
+      "properties": {
+        "co2_kg": {
+          "type": "number",
+          "minimum": 0
+        },
+        "nox_kg": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pm_kg": {
+          "type": "number",
+          "minimum": 0
+        },
+        "so2_kg": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": ["co2_kg", "nox_kg"]
+    },
+    "noise": {
+      "type": "object",
+      "properties": {
+        "level_db": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 150
+        },
+        "frequency_hz": {
+          "type": "number"
+        },
+        "duration_seconds": {
+          "type": "number"
+        }
+      },
+      "required": ["level_db"]
+    },
+    "weather": {
+      "type": "object",
+      "properties": {
+        "temperature_c": {
+          "type": "number"
+        },
+        "pressure_hpa": {
+          "type": "number"
+        },
+        "humidity_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "wind_speed_knots": {
+          "type": "number",
+          "minimum": 0
+        },
+        "wind_direction_deg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "visibility_meters": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "compliance": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["compliant", "non_compliant", "pending_review", "exempted"]
+        },
+        "violations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "regulation": {
+                "type": "string"
+              },
+              "limit": {
+                "type": "number"
+              },
+              "actual": {
+                "type": "number"
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["low", "medium", "high", "critical"]
+              }
+            },
+            "required": ["regulation", "limit", "actual"]
+          }
+        }
+      },
+      "required": ["status"]
+    }
+  },
+  "required": ["metric_id", "timestamp", "location", "emissions", "compliance"]
+}

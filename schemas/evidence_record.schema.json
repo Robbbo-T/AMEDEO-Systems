@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DET Evidence Record",
+  "type": "object",
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "execution_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["attestation", "validation", "audit", "operational", "compliance", "security"]
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{128}$"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signer": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": ["RSA-SHA256", "ECDSA-SHA256", "PQ-DILITHIUM"]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["signer", "signature", "algorithm"]
+      }
+    },
+    "utcs_mi": {
+      "type": "object",
+      "properties": {
+        "compliant": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string"
+        },
+        "manifest": {
+          "type": "object"
+        }
+      },
+      "required": ["compliant", "version"]
+    },
+    "immutable": {
+      "type": "boolean"
+    },
+    "retention": {
+      "type": "object",
+      "properties": {
+        "years": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "classification": {
+          "type": "string"
+        }
+      },
+      "required": ["years"]
+    }
+  },
+  "required": ["evidence_id", "execution_id", "timestamp", "type", "data", "hash", "signatures"]
+}
