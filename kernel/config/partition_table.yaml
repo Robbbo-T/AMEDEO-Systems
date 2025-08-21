@@ -1,0 +1,115 @@
+# ARINC 653-like Partition Table Configuration
+# DO-178C Deterministic Kernel Scheduling Table
+# UTCS-MI v5.0 EstándarUniversal:Registro-Integracion-DO178C-A-1..A-7
+
+partition_table:
+  version: "1.0"
+  major_frame_us: 1000000  # 1 second major frame
+  minor_frame_us: 250000   # 250ms minor frames
+  max_jitter_us: 50        # Maximum allowed jitter
+  
+  # Static Schedule Definition
+  schedule:
+    - partition_id: 0
+      name: "AQUA-OS_Kernel"
+      start_offset_us: 0
+      duration_us: 250000
+      criticality: "DAL-A"
+      memory_budget_kb: 512
+      cpu_budget_percent: 25.0
+      
+    - partition_id: 1
+      name: "Flight_Control"
+      start_offset_us: 250000
+      duration_us: 250000
+      criticality: "DAL-A"
+      memory_budget_kb: 1024
+      cpu_budget_percent: 25.0
+      
+    - partition_id: 2
+      name: "Navigation"
+      start_offset_us: 500000
+      duration_us: 250000
+      criticality: "DAL-B"
+      memory_budget_kb: 768
+      cpu_budget_percent: 25.0
+      
+    - partition_id: 3
+      name: "Communication"
+      start_offset_us: 750000
+      duration_us: 250000
+      criticality: "DAL-C"
+      memory_budget_kb: 256
+      cpu_budget_percent: 25.0
+
+  # Memory Map Definition
+  memory_map:
+    total_memory_kb: 4096
+    kernel_reserved_kb: 512
+    
+    partitions:
+      - partition_id: 0
+        base_address: "0x10000000"
+        size_kb: 512
+        protection: "RWX"
+        
+      - partition_id: 1
+        base_address: "0x10080000"
+        size_kb: 1024
+        protection: "RW"
+        
+      - partition_id: 2
+        base_address: "0x10180000"
+        size_kb: 768
+        protection: "RW"
+        
+      - partition_id: 3
+        base_address: "0x10240000"
+        size_kb: 256
+        protection: "RW"
+
+  # Inter-Partition Communication Ports
+  ports:
+    - name: "FLIGHT_CTRL_CMD"
+      source_partition: 0
+      destination_partition: 1
+      message_size_bytes: 64
+      max_messages: 16
+      direction: "P0_to_P1"
+      
+    - name: "NAV_STATUS"
+      source_partition: 2
+      destination_partition: 1
+      message_size_bytes: 128
+      max_messages: 8
+      direction: "P2_to_P1"
+      
+    - name: "COMM_TELEMETRY"
+      source_partition: 1
+      destination_partition: 3
+      message_size_bytes: 256
+      max_messages: 4
+      direction: "P1_to_P3"
+      
+    - name: "SYSTEM_HEALTH"
+      source_partition: 0
+      destination_partition: 3
+      message_size_bytes: 32
+      max_messages: 32
+      direction: "P0_to_P3"
+
+  # Temporal Constraints
+  constraints:
+    partition_switch_overhead_us: 10
+    context_save_restore_us: 5
+    interrupt_latency_us: 15
+    maximum_blocking_time_us: 50
+    
+  # Safety Properties
+  safety:
+    temporal_isolation: true
+    spatial_isolation: true
+    fault_containment: true
+    deterministic_scheduling: true
+    wcet_analysis_required: true
+    independence_verification: true
