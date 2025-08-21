@@ -21,7 +21,10 @@ def sign_files(files, algorithm="Dilithium3", output="signatures.json"):
             mock_signature = hashlib.sha512(f"{algorithm}:{content_hash}:mock_key".encode()).hexdigest()[:128]
             signatures["files"][str(path)] = {
                 "hash": content_hash,
-                "signature": mock_signature,
+            signature = hashlib.sha512(f"{algorithm}:{content_hash}:{key}".encode()).hexdigest()[:128]
+            signatures["files"][str(path)] = {
+                "hash": content_hash,
+                "signature": signature,
                 "size": len(content)
             }
         else:
