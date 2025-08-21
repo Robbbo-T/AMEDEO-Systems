@@ -10,8 +10,11 @@ def check_bandit_results(bandit_file: str) -> bool:
         print(f"❌ Bandit output not found: {bandit_file}")
         return False
     results = json.loads(p.read_text())
-    high = [r for r in results.get("results", []) if r.get("issue_severity") == "HIGH"]
-    if high:
+    if high := [
+        r
+        for r in results.get("results", [])
+        if r.get("issue_severity") == "HIGH"
+    ]:
         print("❌ HIGH severity security issues found:")
         for issue in high:
             print(f"   - {issue['filename']}:{issue['line_number']} - {issue['test_name']}")
