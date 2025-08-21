@@ -9,14 +9,25 @@ from typing import List, Dict, Optional
 import time
 import json
 import hashlib
+import random
+
+# Physical constants for cert-ready implementation
+SEVERITY_THRESHOLD = 0.1  # Minimum damage severity requiring action
+CONFIDENCE_HIGH = 0.8     # High confidence threshold
+CONFIDENCE_LOW = 0.3      # Low confidence threshold
+
+# Energy limits per AMEDEO Systems cert requirements
+MAX_ENERGY_PER_NODE_MJ = 50.0e-3  # 50 mJ per node maximum
+MAX_ENERGY_PER_TILE_J = 2.0       # 2 J per tile maximum
+BASE_ENERGY_MJ = 5.0e-3           # 5 mJ base energy (was 10 J - major reduction)
 
 
 @dataclass
 class HealingActuation:
     """Healing actuation parameters for micro transistor control"""
     pattern: List[float]  # 3D activation pattern
-    energy_required: float  # Joules
-    duration: float  # Seconds
+    energy_required: float  # Joules (≤50mJ per node limit)
+    duration: float  # Seconds (0.1-1s for local healing, 1-10s for macro)
     success_probability: float  # 0.0-1.0
 
 
@@ -63,7 +74,15 @@ class MicroTransistorNode:
             damage_type = "none"
             severity = 0.0
             
-        confidence = CONFIDENCE_HIGH if severity > SEVERITY_THRESHOLD else CONFIDENCE_LOW
+        # Confidence based on severity and detection clarity
+        if damage_type == "none":
+            confidence = 0.95  # High confidence in no damage
+        elif severity > 0.8:
+            confidence = 0.95  # High confidence in severe damage
+        elif severity > SEVERITY_THRESHOLD:
+            confidence = CONFIDENCE_HIGH
+        else:
+            confidence = CONFIDENCE_LOW
         
         assessment = DamageAssessment(
             damage_type=damage_type,
@@ -82,28 +101,33 @@ class MicroTransistorNode:
         if damage_assessment.severity < 0.1:
             return None  # No healing needed
             
-        # Calculate energy requirements based on damage severity
-        base_energy = 10.0  # Base Joules
-        energy_req = base_energy * damage_assessment.severity * 2.0
+        # Calculate energy requirements based on damage severity (cert-ready limits)
+        energy_req = BASE_ENERGY_MJ * damage_assessment.severity * 2.0
+        
+        # Enforce per-node energy ceiling
+        energy_req = min(energy_req, MAX_ENERGY_PER_NODE_MJ)
         
         # Check resource availability
         if energy_req > self.healing_resources:
             # Request resources from neighbors (simplified)
             energy_req = min(energy_req, self.healing_resources)
             
-        # Generate activation pattern based on damage type
+        # Generate activation pattern based on damage type with thermal timing constraints
         if damage_assessment.damage_type == "stress_crack":
             pattern = [1.0, 0.8, 0.6]  # High intensity healing
-            duration = 5.0
+            duration = 0.5  # Local crack sealing: 0.1-1s
         elif damage_assessment.damage_type == "thermal_degradation":
             pattern = [0.6, 0.8, 0.4]  # Moderate healing with cooling
-            duration = 8.0
+            duration = 0.8  # Local thermal repair: 0.1-1s  
         elif damage_assessment.damage_type == "fatigue_damage":
             pattern = [0.8, 0.6, 0.8]  # Oscillating repair pattern
-            duration = 6.0
+            duration = 0.3  # Fast local fatigue repair: 0.1-1s
+        elif damage_assessment.damage_type == "macro_reshape":
+            pattern = [0.5, 0.5, 0.5]  # Macro shape recovery (ground only)
+            duration = 5.0  # Macro shape recovery: 1-10s
         else:
-            pattern = [0.5, 0.5, 0.5]  # Default pattern
-            duration = 3.0
+            pattern = [0.5, 0.5, 0.5]  # Default local healing
+            duration = 0.2  # Conservative local healing timing
             
         success_prob = min(0.98, 0.9 - damage_assessment.severity * 0.2)
         

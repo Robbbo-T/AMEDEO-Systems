@@ -74,18 +74,21 @@ def demo_aeromorphic_optimization():
     print(f"🛩️  Flight conditions: {flight_conditions}")
     print("🔬 Optimizing aerodynamic surface...")
     
-    # Execute optimization
-    result = aeromorphic_system.optimize_aircraft_surface(flight_conditions)
+    # Execute optimization using new quantum-assisted API
+    aerodynamic_target = {
+        "cells": ["cell_0_0_0", "cell_1_1_1", "cell_2_2_2"],
+        "positions": [0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0],
+        "flight_conditions": flight_conditions
+    }
+    result = aeromorphic_system.optimize_surface_configuration(aerodynamic_target)
     
     # Display results
-    current = result["current_profile"]
-    new = result["new_profile"]
-    improvement = result["performance_improvement"]
-    
-    print(f"   📈 Lift coefficient: {current['lift_coefficient']:.3f} → {new['lift_coefficient']:.3f}")
-    print(f"   📉 Drag coefficient: {current['drag_coefficient']:.3f} → {new['drag_coefficient']:.3f}")
-    print(f"   ⚡ Optimization time: {result['optimization_time']:.3f}s")
-    print(f"   🎯 Overall efficiency gain: {improvement['overall_efficiency_gain']:.1f}%")
+    print(f"   ✅ Optimization success: {result['success']}")
+    print(f"   🔬 Method: {result['optimization_method']}")
+    print(f"   ⚡ Duration: {result['duration']:.3f}s")
+    print(f"   🔋 Energy consumed: {result['energy_consumed']:.6f}J")
+    print(f"   🏗️  Physical transport: {result['physical_transport']}")
+    print(f"   ⏰ Timestamp: {result['timestamp']:.1f}")
     
     print()
 
