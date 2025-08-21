@@ -30,7 +30,7 @@ jobs:
 
       - name: Lint (Ruff strict)
         run: |
-          ruff check agents/ tests/ --select E,F,W,C90,N --line-length 120 || true
+          ruff check agents/ tests/ --select E,F,W,C90,N --line-length 120
 
       - name: UTCS-MI Check
         run: |
