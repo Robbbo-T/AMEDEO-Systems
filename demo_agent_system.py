@@ -12,11 +12,11 @@ from pathlib import Path
 # Add agents to path
 sys.path.insert(0, str(Path(__file__).parent / "agents"))
 
-from base_agent import Intent
-from planner_agent import StrategicPlannerAgent
-from buyer_agent import SupplyBuyerAgent
-from scheduler_agent import ResourceSchedulerAgent
-from ops_pilot_agent import OpsPilotAgent
+from agents.base_agent import Intent
+from agents.planner_agent import StrategicPlannerAgent
+from agents.buyer_agent import SupplyBuyerAgent
+from agents.scheduler_agent import ResourceSchedulerAgent
+from agents.ops_pilot_agent import OpsPilotAgent
 
 
 def main():
