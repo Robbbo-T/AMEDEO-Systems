@@ -1,0 +1,62 @@
+{
+  "block_id": "GAIA_AIR_GENESIS",
+  "timestamp": "2025-08-21T17:19:10.606332+00:00",
+  "version": "1.0",
+  "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "hash_algorithm": "SHA256",
+  "consensus": {
+    "type": "RAFT",
+    "validators": [
+      "validator1",
+      "validator2",
+      "validator3"
+    ]
+  },
+  "identity": {
+    "pki": "X509",
+    "issuer": "GAIA-AIR-CA"
+  },
+  "data": {
+    "GAIA_AIR_ID": "GAIA-AIR-0001",
+    "metadata": {
+      "creator": "Amedeo Pelliccia",
+      "creation_date": "2025-08-21T17:19:10.606351+00:00",
+      "purpose": "Aerospace component traceability and sustainability tracking"
+    },
+    "sustainability": {
+      "kpis": [
+        "co2e",
+        "energy",
+        "recycleRate",
+        "waterUsage",
+        "wasteReduction"
+      ]
+    },
+    "channels": {
+      "core-trace": {
+        "purpose": "Component and DM traceability",
+        "access_control": [
+          "validators",
+          "api_nodes",
+          "auditors"
+        ]
+      },
+      "standards": {
+        "purpose": "Standards and version management",
+        "access_control": [
+          "validators",
+          "api_nodes"
+        ]
+      },
+      "sustain": {
+        "purpose": "Sustainability KPIs",
+        "access_control": [
+          "validators",
+          "api_nodes",
+          "iot_devices"
+        ]
+      }
+    }
+  },
+  "genesis_hash": "f13f26f880cce9c5eae51807610d1b62f9ce5874029e8d222b7767181c3415b4"
+}

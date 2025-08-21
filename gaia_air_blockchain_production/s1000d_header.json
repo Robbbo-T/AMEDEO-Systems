@@ -1,0 +1,26 @@
+{
+  "dmAddress": {
+    "dmIdent": {
+      "dmCode": {
+        "modelIdentCode": "GAIAAIR",
+        "systemDiffCode": "00",
+        "subSystemDiffCode": "00",
+        "subSubSystemDiffCode": "00",
+        "assyCode": "00",
+        "disassyCode": "00",
+        "disassyCodeVariant": "0",
+        "infoCode": "00",
+        "infoCodeVariant": "0",
+        "itemLocationCode": "A"
+      },
+      "language": {
+        "countryIsoCode": "ES",
+        "languageIsoCode": "es"
+      },
+      "issueInfo": {
+        "inWork": "00",
+        "issueNumber": "01"
+      }
+    }
+  }
+}

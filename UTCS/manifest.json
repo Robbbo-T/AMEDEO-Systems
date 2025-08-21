@@ -41,5 +41,19 @@
   "standards/utdc-gps-mff/reference/schemas/mff-header-v1.0.json": "EstándarUniversal:Esquema-Desarrollo-UTDC-03.00-HeaderValidation-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-f6a7b8c9-RestoDeVidaUtil",
   "standards/utdc-gps-mff/reference/tools/validate.py": "EstándarUniversal:Herramienta-Desarrollo-UTDC-01.00-ValidatorTool-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-validate1-RestoDeVidaUtil",
   "standards/utdc-gps-mff/reference/tools/generate.py": "EstándarUniversal:Herramienta-Desarrollo-UTDC-01.01-GeneratorTool-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-generate1-RestoDeVidaUtil",
-  "standards/utdc-gps-mff/reference/tests/test_basic.py": "EstándarUniversal:Prueba-Desarrollo-UTDC-01.00-BasicTests-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-test0001-RestoDeVidaUtil"
+  "standards/utdc-gps-mff/reference/tests/test_basic.py": "EstándarUniversal:Prueba-Desarrollo-UTDC-01.00-BasicTests-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-test0001-RestoDeVidaUtil",
+  "main.py": "EstándarUniversal:Documento-Hibrida-Blockchain-00.00-ImplementacionBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-a0b1c2d3-RestoDeVidaUtil",
+  "requirements.txt": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-DependenciasBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-b1c2d3e4-RestoDeVidaUtil",
+  "Dockerfile": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-ContenedorBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-c2d3e4f5-RestoDeVidaUtil",
+  "healthcheck.py": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-SaludBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-d3e4f5g6-RestoDeVidaUtil",
+  "security_audit.py": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-AuditoriaSeguridad-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-e4f5g6h7-RestoDeVidaUtil",
+  "gaia_air_blockchain_production/genesis_block.json": "EstándarUniversal:Documento-Hibrida-Blockchain-00.00-BloqueGenesis-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-f5g6h7i8-RestoDeVidaUtil",
+  "gaia_air_blockchain_production/docker-compose.yml": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-ComposeDespliegue-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-g6h7i8j9-RestoDeVidaUtil",
+  "gaia_air_blockchain_production/security_report.json": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-ReporteSeguridad-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-h7i8j9k0-RestoDeVidaUtil",
+  "gaia_air_blockchain_production/network-policy.yaml": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-PoliticaRed-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-i8j9k0l1-RestoDeVidaUtil",
+  "gaia_air_blockchain_production/pdb.yaml": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-DisrupcionPods-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-j9k0l1m2-RestoDeVidaUtil",
+  "gaia_air_blockchain_production/s1000d_header.json": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-CabeceraS1000D-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-k0l1m2n3-RestoDeVidaUtil",
+  "test_blockchain.py": "EstándarUniversal:Prueba-Desarrollo-Blockchain-00.00-PruebaIntegracion-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-l1m2n3o4-RestoDeVidaUtil",
+  "BLOCKCHAIN_README.md": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-DocumentacionBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-m2n3o4p5-RestoDeVidaUtil"
+}'''
 }
