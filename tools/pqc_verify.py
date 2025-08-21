@@ -14,7 +14,7 @@ def verify_signatures(sig_file, algorithm="Dilithium3"):
 
     verified = 0
     failed = 0
-    for file_path, sig_data in data.get("files", {}).items():
+        expected_sig = hashlib.sha512(f"{algorithm}:{sig_data['hash']}:{public_key}".encode()).hexdigest()[:128]
         expected_sig = hashlib.sha512(f"{algorithm}:{sig_data['hash']}:mock_key".encode()).hexdigest()[:128]
         if sig_data.get("signature") == expected_sig:
             verified += 1
