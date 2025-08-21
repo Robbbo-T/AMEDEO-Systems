@@ -182,7 +182,7 @@ class BlockchainLedger:
         serializable_transactions = []
         for tx in self.pending_transactions:
             tx_dict = tx.__dict__.copy()
-            tx_dict['transaction_type'] = tx_dict['transaction_type'].value  # Convert enum to string
+            tx_dict = tx.to_dict()
             serializable_transactions.append(tx_dict)
             
         new_block = {
