@@ -468,7 +468,6 @@ class SelfHealingSurfaceController:
                 node_id in tile_leader.backup_nodes):
                 return tile_leader
         return None
-        return healing_summary
     
     def get_health_status(self) -> Dict:
         """Get overall health status of the surface"""
