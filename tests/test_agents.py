@@ -18,6 +18,8 @@ from ops_pilot_agent import OpsPilotAgent
     (StrategicPlannerAgent, "HORIZON_SHIFT", {"affects_strategy": True, "expected_gain": 4.2}),
     (SupplyBuyerAgent, "SUPPLY_CHAIN_METAMORPHOSIS", {"affects_tempo": True, "expected_gain": 4.0}),
     (ResourceSchedulerAgent, "ELASTIC_CAPACITY_TRANSFORM", {"expands_envelope": True, "expected_gain": 4.0}),
+    (ResourceSchedulerAgent, "MICRO_TRANSISTOR_SELF_HEALING", {"surface_id": "wing_001", "node_count": 25, "expands_envelope": True}),
+    (ResourceSchedulerAgent, "AEROMORPHIC_SURFACE_OPTIMIZATION", {"surface_dimensions": (8, 4, 2), "flight_conditions": {"altitude": 30000, "speed": 260}, "affects_tempo": True}),
     (OpsPilotAgent, "OPERATIONAL_ENVELOPE_EXPANSION", {"expands_envelope": True, "expected_gain": 4.0}),
 ])
 def test_agent_depth_requirements(agent_class, kind, payload):
