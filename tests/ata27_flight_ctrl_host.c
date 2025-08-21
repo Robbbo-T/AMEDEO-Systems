@@ -1,9 +1,7 @@
-Resolved with Allman style and ≤50 µs jitter check.
-
-```c
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stddef.h>
 #include "Voter_Interface.h"
 #include "HAL_Interface.h"
 #include "det.h"
@@ -110,4 +108,3 @@ int main(void)
     printf("[OK] 1000 steps @1kHz, 2oo3 consensus maintained.\n");
     return 0;
 }
-```
