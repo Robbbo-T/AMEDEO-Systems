@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 UTCS-MI: AQUART-NT-CODE-nano_teleportation_controller-v1.0
-Nano-Teleportation (Cellular Transposition) in Aeromorphics Structures
+Nano-Teleportation (Cellular Transposition) in Aeromorphic Structures
 """
 
 from dataclasses import dataclass
