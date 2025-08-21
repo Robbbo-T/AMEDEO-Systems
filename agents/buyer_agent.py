@@ -5,7 +5,7 @@ Supply Buyer Agent
 Depth: Transforms supply rhythms from reactive to predictive-generative
 """
 
-from base_agent import AMEDEOAgent, Intent, Result, to_factor, InsufficientDepth
+from .base_agent import AMEDEOAgent, Intent, Result, to_factor, InsufficientDepth
 from typing import Dict, Any, List
 import json
 

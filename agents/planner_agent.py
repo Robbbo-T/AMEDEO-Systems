@@ -5,7 +5,7 @@ Strategic Planner Agent
 Depth: Transforms decision architectures, not just priorities
 """
 
-from base_agent import AMEDEOAgent, Intent, Result, to_factor, InsufficientDepth
+from .base_agent import AMEDEOAgent, Intent, Result, to_factor, InsufficientDepth
 from typing import Dict, Any
 import json
 
