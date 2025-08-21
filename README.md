@@ -1,4 +1,4 @@
-# AMEDEO Systems (P0) — README
+# AMEDEO Systems (P0) — Aerospace Main Evolution. Digital, Environmental and Operating Systems
 
 **AMEDEO Systems** is a unified, certifiable framework for the **digital, environmental, and operational evolution** of aerospace systems.
 **AQUA-OS/ADT** acts as the **certifiable digital transponder**, bridging legacy avionics with multi-physics computing.
