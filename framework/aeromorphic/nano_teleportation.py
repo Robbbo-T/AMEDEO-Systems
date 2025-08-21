@@ -110,6 +110,9 @@ class QuantumTeleportationEngine:
         import random
         noise_level = 0.01
         for i in range(len(teleported_state)):
+        noise_level = 0.01
+        for i in range(len(teleported_state)):
+            teleported_state[i] += random.uniform(-noise_level, noise_level)
             teleported_state[i] += random.uniform(-noise_level, noise_level)
             
         # Renormalize
