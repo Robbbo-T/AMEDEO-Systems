@@ -1,3 +1,6 @@
+Conflict resolved. Kept ≤50 µs jitter, Allman braces, left-aligned pointers.
+
+```c
 #include "tsn_sim.h"
 #include <stdint.h>
 
@@ -13,7 +16,10 @@ int tsn_measure(uint32_t *lat, uint32_t *jit)
 {
     uint32_t r1 = lcg_next();
     uint32_t r2 = lcg_next();
+
     *lat = 150u + (r1 % 40u); /* ~150-189 us */
-    *jit = 1u + (r2 % 3u);    /* 1-3 us */
+    *jit = 1u + (r2 % 49u);   /* 1-49 us, ≤50 µs requirement */
     return 0;
 }
+```
+
