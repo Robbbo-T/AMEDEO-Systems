@@ -48,7 +48,7 @@ jobs:
 
       - name: Security Scan (HIGH only)
         run: |
-          bandit -r agents/ -iii -ll -f json -o bandit.json || true
+          bandit -r agents/ -iii -ll -f json -o bandit.json
           python tools/check_bandit.py bandit.json
 
       - name: Generate DET Evidence
