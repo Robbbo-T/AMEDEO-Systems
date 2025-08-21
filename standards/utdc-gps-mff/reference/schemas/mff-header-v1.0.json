@@ -1,0 +1,218 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://amedeo-systems.com/schemas/mff-header-v1.0.json",
+  "title": "UTDC-GPS-MFF Header Schema v1.0",
+  "description": "JSON Schema for UTDC-GPS-MFF Header validation",
+  "type": "object",
+  "required": [
+    "utcmi_id",
+    "artifact",
+    "regulation_reference",
+    "template_ref",
+    "generation",
+    "compliance",
+    "security",
+    "timestamps",
+    "license"
+  ],
+  "properties": {
+    "utcmi_id": {
+      "type": "string",
+      "pattern": "^EstándarUniversal:[^-]+-[^-]+-[^-]+-[^-]+-[^-]+-[0-9]{4}-v[0-9]+\\.[0-9]+-[^-]+-[^-]+-[^-]+-[^-]+-[a-f0-9]{8}-[^-]+$",
+      "description": "UTCS-MI v5.0+ compliant identifier"
+    },
+    "repo_path": {
+      "type": "string",
+      "description": "Repository path to the artifact"
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["uri", "format", "regulation_schema", "size_bytes", "sha256", "canonicalization"],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI or path to the artifact"
+        },
+        "format": {
+          "type": "object",
+          "required": ["mime", "ext"],
+          "properties": {
+            "mime": {
+              "type": "string",
+              "pattern": "^[a-z-]+/[a-z0-9][a-z0-9!#$&\\-\\^_.]*$"
+            },
+            "ext": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+$"
+            }
+          }
+        },
+        "regulation_schema": {
+          "type": "object",
+          "required": ["name", "version"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": ["S1000D", "DO-178C", "CS-25", "UTDC", "SVG", "JSON"]
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^[0-9]+\\.[0-9]+$"
+            }
+          }
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "canonicalization": {
+          "type": "string",
+          "description": "Canonicalization rules applied"
+        }
+      }
+    },
+    "regulation_reference": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "List of applicable regulations"
+    },
+    "template_ref": {
+      "type": "object",
+      "required": ["uri", "version"],
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "required": ["method", "model", "prompt_hash", "parameters"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["GeneracionHumana", "GeneracionHibrida", "GeneracionAuto"]
+        },
+        "model": {
+          "type": "string"
+        },
+        "prompt_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}$"
+        },
+        "parameters": {
+          "type": "object"
+        }
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "id", "commit"],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "commit": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "compliance": {
+      "type": "object",
+      "required": ["validators", "result"],
+      "properties": {
+        "validators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "rule"],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "rule": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "result": {
+          "type": "string",
+          "enum": ["pending", "passed", "failed"]
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "required": ["classification", "integrity_signature"],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": ["CUI", "PUBLIC", "CONFIDENTIAL", "SECRET"]
+        },
+        "integrity_signature": {
+          "type": "object",
+          "required": ["alg", "sig"],
+          "properties": {
+            "alg": {
+              "type": "string",
+              "enum": ["Dilithium3", "Ed25519"]
+            },
+            "sig": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "timestamps": {
+      "type": "object",
+      "required": ["created_utc", "generated_utc"],
+      "properties": {
+        "created_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "license": {
+      "type": "string",
+      "default": "CC BY-SA 4.0"
+    },
+    "i18n": {
+      "type": "object",
+      "properties": {
+        "lang": {
+          "type": "string",
+          "pattern": "^[a-z]{2,3}(-[A-Z]{2})?$",
+          "description": "BCP 47 language tag"
+        }
+      }
+    }
+  }
+}

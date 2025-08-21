@@ -30,6 +30,18 @@
   "agents/POLICY.md": "EstándarUniversal:Documento-Desarrollo-AQUART-00.06-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-0e4c58d4-PoliticaGobernanza",
   "agents/manifest.yaml": "EstándarUniversal:Documento-Desarrollo-AQUART-00.07-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-manifest-ManifiestoAgentes",
   "tests/test_depth.py": "EstándarUniversal:Prueba-Desarrollo-AQUART-00.08-AerospaceMainEvolutionDigital-0001-v1.0-AMEDEOSystems-GeneracionIA-DEPTH-AmedeoPelliccia-testdpth-ValidacionProfundidad",
+  "standards/utdc-gps-mff/STANDARD_GUIDE.md": "EstándarUniversal:Especificacion-Desarrollo-UTDC-00.00-StandardGuide-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-AmedeoPelliccia-a1b2c3d4-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/src/utdc_gps_mff/core/header.py": "EstándarUniversal:Codigo-Desarrollo-UTDC-01.00-CoreHeader-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-b2c3d4e5-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/src/utdc_gps_mff/core/validator.py": "EstándarUniversal:Codigo-Desarrollo-UTDC-01.01-Validator-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-c3d4e5f6-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/src/utdc_gps_mff/core/signer.py": "EstándarUniversal:Codigo-Desarrollo-UTDC-01.02-Signer-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-d4e5f6a7-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/src/utdc_gps_mff/core/canonicalizer.py": "EstándarUniversal:Codigo-Desarrollo-UTDC-01.03-Canonicalizer-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-e5f6a7b8-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/src/utdc_gps_mff/generators/base_generator.py": "EstándarUniversal:Codigo-Desarrollo-UTDC-01.04-BaseGenerator-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-f6a7b8c9-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/templates/s1000d/basic_document.j2": "EstándarUniversal:Plantilla-Desarrollo-S1000D-02.00-DataModule-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-AIR-ReferenceImpl-d4e5f6a7-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/templates/svg/technical_diagram.j2": "EstándarUniversal:Plantilla-Desarrollo-SVG-02.01-TechnicalDiagram-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-e5f6a7b8-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/schemas/mff-header-v1.0.json": "EstándarUniversal:Esquema-Desarrollo-UTDC-03.00-HeaderValidation-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-f6a7b8c9-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/tools/validate.py": "EstándarUniversal:Herramienta-Desarrollo-UTDC-01.00-ValidatorTool-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-validate1-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/tools/generate.py": "EstándarUniversal:Herramienta-Desarrollo-UTDC-01.01-GeneratorTool-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-generate1-RestoDeVidaUtil",
+  "standards/utdc-gps-mff/reference/tests/test_basic.py": "EstándarUniversal:Prueba-Desarrollo-UTDC-01.00-BasicTests-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-test0001-RestoDeVidaUtil",
   "main.py": "EstándarUniversal:Documento-Hibrida-Blockchain-00.00-ImplementacionBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-a0b1c2d3-RestoDeVidaUtil",
   "requirements.txt": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-DependenciasBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-b1c2d3e4-RestoDeVidaUtil",
   "Dockerfile": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-ContenedorBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-c2d3e4f5-RestoDeVidaUtil",
@@ -43,4 +55,5 @@
   "gaia_air_blockchain_production/s1000d_header.json": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-CabeceraS1000D-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-k0l1m2n3-RestoDeVidaUtil",
   "test_blockchain.py": "EstándarUniversal:Prueba-Desarrollo-Blockchain-00.00-PruebaIntegracion-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-l1m2n3o4-RestoDeVidaUtil",
   "BLOCKCHAIN_README.md": "EstándarUniversal:Documento-Desarrollo-Blockchain-00.00-DocumentacionBlockchain-0001-v1.0-Gaia Air-GeneracionHibrida-AIR-AmedeoPelliccia-m2n3o4p5-RestoDeVidaUtil"
+}'''
 }
