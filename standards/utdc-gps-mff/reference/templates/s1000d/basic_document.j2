@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MFF-Sidecar: mff_artifact.mff.json -->
+<!-- UTDC-GPS-MFF S1000D Basic Document Template -->
+<!-- Template placeholders -->
+<!-- ${TITLE} -->
+<!-- ${DESCRIPTION} -->
+<!-- ${AUTHOR} -->
+<!-- ${DATE_UTC} -->
+<!-- ${VERSION} -->
+<dmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="UTDC" systemDiffCode="GPS" systemCode="MFF" 
+                subSystemCode="0" subSubSystemCode="0" assyCode="00" 
+                disassyCode="00" disassyCodeVariant="A" infoCode="000" 
+                infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="001" inWork="00"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2025" month="08" day="21"/>
+        <dmTitle>
+          <techName>${TITLE}</techName>
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany>
+        <enterpriseName>AMEDEO Systems</enterpriseName>
+      </responsiblePartnerCompany>
+      <originator>
+        <enterpriseName>${AUTHOR}</enterpriseName>
+      </originator>
+      <applic>
+        <displayText>
+          <simplePara>All UTDC-GPS-MFF implementations</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="S1000D" systemDiffCode="F" systemCode="00" 
+                    subSystemCode="0" subSubSystemCode="0" assyCode="00" 
+                    disassyCode="00" disassyCodeVariant="A" infoCode="022" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+    </dmStatus>
+  </identAndStatusSection>
+  
+  <content>
+    <description>
+      <levelledPara>
+        <title>Document Purpose</title>
+        <para>${DESCRIPTION}</para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>UTDC-GPS-MFF Compliance</title>
+        <para>
+          This document is generated according to the Universal Technical Data and Content 
+          Generative Prompting Standard - Machine Final Format (UTDC-GPS-MFF) specification.
+          It includes complete provenance tracking, cryptographic validation, and regulatory compliance.
+        </para>
+        
+        <levelledPara>
+          <title>Generation Metadata</title>
+          <para>Generated on: ${DATE_UTC}</para>
+          <para>Version: ${VERSION}</para>
+          <para>Standard: UTDC-GPS-MFF v1.0</para>
+        </levelledPara>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Validation Requirements</title>
+        <para>
+          This document must be validated using UTDC-GPS-MFF validators and
+          accompanied by a valid MFF-Header sidecar file containing:
+        </para>
+        <randomList>
+          <listItem>
+            <para>UTCS-MI v5.0+ compliant identifier</para>
+          </listItem>
+          <listItem>
+            <para>Complete provenance chain</para>
+          </listItem>
+          <listItem>
+            <para>Cryptographic signatures (PQC)</para>
+          </listItem>
+          <listItem>
+            <para>Regulatory compliance attestation</para>
+          </listItem>
+        </randomList>
+      </levelledPara>
+    </description>
+  </content>
+</dmodule>

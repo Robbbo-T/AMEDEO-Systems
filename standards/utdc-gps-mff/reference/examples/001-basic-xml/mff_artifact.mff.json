@@ -1,0 +1,52 @@
+{
+  "artifact": {
+    "canonicalization": "utf8;lf;attr_order=asc;indent=2",
+    "format": {
+      "ext": "txt",
+      "mime": "application/octet-stream"
+    },
+    "regulation_schema": {
+      "name": "UTDC",
+      "version": "1.0"
+    },
+    "sha256": "82019268aa8c62a9541b9514e45b34cc730c6fa53e144ad3e51e6f6374eed456",
+    "size_bytes": 3630,
+    "uri": "examples/001-basic-xml/mff_artifact.txt"
+  },
+  "compliance": {
+    "result": "pending",
+    "validators": [
+      {
+        "name": "mff-validator",
+        "rule": "UTDC-GPS-MFF-v1.0"
+      }
+    ]
+  },
+  "generation": {
+    "method": "GeneracionHibrida",
+    "model": "UTDC-MFF-Generator",
+    "parameters": {},
+    "prompt_hash": "1e919ad6"
+  },
+  "license": "CC BY-SA 4.0",
+  "regulation_reference": [
+    "UTDC"
+  ],
+  "repo_path": "examples/001-basic-xml",
+  "security": {
+    "classification": "CUI",
+    "integrity_signature": {
+      "alg": "Dilithium3",
+      "sig": "PQC_SIG_0439"
+    }
+  },
+  "template_ref": {
+    "uri": "/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/standards/utdc-gps-mff/reference/templates/s1000d/basic_document.j2",
+    "version": "v1.0"
+  },
+  "timestamps": {
+    "created_utc": "2025-08-21T17:49:45.806801Z",
+    "generated_utc": "2025-08-21T17:49:45.806801Z"
+  },
+  "utcmi_id": "EstándarUniversal:Documento-Desarrollo-UTDC-00.00-GeneratedDocument-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHibrida-CROSS-ReferenceImpl-43966799-RestoDeVidaUtil"
+}

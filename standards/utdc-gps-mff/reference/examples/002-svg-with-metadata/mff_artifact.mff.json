@@ -1,0 +1,52 @@
+{
+  "artifact": {
+    "canonicalization": "utf8;lf;attr_order=asc;indent=2",
+    "format": {
+      "ext": "txt",
+      "mime": "application/octet-stream"
+    },
+    "regulation_schema": {
+      "name": "SVG",
+      "version": "1.0"
+    },
+    "sha256": "a222ecb6bdd6d429d8cee6fba62999bbbc966d8edc733704f96102d2950b8e11",
+    "size_bytes": 5336,
+    "uri": "examples/002-svg-with-metadata/mff_artifact.txt"
+  },
+  "compliance": {
+    "result": "pending",
+    "validators": [
+      {
+        "name": "mff-validator",
+        "rule": "UTDC-GPS-MFF-v1.0"
+      }
+    ]
+  },
+  "generation": {
+    "method": "GeneracionHibrida",
+    "model": "UTDC-MFF-Generator",
+    "parameters": {},
+    "prompt_hash": "5dcaae63"
+  },
+  "license": "CC BY-SA 4.0",
+  "regulation_reference": [
+    "SVG"
+  ],
+  "repo_path": "examples/002-svg-with-metadata",
+  "security": {
+    "classification": "CUI",
+    "integrity_signature": {
+      "alg": "Dilithium3",
+      "sig": "PQC_SIG_2367"
+    }
+  },
+  "template_ref": {
+    "uri": "/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/standards/utdc-gps-mff/reference/templates/svg/technical_diagram.j2",
+    "version": "v1.0"
+  },
+  "timestamps": {
+    "created_utc": "2025-08-21T17:51:47.109660Z",
+    "generated_utc": "2025-08-21T17:51:47.109660Z"
+  },
+  "utcmi_id": "EstándarUniversal:Documento-Desarrollo-SVG-00.00-GeneratedDocument-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHibrida-CROSS-ReferenceImpl-41176133-RestoDeVidaUtil"
+}

@@ -1,0 +1,48 @@
+# UTCS-MI: EstándarUniversal:Especificacion-Desarrollo-UTDC-00.00-StandardGuide-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-AmedeoPelliccia-a1b2c3d4-RestoDeVidaUtil
+
+version: "5.0+"
+standard: UTDC-GPS-MFF
+implementation: reference-v1.0
+
+artifacts:
+  - id: "EstándarUniversal:Codigo-Desarrollo-UTDC-01.00-CoreHeader-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-b2c3d4e5-RestoDeVidaUtil"
+    path: "src/utdc_gps_mff/core/header.py"
+    type: "Codigo"
+    origin: "Manual"
+    hash: "sha256:b2c3d4e5"
+    state: "Desarrollo"
+    
+  - id: "EstándarUniversal:Codigo-Desarrollo-UTDC-01.01-Validator-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-CROSS-ReferenceImpl-c3d4e5f6-RestoDeVidaUtil"
+    path: "src/utdc_gps_mff/core/validator.py"
+    type: "Codigo"
+    origin: "Manual"
+    hash: "sha256:c3d4e5f6"
+    state: "Desarrollo"
+    
+  - id: "EstándarUniversal:Plantilla-Desarrollo-S1000D-02.00-DataModule-0001-v1.0-AerospaceAndQuantumUnitedAdvancedVenture-GeneracionHumana-AIR-ReferenceImpl-d4e5f6a7-RestoDeVidaUtil"
+    path: "templates/s1000d/data_module.xml.j2"
+    type: "Plantilla"
+    origin: "Manual"
+    hash: "sha256:d4e5f6a7"
+    state: "Desarrollo"
+
+compliance:
+  standards:
+    - UTCS-MI-v5.0
+    - S1000D-v5.0
+    - DO-178C
+    - CS-25
+  validation:
+    automated: true
+    coverage: 100.0
+    
+quality_gates:
+  - id: "utcs_compliance"
+    threshold: 100.0
+    unit: "percent"
+  - id: "test_coverage"
+    threshold: 95.0
+    unit: "percent"
+  - id: "security_scan"
+    threshold: 0
+    unit: "high_findings"
