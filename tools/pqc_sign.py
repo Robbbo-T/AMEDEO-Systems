@@ -24,6 +24,8 @@ def sign_files(files, algorithm="Dilithium3", output="signatures.json"):
                 "signature": mock_signature,
                 "size": len(content)
             }
+        else:
+            print(f"⚠️ File not found: {file_path}")
 
     Path(output).write_text(json.dumps(signatures, indent=2))
     print(f"✅ Signed {len(signatures['files'])} files with {algorithm}")
