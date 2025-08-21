@@ -1,7 +1,7 @@
 #include "det.h"
 #include <stdio.h>
 static FILE *fp;
-int          det_init(const char *path)
+int det_init(const char *path)
 {
     fp = fopen(path, "wb");
     return fp ? 0 : -1;
