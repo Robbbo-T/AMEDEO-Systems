@@ -47,7 +47,11 @@ class QuantumTeleportationEngine:
             
         # Simulate quantum entanglement with Bell pair creation
         # For simulation: random success based on material properties
-        success_probability = 0.95 if self.material.quantum_coherence > 50.0 else 0.85
+        success_probability = (
+            ENTANGLEMENT_SUCCESS_PROBABILITY_HIGH
+            if self.material.quantum_coherence > QUANTUM_COHERENCE_THRESHOLD
+            else ENTANGLEMENT_SUCCESS_PROBABILITY_LOW
+        )
         
         if random.random() < success_probability:
             self.entangled_pairs[cell_id_1] = cell_id_2
