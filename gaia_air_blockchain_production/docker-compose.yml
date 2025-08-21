@@ -1,0 +1,157 @@
+networks:
+  gaia_air_net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 10.10.0.0/24
+services:
+  api1:
+    container_name: gaia_air_api_1
+    depends_on:
+    - validator1
+    - validator2
+    - validator3
+    environment:
+    - NODE_TYPE=api
+    - NODE_ID=api1
+    - NETWORK_NAME=GAIA_AIR_NETWORK
+    - VALIDATOR_URLS=validator1:7051,validator2:7051,validator3:7051
+    - TLS_ENABLED=true
+    - VAULT_ADDR=${VAULT_ADDR}
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080/health
+      timeout: 3s
+    image: gaiaair/api:latest
+    networks:
+    - gaia_air_net
+    ports:
+    - 8080:8080
+    restart: unless-stopped
+    volumes:
+    - api1_data:/data
+  orderer1:
+    container_name: gaia_air_orderer_1
+    environment:
+    - NODE_TYPE=orderer
+    - NODE_ID=orderer1
+    - NETWORK_NAME=GAIA_AIR_NETWORK
+    - CONSENSUS_TYPE=RAFT
+    - TLS_ENABLED=true
+    - VAULT_ADDR=${VAULT_ADDR}
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - https://localhost:9443/healthz
+      timeout: 3s
+    image: gaiaair/orderer:latest
+    networks:
+    - gaia_air_net
+    ports:
+    - 7050:7050
+    restart: unless-stopped
+    volumes:
+    - orderer1_data:/data
+  validator1:
+    container_name: gaia_air_validator_1
+    depends_on:
+    - orderer1
+    environment:
+    - NODE_TYPE=validator
+    - NODE_ID=validator1
+    - NETWORK_NAME=GAIA_AIR_NETWORK
+    - CONSENSUS_TYPE=RAFT
+    - TLS_ENABLED=true
+    - ORDERER_URL=orderer1:7050
+    - VAULT_ADDR=${VAULT_ADDR}
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - https://localhost:9443/healthz
+      timeout: 3s
+    image: gaiaair/validator:latest
+    networks:
+    - gaia_air_net
+    ports:
+    - 7051:7051
+    restart: unless-stopped
+    volumes:
+    - validator1_data:/data
+  validator2:
+    container_name: gaia_air_validator_2
+    depends_on:
+    - orderer1
+    environment:
+    - NODE_TYPE=validator
+    - NODE_ID=validator2
+    - NETWORK_NAME=GAIA_AIR_NETWORK
+    - CONSENSUS_TYPE=RAFT
+    - TLS_ENABLED=true
+    - ORDERER_URL=orderer1:7050
+    - VAULT_ADDR=${VAULT_ADDR}
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - https://localhost:9443/healthz
+      timeout: 3s
+    image: gaiaair/validator:latest
+    networks:
+    - gaia_air_net
+    ports:
+    - 7052:7051
+    restart: unless-stopped
+    volumes:
+    - validator2_data:/data
+  validator3:
+    container_name: gaia_air_validator_3
+    depends_on:
+    - orderer1
+    environment:
+    - NODE_TYPE=validator
+    - NODE_ID=validator3
+    - NETWORK_NAME=GAIA_AIR_NETWORK
+    - CONSENSUS_TYPE=RAFT
+    - TLS_ENABLED=true
+    - ORDERER_URL=orderer1:7050
+    - VAULT_ADDR=${VAULT_ADDR}
+    healthcheck:
+      interval: 30s
+      retries: 5
+      test:
+      - CMD
+      - curl
+      - -f
+      - https://localhost:9443/healthz
+      timeout: 3s
+    image: gaiaair/validator:latest
+    networks:
+    - gaia_air_net
+    ports:
+    - 7053:7051
+    restart: unless-stopped
+    volumes:
+    - validator3_data:/data
+version: '3.9'
+volumes:
+  api1_data: {}
+  orderer1_data: {}
+  validator1_data: {}
+  validator2_data: {}
+  validator3_data: {}
