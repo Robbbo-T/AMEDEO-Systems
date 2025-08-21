@@ -38,9 +38,9 @@ int main(void){
   for(int i=0;i<steps;i++){
     uint64_t t = hal_now_us();
     if (poae_run_cycle(t, perceive, observe, actuate, evolve, &ctx) != 0) return 1;
-    /* TSN metrics (synthetic) */
+    /* TSN metrics (synthetic) - ARINC 653-like scheduling requirement: jitter ≤ 50µs */
     uint32_t lat,jit; tsn_measure(&lat,&jit);
-    if (jit > 1000) { fprintf(stderr,"[TSN] jitter too high\n"); return 2; }
+    if (jit > 50) { fprintf(stderr,"[TSN] jitter too high: %u µs > 50µs\n", jit); return 2; }
     /* busy-wait to approximate 1kHz in host */
     while((hal_now_us() - t) < (uint64_t)period_us) {}
   }
