@@ -17,10 +17,10 @@
   },
   "traceability": {
     "trace_ids": [
-      "demo-planner-1755705476868",
-      "demo-buyer-1755705476868",
-      "demo-scheduler-1755705476868",
-      "demo-pilot-1755705476868"
+      "demo-planner-1755741866729",
+      "demo-buyer-1755741866729",
+      "demo-scheduler-1755741866730",
+      "demo-pilot-1755741866730"
     ],
     "evidence_signatures": [
       "Dilithium-mock",
