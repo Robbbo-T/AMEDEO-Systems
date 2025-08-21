@@ -13,13 +13,17 @@ def verify_signatures(sig_file, algorithm="Dilithium3"):
         return False
 
     verified = 0
+    failed = 0
     for file_path, sig_data in data.get("files", {}).items():
         expected_sig = hashlib.sha512(f"{algorithm}:{sig_data['hash']}:mock_key".encode()).hexdigest()[:128]
         if sig_data.get("signature") == expected_sig:
             verified += 1
         else:
             print(f"❌ Signature verification failed for {file_path}")
-            return False
+            failed += 1
+    if failed > 0:
+        return False
+    return True
 
     print(f"✅ Verified {verified}/{len(data.get('files', {}))} signatures")
     return True
