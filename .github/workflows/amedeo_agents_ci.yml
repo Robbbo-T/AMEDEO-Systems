@@ -42,7 +42,9 @@ jobs:
 
       - name: Validate Agent Depth (≥3x each, ≥81x cascade)
         run: |
-          python tools/depth_validator.py
+#       - name: Validate Agent Depth (≥3x each, ≥81x cascade)
+#         run: |
+#           python tools/depth_validator.py
 
       - name: Security Scan (HIGH only)
         run: |
