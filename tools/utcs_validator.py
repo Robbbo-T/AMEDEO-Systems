@@ -5,7 +5,6 @@ import re
 from pathlib import Path
 import sys
 
-HASH_PATTERN = re.compile(r"^sha256:[a-f0-9]{8}$")
 
 
 def validate_manifest(manifest_path="agents/manifest.yaml") -> bool:
