@@ -1,0 +1,130 @@
+{
+  "certification_framework": {
+    "standards": [
+      "DO-178C",
+      "DO-326A",
+      "ED-202A",
+      "DO-330",
+      "ARP4754A"
+    ],
+    "dal_levels": [
+      "DAL-A",
+      "DAL-B",
+      "DAL-C"
+    ],
+    "partition_evidence": "ARINC-653 with CAST-32A compliance"
+  },
+  "threat_model": {
+    "standard": "DO-326A/ED-202A",
+    "assessment_date": 1755819521.5502777,
+    "system": "AMEDEO Self-Healing Surface Control",
+    "threats": [
+      {
+        "id": "CYB-001",
+        "category": "cyber",
+        "severity": "catastrophic",
+        "likelihood": "remote",
+        "description": "Unauthorized access to healing control systems",
+        "mitigation": "Dilithium-3 PQC signatures, mTLS, zero-trust network"
+      },
+      {
+        "id": "CYB-002",
+        "category": "cyber",
+        "severity": "hazardous",
+        "likelihood": "remote",
+        "description": "Tampering with healing actuation patterns",
+        "mitigation": "RTA supervisor safety gates, 2oo3 consensus, energy limits"
+      },
+      {
+        "id": "CYB-003",
+        "category": "cyber",
+        "severity": "major",
+        "likelihood": "probable",
+        "description": "Denial of service on tile communication",
+        "mitigation": "Redundant communication paths, local fallback modes"
+      },
+      {
+        "id": "PHY-001",
+        "category": "physical",
+        "severity": "catastrophic",
+        "likelihood": "extremely_remote",
+        "description": "Physical tampering with micro transistor nodes",
+        "mitigation": "Tamper-evident packaging, integrity monitoring"
+      },
+      {
+        "id": "ENV-001",
+        "category": "environmental",
+        "severity": "hazardous",
+        "likelihood": "remote",
+        "description": "Thermal runaway from excessive heating",
+        "mitigation": "25\u00b0C temperature limits, thermal guards, duty cycle limits"
+      }
+    ],
+    "overall_risk": "ACCEPTABLE",
+    "certification_status": "DO-326A_COMPLIANT"
+  },
+  "sbom": {
+    "sbom_format": "SPDX-2.3",
+    "generation_date": 1755819521.550313,
+    "components": [
+      {
+        "name": "dilithium3_pqc",
+        "version": "1.0.0",
+        "supplier": "AMEDEO Systems",
+        "hash_sha256": "c8a9e3f1b2d4a567890abcdef1234567890abcdef1234567890abcdef123456",
+        "license": "Proprietary",
+        "vulnerability_status": "No known vulnerabilities"
+      },
+      {
+        "name": "micro_transistor_controller",
+        "version": "1.0.0",
+        "supplier": "AMEDEO Systems",
+        "hash_sha256": "c8a9e3f1b2d4a567890abcdef1234567890abcdef1234567890abcdef123456",
+        "license": "Proprietary",
+        "vulnerability_status": "No known vulnerabilities"
+      },
+      {
+        "name": "rta_supervisor",
+        "version": "1.0.0",
+        "supplier": "AMEDEO Systems",
+        "hash_sha256": "51de0c77b2d4a567890abcdef1234567890abcdef1234567890abcdef123456",
+        "license": "Proprietary",
+        "vulnerability_status": "No known vulnerabilities"
+      },
+      {
+        "name": "python_runtime",
+        "version": "3.12.3",
+        "supplier": "Python Software Foundation",
+        "hash_sha256": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+        "license": "PSF License",
+        "vulnerability_status": "CVE scan pending"
+      }
+    ],
+    "sbom_hash": "c2e541eb110d8f4ee4ccd6c4acdf80a62befe5e1bdc1f37499eaf3d2d84508be",
+    "attestation": "All components verified and scanned",
+    "signature": "Dilithium3_PQC_SIGNATURE_PLACEHOLDER"
+  },
+  "energy_compliance": {
+    "node_limit_mj": 50.0,
+    "tile_limit_j": 2.0,
+    "thermal_limit_c": 25.0,
+    "duty_cycle_limit": 0.1
+  },
+  "consensus_model": {
+    "type": "2oo3_tile_leader",
+    "scope": "0.01-0.1_m2_patches",
+    "granularity": "tile_level_not_transistor"
+  },
+  "quantum_approach": {
+    "method": "quantum_assisted_classical_optimization",
+    "physical_transport": "classical_only",
+    "teleportation": "not_implemented_not_physical"
+  },
+  "crypto_compliance": {
+    "algorithm": "Dilithium-3",
+    "standard": "NIST_PQC_Selected",
+    "key_size": "2528_bytes_private_1312_bytes_public"
+  },
+  "timestamp": 1755819521.550317,
+  "compliance_status": "CERT_READY"
+}

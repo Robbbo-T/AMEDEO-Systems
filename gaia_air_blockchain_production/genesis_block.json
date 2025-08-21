@@ -1,6 +1,6 @@
 {
   "block_id": "GAIA_AIR_GENESIS",
-  "timestamp": "2025-08-21T23:27:21.563325+00:00",
+  "timestamp": "2025-08-21T23:38:57.467164+00:00",
   "version": "1.0",
   "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
   "hash_algorithm": "SHA3-256",
@@ -20,7 +20,7 @@
     "GAIA_AIR_ID": "GAIA-AIR-0001",
     "metadata": {
       "creator": "Amedeo Pelliccia",
-      "creation_date": "2025-08-21T23:27:21.563340+00:00",
+      "creation_date": "2025-08-21T23:38:57.467177+00:00",
       "purpose": "Aerospace component traceability and sustainability tracking"
     },
     "sustainability": {
@@ -58,5 +58,5 @@
       }
     }
   },
-  "genesis_hash": "1836feb2301b6a432141ca0146d3fad100e3c211854b9f910b0962d1961443aa"
+  "genesis_hash": "b4019334ffd1a04684296df8e15fb53b84ecabdd24ac4c8b20792fb769db758b"
 }
