@@ -131,7 +131,6 @@ class MicroTransistorNode:
         self.healing_resources -= actuation.energy_required
         
         # Simulate success/failure based on probability
-        import random
         success = random.random() < actuation.success_probability
         
         evidence = {
