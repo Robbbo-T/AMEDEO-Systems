@@ -52,7 +52,7 @@ class ConsciousnessMeter:
         # Simulate IIT-based measurement
         # In real implementation, this would calculate actual integrated information
         complexity = len(str(system_state))
-        phi_value = min(1.0, complexity / 1000.0)  # Normalized
+        phi_value = min(1.0, complexity / self.PHI_COMPLEXITY_NORMALIZATION_FACTOR)  # Normalized
         
         return ConsciousnessMetric(
             name="integrated_information_phi",
