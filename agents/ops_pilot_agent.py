@@ -5,7 +5,7 @@ Operations Pilot Agent
 Depth: Expands what's possible, not just what's efficient
 """
 
-from base_agent import AMEDEOAgent, Intent, Result, to_factor, InsufficientEnvelopeExpansion
+from .base_agent import AMEDEOAgent, Intent, Result, to_factor, InsufficientEnvelopeExpansion
 from typing import Dict, Any, List
 import json
 
