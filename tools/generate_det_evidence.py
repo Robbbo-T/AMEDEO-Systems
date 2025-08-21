@@ -17,7 +17,7 @@ def generate_evidence() -> str:
 
     results = []
     total_impact = 1.0
-    min_impact = float('inf')
+    productivity_deltas = []
 
     for i, (AgentClass, kind, payload) in enumerate(agents_specs):
         agent = AgentClass(f"evidence-{i}", "agents/POLICY.md")
