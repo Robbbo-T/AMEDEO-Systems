@@ -63,7 +63,7 @@ class MicroTransistorNode:
             damage_type = "none"
             severity = 0.0
             
-        confidence = 0.95 if severity > 0.1 else 0.8
+        confidence = CONFIDENCE_HIGH if severity > SEVERITY_THRESHOLD else CONFIDENCE_LOW
         
         assessment = DamageAssessment(
             damage_type=damage_type,
