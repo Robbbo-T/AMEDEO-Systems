@@ -165,7 +165,7 @@ class RTASupervisor:
     def _is_macro_operation(self, pattern: List[float], energy: float, duration: float) -> bool:
         """Determine if this is a macro shape recovery operation"""
         # Macro operations: longer duration (1-10s), higher energy
-        return duration > 1.0 or energy > 0.1  # >1s or >100mJ
+        return duration > MACRO_OPERATION_MIN_DURATION_S or energy > MACRO_OPERATION_MIN_ENERGY_J  # >1s or >100mJ
     
     def _update_safety_tracking(self, pattern: List[float], energy: float, duration: float):
         """Update safety tracking after approved action"""
