@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - framework/cqea/cqea_core.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">framework/cqea</a> - cqea_core.c<span style="font-size: 80%;"> (source / <a href="cqea_core.c.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">73.9&nbsp;%</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">17</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-08-22 05:17:31</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryLo">25.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /**</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * CQEA (Coherent Quantum Error Analysis) Framework</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Part of AQUA-OS/ADT system for quantum-enhanced flight control</span>
+<span id="L4"><span class="lineNum">       4</span>              :  */</span>
+<span id="L5"><span class="lineNum">       5</span>              : </span>
+<span id="L6"><span class="lineNum">       6</span>              : #include &lt;stdint.h&gt;</span>
+<span id="L7"><span class="lineNum">       7</span>              : #include &lt;math.h&gt;</span>
+<span id="L8"><span class="lineNum">       8</span>              : #include &lt;stdio.h&gt;</span>
+<span id="L9"><span class="lineNum">       9</span>              : </span>
+<span id="L10"><span class="lineNum">      10</span>              : #ifndef M_PI</span>
+<span id="L11"><span class="lineNum">      11</span>              : #define M_PI 3.14159265358979323846</span>
+<span id="L12"><span class="lineNum">      12</span>              : #endif</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : /* φ_sync trace-norm metric for quantum coherence analysis */</span>
+<span id="L15"><span class="lineNum">      15</span>              : typedef struct {</span>
+<span id="L16"><span class="lineNum">      16</span>              :     double phi_sync;      /* Trace-norm metric */</span>
+<span id="L17"><span class="lineNum">      17</span>              :     double tau_ctl;       /* Control latency */</span>
+<span id="L18"><span class="lineNum">      18</span>              :     double tau_max;       /* Maximum allowed latency */</span>
+<span id="L19"><span class="lineNum">      19</span>              :     uint64_t timestamp_us;</span>
+<span id="L20"><span class="lineNum">      20</span>              : } cqea_sync_metric_t;</span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span>              : static cqea_sync_metric_t last_metric = {0};</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC tlaBgGNC">          10 : double cqea_calculate_phi_sync(double coherence_factor, double decoherence_rate, double time_s) {</span></span>
+<span id="L25"><span class="lineNum">      25</span>              :     /* Simplified trace-norm calculation for demo */</span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">          10 :     return coherence_factor * exp(-decoherence_rate * time_s);</span></span>
+<span id="L27"><span class="lineNum">      27</span>              : }</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">          10 : int cqea_bounded_latency_check(double tau_ctl, double tau_max) {</span></span>
+<span id="L30"><span class="lineNum">      30</span>              :     /* Enforce bounded-latency guard: τ_ctl ≤ τ_max */</span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC tlaBgUNC">           0 :     if (tau_ctl &gt; tau_max) {</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC">           0 :         printf(&quot;[CQEA] VIOLATION: Control latency %.2f µs exceeds max %.2f µs\n&quot;, </span></span>
+<span id="L33"><span class="lineNum">      33</span>              :                tau_ctl, tau_max);</span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC">           0 :         return -1;</span></span>
+<span id="L35"><span class="lineNum">      35</span>              :     }</span>
+<span id="L36"><span class="lineNum">      36</span>              :     return 0;</span>
+<span id="L37"><span class="lineNum">      37</span>              : }</span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">          10 : int cqea_run_mpc_demo(uint64_t timestamp_us) {</span></span>
+<span id="L40"><span class="lineNum">      40</span>              :     /* Simulate MPC (Model Predictive Control) with quantum enhancement */</span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">          10 :     double t_s = timestamp_us / 1e6;</span></span>
+<span id="L42"><span class="lineNum">      42</span>              :     </span>
+<span id="L43"><span class="lineNum">      43</span>              :     /* Calculate φ_sync trace-norm metric */</span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">          10 :     double coherence = 0.95;  /* High coherence factor */</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">          10 :     double decoherence = 0.01; /* Low decoherence rate */</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">          10 :     double phi_sync = cqea_calculate_phi_sync(coherence, decoherence, t_s);</span></span>
+<span id="L47"><span class="lineNum">      47</span>              :     </span>
+<span id="L48"><span class="lineNum">      48</span>              :     /* Simulate control latency (should be ≤ 50µs for real-time requirements) */</span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">          10 :     double tau_ctl = 25.0 + 15.0 * sin(2 * M_PI * 0.1 * t_s); /* 10-40µs range */</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">          10 :     double tau_max = 50.0; /* 50µs maximum as per requirements */</span></span>
+<span id="L51"><span class="lineNum">      51</span>              :     </span>
+<span id="L52"><span class="lineNum">      52</span>              :     /* Store metrics */</span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          10 :     last_metric.phi_sync = phi_sync;</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">          10 :     last_metric.tau_ctl = tau_ctl;</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          10 :     last_metric.tau_max = tau_max;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">          10 :     last_metric.timestamp_us = timestamp_us;</span></span>
+<span id="L57"><span class="lineNum">      57</span>              :     </span>
+<span id="L58"><span class="lineNum">      58</span>              :     /* Check bounded-latency constraint */</span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          10 :     if (cqea_bounded_latency_check(tau_ctl, tau_max) != 0) {</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC tlaBgUNC">           0 :         return -1;</span></span>
+<span id="L61"><span class="lineNum">      61</span>              :     }</span>
+<span id="L62"><span class="lineNum">      62</span>              :     </span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC tlaBgGNC">          10 :     printf(&quot;[CQEA] φ_sync=%.4f, τ_ctl=%.1fµs ≤ τ_max=%.1fµs ✓\n&quot;, </span></span>
+<span id="L64"><span class="lineNum">      64</span>              :            phi_sync, tau_ctl, tau_max);</span>
+<span id="L65"><span class="lineNum">      65</span>              :     </span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          10 :     return 0;</span></span>
+<span id="L67"><span class="lineNum">      67</span>              : }</span>
+<span id="L68"><span class="lineNum">      68</span>              : </span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC tlaBgUNC">           0 : cqea_sync_metric_t cqea_get_last_metric(void) {</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :     return last_metric;</span></span>
+<span id="L71"><span class="lineNum">      71</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

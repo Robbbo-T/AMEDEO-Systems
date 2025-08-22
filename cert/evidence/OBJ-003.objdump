@@ -1,0 +1,865 @@
+
+build/CMakeFiles/envelope_checker_tests.dir/kernel/core/simplex_safety_monitor.c.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <simplex_init>:
+simplex_init():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:10
+
+/* Global Simplex Safety Monitor Context */
+static simplex_context_t g_simplex_ctx;
+
+/* Initialize Simplex Safety Monitor */
+int simplex_init(void) {
+   0:	f3 0f 1e fa          	endbr64
+memset():
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:59 (discriminator 1)
+   case no work is done at all.  We detect these problems by referring
+   non-existing functions.  */
+__fortify_function void *
+__NTH (memset (void *__dest, int __ch, size_t __len))
+{
+  return __builtin___memset_chk (__dest, __ch, __len,
+   4:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # b <simplex_init+0xb>
+   b:	31 c0                	xor    %eax,%eax
+   d:	b9 33 00 00 00       	mov    $0x33,%ecx
+simplex_init():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:10
+  12:	48 83 ec 08          	sub    $0x8,%rsp
+memset():
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:59 (discriminator 1)
+  16:	48 89 d7             	mov    %rdx,%rdi
+  19:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 21 <simplex_init+0x21>
+  20:	01 
+  21:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+}
+
+__fortify_function int
+printf (const char *__restrict __fmt, ...)
+{
+  return __printf_chk (__USE_FORTIFY_LEVEL - 1, __fmt, __va_arg_pack ());
+  24:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 2b <simplex_init+0x2b>
+  2b:	e8 00 00 00 00       	call   30 <simplex_init+0x30>
+  30:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 38 <simplex_init+0x38>
+  37:	01 
+simplex_init():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:17
+    g_simplex_ctx.current_state = SIMPLEX_STATE_NORMAL;
+    g_simplex_ctx.active_monitors = 0;
+    
+    printf("[SIMPLEX] Safety monitor initialized\n");
+    return 0;
+}
+  38:	31 c0                	xor    %eax,%eax
+  3a:	48 83 c4 08          	add    $0x8,%rsp
+  3e:	c3                   	ret
+  3f:	90                   	nop
+
+0000000000000040 <simplex_register_monitor>:
+simplex_register_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:22
+
+/* Register a safety monitor with check and fallback functions */
+int simplex_register_monitor(uint32_t monitor_id, const char *name,
+                            int (*check_fn)(uint64_t, void*),
+                            int (*fallback_fn)(uint64_t, void*)) {
+  40:	f3 0f 1e fa          	endbr64
+  44:	89 f8                	mov    %edi,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:23
+    if (monitor_id >= SIMPLEX_MAX_MONITORS) {
+  46:	83 ff 07             	cmp    $0x7,%edi
+  49:	0f 87 89 00 00 00    	ja     d8 <simplex_register_monitor+0x98>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:28
+        return -1;
+    }
+    
+    simplex_monitor_t *monitor = &g_simplex_ctx.monitors[monitor_id];
+    monitor->monitor_id = monitor_id;
+  4f:	41 89 c1             	mov    %eax,%r9d
+  52:	48 89 f7             	mov    %rsi,%rdi
+  55:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 5c <simplex_register_monitor+0x1c>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:22
+                            int (*fallback_fn)(uint64_t, void*)) {
+  5c:	48 83 ec 08          	sub    $0x8,%rsp
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:28
+    monitor->monitor_id = monitor_id;
+  60:	4f 8d 04 49          	lea    (%r9,%r9,2),%r8
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:31
+    monitor->enabled = true;
+    monitor->name = name;
+    monitor->check_function = check_fn;
+  64:	4f 8d 4c 49 03       	lea    0x3(%r9,%r9,2),%r9
+  69:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 71 <simplex_register_monitor+0x31>
+  70:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:28
+    monitor->monitor_id = monitor_id;
+  71:	49 c1 e0 04          	shl    $0x4,%r8
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:31
+    monitor->check_function = check_fn;
+  75:	49 c1 e1 04          	shl    $0x4,%r9
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:28
+    monitor->monitor_id = monitor_id;
+  79:	4e 8d 14 06          	lea    (%rsi,%r8,1),%r10
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:31
+    monitor->check_function = check_fn;
+  7d:	4c 01 ce             	add    %r9,%rsi
+  80:	48 89 56 08          	mov    %rdx,0x8(%rsi)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:33
+    monitor->fallback_function = fallback_fn;
+    monitor->violation_count = 0;
+  84:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # 8b <simplex_register_monitor+0x4b>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:32
+    monitor->fallback_function = fallback_fn;
+  8b:	48 89 4e 10          	mov    %rcx,0x10(%rsi)
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+  8f:	48 89 f9             	mov    %rdi,%rcx
+  92:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 99 <simplex_register_monitor+0x59>
+simplex_register_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:28
+    monitor->monitor_id = monitor_id;
+  99:	41 89 42 18          	mov    %eax,0x18(%r10)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:30
+    monitor->name = name;
+  9d:	49 89 7a 30          	mov    %rdi,0x30(%r10)
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+  a1:	bf 02 00 00 00       	mov    $0x2,%edi
+simplex_register_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:29
+    monitor->enabled = true;
+  a6:	41 c6 42 1c 01       	movb   $0x1,0x1c(%r10)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:33
+    monitor->violation_count = 0;
+  ab:	4a c7 44 02 20 00 00 	movq   $0x0,0x20(%rdx,%r8,1)
+  b2:	00 00 
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+  b4:	89 c2                	mov    %eax,%edx
+  b6:	31 c0                	xor    %eax,%eax
+simplex_register_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:36
+    monitor->last_violation = SIMPLEX_VIOLATION_NONE;
+    
+    g_simplex_ctx.active_monitors++;
+  b8:	83 05 00 00 00 00 01 	addl   $0x1,0x0(%rip)        # bf <simplex_register_monitor+0x7f>
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+  bf:	e8 00 00 00 00       	call   c4 <simplex_register_monitor+0x84>
+simplex_register_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:38
+    printf("[SIMPLEX] Registered monitor %u: %s\n", monitor_id, name);
+    return 0;
+  c4:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # cc <simplex_register_monitor+0x8c>
+  cb:	01 
+  cc:	31 c0                	xor    %eax,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:39
+}
+  ce:	48 83 c4 08          	add    $0x8,%rsp
+  d2:	c3                   	ret
+  d3:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  d8:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # e0 <simplex_register_monitor+0xa0>
+  df:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:24
+        return -1;
+  e0:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:39
+}
+  e5:	c3                   	ret
+  e6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  ed:	00 00 00 
+
+00000000000000f0 <simplex_enable_monitor>:
+simplex_enable_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:42
+
+/* Enable/disable specific monitors */
+int simplex_enable_monitor(uint32_t monitor_id) {
+  f0:	f3 0f 1e fa          	endbr64
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:43
+    if (monitor_id >= SIMPLEX_MAX_MONITORS) {
+  f4:	83 ff 07             	cmp    $0x7,%edi
+  f7:	77 27                	ja     120 <simplex_enable_monitor+0x30>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:46
+        return -1;
+    }
+    g_simplex_ctx.monitors[monitor_id].enabled = true;
+  f9:	89 ff                	mov    %edi,%edi
+  fb:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # 102 <simplex_enable_monitor+0x12>
+ 102:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 10a <simplex_enable_monitor+0x1a>
+ 109:	01 
+ 10a:	48 8d 04 7f          	lea    (%rdi,%rdi,2),%rax
+ 10e:	48 c1 e0 04          	shl    $0x4,%rax
+ 112:	c6 44 02 1c 01       	movb   $0x1,0x1c(%rdx,%rax,1)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:47
+    return 0;
+ 117:	31 c0                	xor    %eax,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:48
+}
+ 119:	c3                   	ret
+ 11a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+ 120:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 128 <simplex_enable_monitor+0x38>
+ 127:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:44
+        return -1;
+ 128:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+ 12d:	c3                   	ret
+ 12e:	66 90                	xchg   %ax,%ax
+
+0000000000000130 <simplex_disable_monitor>:
+simplex_disable_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:50
+
+int simplex_disable_monitor(uint32_t monitor_id) {
+ 130:	f3 0f 1e fa          	endbr64
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:51
+    if (monitor_id >= SIMPLEX_MAX_MONITORS) {
+ 134:	83 ff 07             	cmp    $0x7,%edi
+ 137:	77 27                	ja     160 <simplex_disable_monitor+0x30>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:54
+        return -1;
+    }
+    g_simplex_ctx.monitors[monitor_id].enabled = false;
+ 139:	89 ff                	mov    %edi,%edi
+ 13b:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # 142 <simplex_disable_monitor+0x12>
+ 142:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 14a <simplex_disable_monitor+0x1a>
+ 149:	01 
+ 14a:	48 8d 04 7f          	lea    (%rdi,%rdi,2),%rax
+ 14e:	48 c1 e0 04          	shl    $0x4,%rax
+ 152:	c6 44 02 1c 00       	movb   $0x0,0x1c(%rdx,%rax,1)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:55
+    return 0;
+ 157:	31 c0                	xor    %eax,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:56
+}
+ 159:	c3                   	ret
+ 15a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+ 160:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 168 <simplex_disable_monitor+0x38>
+ 167:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:52
+        return -1;
+ 168:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+ 16d:	c3                   	ret
+ 16e:	66 90                	xchg   %ax,%ax
+
+0000000000000170 <simplex_run_monitors>:
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:59
+
+/* Run all enabled monitors and handle violations */
+int simplex_run_monitors(uint64_t timestamp_us, void *context) {
+ 170:	f3 0f 1e fa          	endbr64
+ 174:	41 57                	push   %r15
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 176:	4c 8d 3d 00 00 00 00 	lea    0x0(%rip),%r15        # 17d <simplex_run_monitors+0xd>
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:59
+ 17d:	41 56                	push   %r14
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:60
+    int violations_detected = 0;
+ 17f:	45 31 f6             	xor    %r14d,%r14d
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:59
+int simplex_run_monitors(uint64_t timestamp_us, void *context) {
+ 182:	41 55                	push   %r13
+ 184:	49 89 f5             	mov    %rsi,%r13
+ 187:	41 54                	push   %r12
+ 189:	49 89 fc             	mov    %rdi,%r12
+ 18c:	55                   	push   %rbp
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:62
+    
+    for (uint32_t i = 0; i < SIMPLEX_MAX_MONITORS; i++) {
+ 18d:	31 ed                	xor    %ebp,%ebp
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:59
+int simplex_run_monitors(uint64_t timestamp_us, void *context) {
+ 18f:	53                   	push   %rbx
+ 190:	48 8d 1d 00 00 00 00 	lea    0x0(%rip),%rbx        # 197 <simplex_run_monitors+0x27>
+ 197:	48 83 ec 08          	sub    $0x8,%rsp
+ 19b:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 1a3 <simplex_run_monitors+0x33>
+ 1a2:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:62 (discriminator 1)
+    for (uint32_t i = 0; i < SIMPLEX_MAX_MONITORS; i++) {
+ 1a3:	eb 34                	jmp    1d9 <simplex_run_monitors+0x69>
+ 1a5:	0f 1f 00             	nopl   (%rax)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:65 (discriminator 2)
+        simplex_monitor_t *monitor = &g_simplex_ctx.monitors[i];
+        
+        if (!monitor->enabled || !monitor->check_function) {
+ 1a8:	48 8b 43 20          	mov    0x20(%rbx),%rax
+ 1ac:	48 85 c0             	test   %rax,%rax
+ 1af:	0f 84 03 01 00 00    	je     2b8 <simplex_run_monitors+0x148>
+ 1b5:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 1bd <simplex_run_monitors+0x4d>
+ 1bc:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:72
+        }
+        
+        monitor->last_check_us = timestamp_us;
+        
+        /* Run monitor check function */
+        int result = monitor->check_function(timestamp_us, context);
+ 1bd:	4c 89 ee             	mov    %r13,%rsi
+ 1c0:	4c 89 e7             	mov    %r12,%rdi
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:69
+        monitor->last_check_us = timestamp_us;
+ 1c3:	4c 89 63 08          	mov    %r12,0x8(%rbx)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:72
+        int result = monitor->check_function(timestamp_us, context);
+ 1c7:	ff d0                	call   *%rax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:74
+        
+        if (result != 0) {
+ 1c9:	85 c0                	test   %eax,%eax
+ 1cb:	75 43                	jne    210 <simplex_run_monitors+0xa0>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:62 (discriminator 2)
+    for (uint32_t i = 0; i < SIMPLEX_MAX_MONITORS; i++) {
+ 1cd:	83 c5 01             	add    $0x1,%ebp
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:62 (discriminator 1)
+ 1d0:	48 83 c3 30          	add    $0x30,%rbx
+ 1d4:	83 fd 08             	cmp    $0x8,%ebp
+ 1d7:	74 1a                	je     1f3 <simplex_run_monitors+0x83>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:65
+        if (!monitor->enabled || !monitor->check_function) {
+ 1d9:	80 7b 04 00          	cmpb   $0x0,0x4(%rbx)
+ 1dd:	75 c9                	jne    1a8 <simplex_run_monitors+0x38>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:66
+            continue;
+ 1df:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 1e7 <simplex_run_monitors+0x77>
+ 1e6:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:62 (discriminator 2)
+    for (uint32_t i = 0; i < SIMPLEX_MAX_MONITORS; i++) {
+ 1e7:	83 c5 01             	add    $0x1,%ebp
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:62 (discriminator 1)
+ 1ea:	48 83 c3 30          	add    $0x30,%rbx
+ 1ee:	83 fd 08             	cmp    $0x8,%ebp
+ 1f1:	75 e6                	jne    1d9 <simplex_run_monitors+0x69>
+ 1f3:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 1fb <simplex_run_monitors+0x8b>
+ 1fa:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:108
+            }
+        }
+    }
+    
+    return violations_detected;
+}
+ 1fb:	48 83 c4 08          	add    $0x8,%rsp
+ 1ff:	44 89 f0             	mov    %r14d,%eax
+ 202:	5b                   	pop    %rbx
+ 203:	5d                   	pop    %rbp
+ 204:	41 5c                	pop    %r12
+ 206:	41 5d                	pop    %r13
+ 208:	41 5e                	pop    %r14
+ 20a:	41 5f                	pop    %r15
+ 20c:	c3                   	ret
+ 20d:	0f 1f 00             	nopl   (%rax)
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:76
+            monitor->violation_count++;
+ 210:	83 43 10 01          	addl   $0x1,0x10(%rbx)
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 214:	4d 89 e0             	mov    %r12,%r8
+ 217:	4c 89 fe             	mov    %r15,%rsi
+ 21a:	bf 02 00 00 00       	mov    $0x2,%edi
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:77
+            g_simplex_ctx.total_violations++;
+ 21f:	83 05 00 00 00 00 01 	addl   $0x1,0x0(%rip)        # 226 <simplex_run_monitors+0xb6>
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 226:	48 8b 4b 18          	mov    0x18(%rbx),%rcx
+ 22a:	31 c0                	xor    %eax,%eax
+ 22c:	8b 13                	mov    (%rbx),%edx
+ 22e:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 236 <simplex_run_monitors+0xc6>
+ 235:	01 
+ 236:	e8 00 00 00 00       	call   23b <simplex_run_monitors+0xcb>
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:85
+            if (monitor->fallback_function) {
+ 23b:	48 8b 43 28          	mov    0x28(%rbx),%rax
+ 23f:	48 85 c0             	test   %rax,%rax
+ 242:	0f 84 88 00 00 00    	je     2d0 <simplex_run_monitors+0x160>
+ 248:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 250 <simplex_run_monitors+0xe0>
+ 24f:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:86
+                int fallback_result = monitor->fallback_function(timestamp_us, context);
+ 250:	4c 89 ee             	mov    %r13,%rsi
+ 253:	4c 89 e7             	mov    %r12,%rdi
+ 256:	ff d0                	call   *%rax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:87
+                if (fallback_result == 0) {
+ 258:	85 c0                	test   %eax,%eax
+ 25a:	75 7e                	jne    2da <simplex_run_monitors+0x16a>
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 25c:	8b 13                	mov    (%rbx),%edx
+ 25e:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 265 <simplex_run_monitors+0xf5>
+ 265:	bf 02 00 00 00       	mov    $0x2,%edi
+ 26a:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 272 <simplex_run_monitors+0x102>
+ 271:	01 
+ 272:	e8 00 00 00 00       	call   277 <simplex_run_monitors+0x107>
+ 277:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 27f <simplex_run_monitors+0x10f>
+ 27e:	01 
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:90
+                    g_simplex_ctx.fallback_activations++;
+ 27f:	83 05 00 00 00 00 01 	addl   $0x1,0x0(%rip)        # 286 <simplex_run_monitors+0x116>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:100
+            if (g_simplex_ctx.current_state == SIMPLEX_STATE_NORMAL) {
+ 286:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # 28c <simplex_run_monitors+0x11c>
+ 28c:	85 c0                	test   %eax,%eax
+ 28e:	75 19                	jne    2a9 <simplex_run_monitors+0x139>
+ 290:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 298 <simplex_run_monitors+0x128>
+ 297:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:101
+                g_simplex_ctx.current_state = SIMPLEX_STATE_DEGRADED;
+ 298:	c7 05 00 00 00 00 01 	movl   $0x1,0x0(%rip)        # 2a2 <simplex_run_monitors+0x132>
+ 29f:	00 00 00 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:102
+                g_simplex_ctx.last_state_change_us = timestamp_us;
+ 2a2:	4c 89 25 00 00 00 00 	mov    %r12,0x0(%rip)        # 2a9 <simplex_run_monitors+0x139>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:78
+            violations_detected++;
+ 2a9:	41 83 c6 01          	add    $0x1,%r14d
+ 2ad:	e9 1b ff ff ff       	jmp    1cd <simplex_run_monitors+0x5d>
+ 2b2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+ 2b8:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 2c0 <simplex_run_monitors+0x150>
+ 2bf:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:66
+            continue;
+ 2c0:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 2c8 <simplex_run_monitors+0x158>
+ 2c7:	01 
+ 2c8:	e9 1a ff ff ff       	jmp    1e7 <simplex_run_monitors+0x77>
+ 2cd:	0f 1f 00             	nopl   (%rax)
+ 2d0:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 2d8 <simplex_run_monitors+0x168>
+ 2d7:	01 
+ 2d8:	eb ac                	jmp    286 <simplex_run_monitors+0x116>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:92
+                    printf("[SIMPLEX] CRITICAL: Fallback failed for monitor %u\n", 
+ 2da:	48 8d 44 6d 00       	lea    0x0(%rbp,%rbp,2),%rax
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 2df:	bf 02 00 00 00       	mov    $0x2,%edi
+ 2e4:	48 8d 15 00 00 00 00 	lea    0x0(%rip),%rdx        # 2eb <simplex_run_monitors+0x17b>
+ 2eb:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 2f3 <simplex_run_monitors+0x183>
+ 2f2:	01 
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:92
+ 2f3:	48 c1 e0 04          	shl    $0x4,%rax
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 2f7:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 2fe <simplex_run_monitors+0x18e>
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:95
+                    return -1;
+ 2fe:	41 be ff ff ff ff    	mov    $0xffffffff,%r14d
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 304:	8b 54 02 18          	mov    0x18(%rdx,%rax,1),%edx
+ 308:	31 c0                	xor    %eax,%eax
+ 30a:	e8 00 00 00 00       	call   30f <simplex_run_monitors+0x19f>
+ 30f:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 317 <simplex_run_monitors+0x1a7>
+ 316:	01 
+simplex_run_monitors():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:94
+                    g_simplex_ctx.current_state = SIMPLEX_STATE_FAILED;
+ 317:	c7 05 00 00 00 00 03 	movl   $0x3,0x0(%rip)        # 321 <simplex_run_monitors+0x1b1>
+ 31e:	00 00 00 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:95
+                    return -1;
+ 321:	e9 d5 fe ff ff       	jmp    1fb <simplex_run_monitors+0x8b>
+ 326:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+ 32d:	00 00 00 
+
+0000000000000330 <simplex_get_state>:
+simplex_get_state():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:111
+
+/* Get current safety state */
+simplex_state_t simplex_get_state(void) {
+ 330:	f3 0f 1e fa          	endbr64
+ 334:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 33c <simplex_get_state+0xc>
+ 33b:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:113
+    return g_simplex_ctx.current_state;
+}
+ 33c:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # 342 <simplex_get_state+0x12>
+ 342:	c3                   	ret
+ 343:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+ 34a:	00 00 00 00 
+ 34e:	66 90                	xchg   %ax,%ax
+
+0000000000000350 <simplex_get_violation_count>:
+simplex_get_violation_count():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:116
+
+/* Get total violation count */
+uint32_t simplex_get_violation_count(void) {
+ 350:	f3 0f 1e fa          	endbr64
+ 354:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 35c <simplex_get_violation_count+0xc>
+ 35b:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:118
+    return g_simplex_ctx.total_violations;
+}
+ 35c:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # 362 <simplex_get_violation_count+0x12>
+ 362:	c3                   	ret
+ 363:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+ 36a:	00 00 00 00 
+ 36e:	66 90                	xchg   %ax,%ax
+
+0000000000000370 <simplex_timing_monitor>:
+simplex_timing_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:123
+
+/* Monitor Hook Functions */
+
+/* Timing monitor - checks for deadline violations and jitter */
+int simplex_timing_monitor(uint64_t timestamp_us, void *context) {
+ 370:	f3 0f 1e fa          	endbr64
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:128
+    (void)context;
+    
+    /* Simulate timing check based on current jitter */
+    static uint64_t last_check = 0;
+    if (last_check == 0) {
+ 374:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 37b <simplex_timing_monitor+0xb>
+ 37b:	48 85 c0             	test   %rax,%rax
+ 37e:	74 28                	je     3a8 <simplex_timing_monitor+0x38>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:134
+        last_check = timestamp_us;
+        return 0;
+    }
+    
+    uint64_t delta = timestamp_us - last_check;
+    last_check = timestamp_us;
+ 380:	48 89 3d 00 00 00 00 	mov    %rdi,0x0(%rip)        # 387 <simplex_timing_monitor+0x17>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:137
+    
+    /* Check for excessive jitter (>50us as per requirements) */
+    if (delta > 1050 || delta < 950) { /* Allow 5% variance around 1000us period */
+ 387:	48 29 c7             	sub    %rax,%rdi
+ 38a:	48 8d 87 4a fc ff ff 	lea    -0x3b6(%rdi),%rax
+ 391:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 399 <simplex_timing_monitor+0x29>
+ 398:	01 
+ 399:	48 83 f8 64          	cmp    $0x64,%rax
+ 39d:	77 1b                	ja     3ba <simplex_timing_monitor+0x4a>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:130
+        return 0;
+ 39f:	31 c0                	xor    %eax,%eax
+ 3a1:	c3                   	ret
+ 3a2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+ 3a8:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 3b0 <simplex_timing_monitor+0x40>
+ 3af:	01 
+ 3b0:	31 c0                	xor    %eax,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:129
+        last_check = timestamp_us;
+ 3b2:	48 89 3d 00 00 00 00 	mov    %rdi,0x0(%rip)        # 3b9 <simplex_timing_monitor+0x49>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:130
+        return 0;
+ 3b9:	c3                   	ret
+ 3ba:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 3c2 <simplex_timing_monitor+0x52>
+ 3c1:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:138
+        return -1; /* Timing violation */
+ 3c2:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:142
+    }
+    
+    return 0;
+}
+ 3c7:	c3                   	ret
+ 3c8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+ 3cf:	00 
+
+00000000000003d0 <simplex_envelope_monitor>:
+simplex_envelope_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:145
+
+/* Envelope monitor - checks operational envelope boundaries */
+int simplex_envelope_monitor(uint64_t timestamp_us, void *context) {
+ 3d0:	f3 0f 1e fa          	endbr64
+ 3d4:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 3dc <simplex_envelope_monitor+0xc>
+ 3db:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:152
+    (void)context;
+    
+    /* Placeholder for envelope checking logic */
+    /* In a real system, this would check flight envelope parameters */
+    return 0;
+}
+ 3dc:	31 c0                	xor    %eax,%eax
+ 3de:	c3                   	ret
+ 3df:	90                   	nop
+
+00000000000003e0 <simplex_resource_monitor>:
+simplex_resource_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:155
+
+/* Resource monitor - checks CPU and memory usage */
+int simplex_resource_monitor(uint64_t timestamp_us, void *context) {
+ 3e0:	f3 0f 1e fa          	endbr64
+ 3e4:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 3ec <simplex_resource_monitor+0xc>
+ 3eb:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:162
+    (void)context;
+    
+    /* Placeholder for resource monitoring */
+    /* In a real system, this would check partition resource budgets */
+    return 0;
+}
+ 3ec:	31 c0                	xor    %eax,%eax
+ 3ee:	c3                   	ret
+ 3ef:	90                   	nop
+
+00000000000003f0 <simplex_memory_monitor>:
+simplex_memory_monitor():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:165
+
+/* Memory monitor - checks for memory corruption and overruns */
+int simplex_memory_monitor(uint64_t timestamp_us, void *context) {
+ 3f0:	f3 0f 1e fa          	endbr64
+ 3f4:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 3fc <simplex_memory_monitor+0xc>
+ 3fb:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:172
+    (void)context;
+    
+    /* Placeholder for memory monitoring */
+    /* In a real system, this would check memory protection and integrity */
+    return 0;
+}
+ 3fc:	31 c0                	xor    %eax,%eax
+ 3fe:	c3                   	ret
+ 3ff:	90                   	nop
+
+0000000000000400 <simplex_timing_fallback>:
+simplex_timing_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:177
+
+/* Fallback Policy Functions */
+
+/* Timing fallback - switches to backup timing source */
+int simplex_timing_fallback(uint64_t timestamp_us, void *context) {
+ 400:	f3 0f 1e fa          	endbr64
+ 404:	48 83 ec 08          	sub    $0x8,%rsp
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 408:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 40f <simplex_timing_fallback+0xf>
+ 40f:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 417 <simplex_timing_fallback+0x17>
+ 416:	01 
+ 417:	e8 00 00 00 00       	call   41c <simplex_timing_fallback+0x1c>
+ 41c:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 424 <simplex_timing_fallback+0x24>
+ 423:	01 
+simplex_timing_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:183
+    (void)timestamp_us;
+    (void)context;
+    
+    printf("[SIMPLEX] Timing fallback: Switching to backup timing source\n");
+    return 0;
+}
+ 424:	31 c0                	xor    %eax,%eax
+ 426:	48 83 c4 08          	add    $0x8,%rsp
+ 42a:	c3                   	ret
+ 42b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+0000000000000430 <simplex_envelope_fallback>:
+simplex_envelope_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:186
+
+/* Envelope fallback - applies safe control limits */
+int simplex_envelope_fallback(uint64_t timestamp_us, void *context) {
+ 430:	f3 0f 1e fa          	endbr64
+ 434:	48 83 ec 08          	sub    $0x8,%rsp
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 438:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 43f <simplex_envelope_fallback+0xf>
+ 43f:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 447 <simplex_envelope_fallback+0x17>
+ 446:	01 
+ 447:	e8 00 00 00 00       	call   44c <simplex_envelope_fallback+0x1c>
+ 44c:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 454 <simplex_envelope_fallback+0x24>
+ 453:	01 
+simplex_envelope_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:192
+    (void)timestamp_us;
+    (void)context;
+    
+    printf("[SIMPLEX] Envelope fallback: Applying safe control limits\n");
+    return 0;
+}
+ 454:	31 c0                	xor    %eax,%eax
+ 456:	48 83 c4 08          	add    $0x8,%rsp
+ 45a:	c3                   	ret
+ 45b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+0000000000000460 <simplex_resource_fallback>:
+simplex_resource_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:195
+
+/* Resource fallback - reduces non-critical processing */
+int simplex_resource_fallback(uint64_t timestamp_us, void *context) {
+ 460:	f3 0f 1e fa          	endbr64
+ 464:	48 83 ec 08          	sub    $0x8,%rsp
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 468:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 46f <simplex_resource_fallback+0xf>
+ 46f:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 477 <simplex_resource_fallback+0x17>
+ 476:	01 
+ 477:	e8 00 00 00 00       	call   47c <simplex_resource_fallback+0x1c>
+ 47c:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 484 <simplex_resource_fallback+0x24>
+ 483:	01 
+simplex_resource_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:201
+    (void)timestamp_us;
+    (void)context;
+    
+    printf("[SIMPLEX] Resource fallback: Reducing non-critical processing\n");
+    return 0;
+}
+ 484:	31 c0                	xor    %eax,%eax
+ 486:	48 83 c4 08          	add    $0x8,%rsp
+ 48a:	c3                   	ret
+ 48b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+0000000000000490 <simplex_memory_fallback>:
+simplex_memory_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:204
+
+/* Memory fallback - activates memory protection mode */
+int simplex_memory_fallback(uint64_t timestamp_us, void *context) {
+ 490:	f3 0f 1e fa          	endbr64
+ 494:	48 83 ec 08          	sub    $0x8,%rsp
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 498:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 49f <simplex_memory_fallback+0xf>
+ 49f:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 4a7 <simplex_memory_fallback+0x17>
+ 4a6:	01 
+ 4a7:	e8 00 00 00 00       	call   4ac <simplex_memory_fallback+0x1c>
+ 4ac:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 4b4 <simplex_memory_fallback+0x24>
+ 4b3:	01 
+simplex_memory_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:210
+    (void)timestamp_us;
+    (void)context;
+    
+    printf("[SIMPLEX] Memory fallback: Activating memory protection mode\n");
+    return 0;
+}
+ 4b4:	31 c0                	xor    %eax,%eax
+ 4b6:	48 83 c4 08          	add    $0x8,%rsp
+ 4ba:	c3                   	ret
+ 4bb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+00000000000004c0 <simplex_force_fallback>:
+simplex_force_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:215
+
+/* Safety Critical Functions */
+
+/* Force fallback for specific violation type */
+int simplex_force_fallback(simplex_violation_t violation_type) {
+ 4c0:	f3 0f 1e fa          	endbr64
+ 4c4:	48 83 ec 08          	sub    $0x8,%rsp
+ 4c8:	89 fa                	mov    %edi,%edx
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 4ca:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 4d1 <simplex_force_fallback+0x11>
+ 4d1:	31 c0                	xor    %eax,%eax
+ 4d3:	bf 02 00 00 00       	mov    $0x2,%edi
+ 4d8:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 4e0 <simplex_force_fallback+0x20>
+ 4df:	01 
+ 4e0:	e8 00 00 00 00       	call   4e5 <simplex_force_fallback+0x25>
+ 4e5:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 4ed <simplex_force_fallback+0x2d>
+ 4ec:	01 
+simplex_force_fallback():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:220
+    printf("[SIMPLEX] FORCED FALLBACK: violation type %d\n", violation_type);
+    g_simplex_ctx.current_state = SIMPLEX_STATE_FALLBACK;
+    g_simplex_ctx.fallback_activations++;
+    return 0;
+}
+ 4ed:	31 c0                	xor    %eax,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:218
+    g_simplex_ctx.fallback_activations++;
+ 4ef:	83 05 00 00 00 00 01 	addl   $0x1,0x0(%rip)        # 4f6 <simplex_force_fallback+0x36>
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:217
+    g_simplex_ctx.current_state = SIMPLEX_STATE_FALLBACK;
+ 4f6:	c7 05 00 00 00 00 02 	movl   $0x2,0x0(%rip)        # 500 <simplex_force_fallback+0x40>
+ 4fd:	00 00 00 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:220
+}
+ 500:	48 83 c4 08          	add    $0x8,%rsp
+ 504:	c3                   	ret
+ 505:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+ 50c:	00 00 00 00 
+
+0000000000000510 <simplex_emergency_shutdown>:
+simplex_emergency_shutdown():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:223
+
+/* Emergency shutdown procedure */
+int simplex_emergency_shutdown(void) {
+ 510:	f3 0f 1e fa          	endbr64
+ 514:	48 83 ec 08          	sub    $0x8,%rsp
+printf():
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:86
+ 518:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 51f <simplex_emergency_shutdown+0xf>
+ 51f:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 527 <simplex_emergency_shutdown+0x17>
+ 526:	01 
+ 527:	e8 00 00 00 00       	call   52c <simplex_emergency_shutdown+0x1c>
+ 52c:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 534 <simplex_emergency_shutdown+0x24>
+ 533:	01 
+simplex_emergency_shutdown():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:235
+     * 3. Log safety event
+     * 4. Transition to safe state
+     */
+    
+    return 0;
+}
+ 534:	31 c0                	xor    %eax,%eax
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:225
+    g_simplex_ctx.current_state = SIMPLEX_STATE_FAILED;
+ 536:	c7 05 00 00 00 00 03 	movl   $0x3,0x0(%rip)        # 540 <simplex_emergency_shutdown+0x30>
+ 53d:	00 00 00 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:235
+}
+ 540:	48 83 c4 08          	add    $0x8,%rsp
+ 544:	c3                   	ret
+ 545:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+ 54c:	00 00 00 00 
+
+0000000000000550 <simplex_is_safe_state>:
+simplex_is_safe_state():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:238
+
+/* Check if system is in safe state */
+bool simplex_is_safe_state(void) {
+ 550:	f3 0f 1e fa          	endbr64
+ 554:	48 83 05 00 00 00 00 	addq   $0x1,0x0(%rip)        # 55c <simplex_is_safe_state+0xc>
+ 55b:	01 
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:239
+    return (g_simplex_ctx.current_state == SIMPLEX_STATE_NORMAL ||
+ 55c:	83 3d 00 00 00 00 01 	cmpl   $0x1,0x0(%rip)        # 563 <simplex_is_safe_state+0x13>
+ 563:	0f 96 c0             	setbe  %al
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:241
+            g_simplex_ctx.current_state == SIMPLEX_STATE_DEGRADED);
+ 566:	c3                   	ret
+
+Disassembly of section .text.startup:
+
+0000000000000000 <_sub_I_00100_0>:
+_sub_I_00100_0():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:241
+   0:	f3 0f 1e fa          	endbr64
+   4:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # b <_sub_I_00100_0+0xb>
+   b:	e9 00 00 00 00       	jmp    10 <__gcov0.simplex_register_monitor>
+
+Disassembly of section .text.exit:
+
+0000000000000000 <_sub_D_00100_1>:
+_sub_D_00100_1():
+/home/runner/work/AMEDEO-Systems/AMEDEO-Systems/kernel/core/simplex_safety_monitor.c:241
+   0:	f3 0f 1e fa          	endbr64
+   4:	e9 00 00 00 00       	jmp    9 <_sub_D_00100_1+0x9>
