@@ -50,7 +50,7 @@ class QuantumAssistedOptimizer:
         # This finds optimal classical reconfiguration paths, not quantum teleportation
         success_probability = min(0.95, 0.8 + (self.material.reconfiguration_time / 10.0))
         
-        import random
+        
         if random.random() < success_probability:
             # Store optimized reconfiguration pattern
             pattern_key = f"{cell_id_1}_{cell_id_2}"
