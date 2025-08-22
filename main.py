@@ -90,7 +90,7 @@ class GaiaBlockchainConfig:
             },
             "security": {
                 "crypto": {
-                    "signature_algorithm": "DILITHIUM3",
+                    "signature_algorithm": "Dilithium-3",
                     "hash_algorithm": "SHA3-256",
                     "tls_version": "1.3"
                 },
