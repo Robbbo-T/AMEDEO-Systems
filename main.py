@@ -49,7 +49,21 @@ class Dilithium3KeyPair:
         signature_hash = hashlib.sha3_512(sig_input).digest()
         # Pad to correct signature size
         padding = secrets.token_bytes(self.signature_size - len(signature_hash))
-        return signature_hash + padding
+        # Pad to correct signature size deterministically
+        pad_len = self.signature_size - len(signature_hash)
+        if pad_len > 0:
+            # Deterministic padding: hash(signature_hash + message) repeatedly
+            pad_source = signature_hash + message
+            padding = b""
+            counter = 0
+            while len(padding) < pad_len:
+                to_hash = pad_source + counter.to_bytes(4, "big")
+                padding += hashlib.sha3_512(to_hash).digest()
+                counter += 1
+            padding = padding[:pad_len]
+            return signature_hash + padding
+        else:
+            return signature_hash[:self.signature_size]
     
     def verify(self, message: bytes, signature: bytes, public_key: bytes) -> bool:
         """Verify Dilithium-3 signature (placeholder implementation)"""
