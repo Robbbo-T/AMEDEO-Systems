@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Optional
 
 
-@dataclass
+@dataclass(frozen=True)
 class QuantumState:
     data: Any
     fidelity: float = 1.0
