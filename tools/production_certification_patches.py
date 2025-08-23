@@ -32,7 +32,7 @@ from enum import Enum
 # CERTIFICATION EVIDENCE PIPELINE
 # ============================================================================
 
-@dataclass
+@dataclass(frozen=True)
 class DETRecord:
     """Immutable evidence record for certification"""
     utcs_mi_id: str
