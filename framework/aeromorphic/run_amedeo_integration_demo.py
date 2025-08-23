@@ -15,6 +15,7 @@ automatically optimizing its configuration while learning for future flights.
 """
 
 import asyncio
+import os
 import logging
 import numpy as np
 import time
@@ -935,7 +936,7 @@ class AMEDEOIntegratedSystem:
 # DEMONSTRATION RUNNER
 # ============================================================================
 
-async def run_amedeo_integration_demo():
+async def run_amedeo_integration_demo(mission_duration_hours: float = 1.0):
     """Run the complete AMEDEO integration demonstration"""
     
     logging.info("🚀 Starting AMEDEO Ecosystem Integration Demonstration")
@@ -951,16 +952,16 @@ async def run_amedeo_integration_demo():
             logging.error("❌ System initialization failed")
             return 1
         
-        logging.info("✅ All systems initialized and integrated successfully!")
-        logging.info("-" * 60)
-        
-        # Run flight mission simulation
-        await amedeo_system.simulate_flight_mission(mission_duration_hours=1.0)  # 1-hour demo mission
-        
-        logging.info("-" * 60)
-        logging.info("🏁 AMEDEO Integration Demonstration Completed Successfully!")
-        
-        return 0
+    logging.info("✅ All systems initialized and integrated successfully!")
+    logging.info("-" * 60)
+
+    # Run flight mission simulation
+    await amedeo_system.simulate_flight_mission(mission_duration_hours=mission_duration_hours)
+
+    logging.info("-" * 60)
+    logging.info("🏁 AMEDEO Integration Demonstration Completed Successfully!")
+
+    return 0
         
     except KeyboardInterrupt:
         logging.info("⏹️ Demonstration interrupted by user")
@@ -987,7 +988,16 @@ async def main():
     logging.info("Quantum-Enhanced Aerospace Systems Working in Harmony")
     logging.info("=" * 80)
     
-    return await run_amedeo_integration_demo()
+    # Allow overriding demo hours via environment variable for quick runs
+    hours_env = os.getenv("AMEDEO_DEMO_HOURS")
+    mission_hours = 1.0
+    if hours_env:
+        try:
+            mission_hours = float(hours_env)
+        except ValueError:
+            pass
+
+    return await run_amedeo_integration_demo(mission_duration_hours=mission_hours)
 
 if __name__ == "__main__":
     import sys

@@ -1,0 +1,13 @@
+# Data paths (edit for your environment)
+raw:
+  flights: data/raw/flights/
+  incidents: data/raw/incidents/
+  weather: data/raw/weather/
+  airline: data/raw/airline/
+processed:
+  silver: data/processed/silver/
+  gold: data/processed/gold/
+outputs:
+  models: outputs/models/
+  reports: outputs/reports/
+  rule_cards: outputs/rule_cards/
