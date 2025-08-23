@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from typing import Dict, Any
 
 
-@dataclass
+@dataclass(frozen=True)
 class WisdomObject:
     condition_signature: Dict[str, Any]
     action: str
