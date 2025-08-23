@@ -493,7 +493,7 @@ class AMEDEOIntegratedSystem:
             await self.digital_evidence_twin.log_event({
                 "event": "sensor_data_coordination",
                 "flight_phase": self.current_flight_phase.value,
-                "successful_transmissions": sum(1 for s in sensor_data.values() if s['transmission_success']),
+                "successful_transmissions": sum(bool(s['transmission_success'])
                 "total_sensors": len(sensor_locations),
                 "teleportation_mode": self.aeromorphic_teleporter.current_mode.value,
                 "timestamp": flight_state.timestamp
