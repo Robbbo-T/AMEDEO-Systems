@@ -3,7 +3,7 @@ from typing import Any, Dict
 import random
 
 
-@dataclass
+@dataclass(frozen=True)
 class FeatureStore:
     flights: Any
     labels: Dict[str, Any]
