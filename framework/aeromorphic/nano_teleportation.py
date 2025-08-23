@@ -10,6 +10,7 @@ from typing import Dict, List, Tuple, Optional
 import time
 import math
 import json
+import random
 
 
 @dataclass
@@ -115,8 +116,7 @@ class QuantumAssistedOptimizer:
     def _calculate_cost_landscape(self, cells: List[str], positions: List[float]) -> List[float]:
         """Calculate cost landscape for classical reconfiguration optimization"""
         # Quantum algorithms optimize this classical cost function
-        import random
-        return [random.uniform(0.1, 1.0) for _ in range(len(cells))]
+    return [random.uniform(0.1, 1.0) for _ in range(len(cells))]
 
 
 class AeromorphicLattice:

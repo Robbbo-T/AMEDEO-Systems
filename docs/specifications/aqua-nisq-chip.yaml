@@ -8,4 +8,28 @@ control:
   sample_rate_hz: 100000000
   pulse_resolution_ns: 2
   calibration_interval_s: 3600
-notes: Minimal NISQ chip spec for AQUA-OS backend
+
+# Enhanced specifications for breakthrough capabilities
+environmental_operation:
+  temperature_range: "200K - 350K"  # Room temperature capability target
+  pressure_range: "0.1 - 1.0 atm"  # Altitude operation for aerospace
+  vibration_tolerance: "aerospace_grade"  # DO-178C requirements
+  radiation_hardening: "space_qualified"  # CS-25 compliance
+  
+coherence_requirements:
+  decoherence_time_target: "> 1 second"  # vs current microseconds
+  error_rate_1q_target: "< 0.0001"       # 10x improvement target
+  error_rate_2q_target: "< 0.001"        # 10x improvement target
+  
+breakthrough_features:
+  room_temperature_operation: "development_target"
+  coherence_maintenance: "active_error_correction"
+  aerospace_integration: "certified_modules"
+  
+compliance:
+  - "DO-178C"
+  - "DO-254" 
+  - "CS-25"
+  - "UTCS-MI v5.0+"
+  
+notes: Enhanced NISQ chip spec targeting room temperature quantum operation for aerospace applications
