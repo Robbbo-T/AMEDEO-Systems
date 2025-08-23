@@ -35,6 +35,7 @@ class AMEDEOAPIServer:
         self.schemas_dir = Path(schemas_dir)
         self.schemas = self._load_schemas()
         self.agents = self._initialize_agents()
+        self.tmr_backend = self._initialize_tmr_backend()
         
     def _load_schemas(self) -> Dict[str, Dict]:
         """Load all JSON schemas"""
@@ -65,6 +66,16 @@ class AMEDEOAPIServer:
             "scheduler": ResourceSchedulerAgent("api-scheduler", "agents/POLICY.md"),
             "pilot": OpsPilotAgent("api-pilot", "agents/POLICY.md")
         }
+    
+    def _initialize_tmr_backend(self):
+        """Initialize TMR backend for 2oo3 consensus"""
+        try:
+            sys.path.insert(0, str(Path(__file__).parent))
+            from tmr.core import TMRBackend
+            return TMRBackend("api-tmr")
+        except ImportError as e:
+            print(f"Warning: TMR backend not available: {e}")
+            return None
     
     def get_system_status(self) -> Dict[str, Any]:
         """Get current system status"""
@@ -488,6 +499,80 @@ class AMEDEOAPIServer:
                 }
             }
         }
+    
+    def tmr_generate(self, request) -> Dict[str, Any]:
+        """TMR generation endpoint with 2oo3 consensus"""
+        try:
+            # Check if TMR backend is available
+            if not self.tmr_backend:
+                return {
+                    "error": "TMR backend not available",
+                    "status": "service_unavailable"
+                }, 503
+            
+            # Parse request
+            if not request.is_json:
+                return {
+                    "error": "Request must be JSON",
+                    "status": "bad_request"
+                }, 400
+            
+            data = request.get_json()
+            
+            # Validate required fields
+            required_fields = ["id", "template", "inputs"]
+            missing_fields = [field for field in required_fields if field not in data]
+            if missing_fields:
+                return {
+                    "error": f"Missing required fields: {missing_fields}",
+                    "status": "bad_request"
+                }, 400
+            
+            # Create PromptSpec
+            from tmr.core import PromptSpec
+            
+            prompt_spec = PromptSpec(
+                id=data["id"],
+                template=data["template"], 
+                inputs=data["inputs"],
+                controls=data.get("controls", {
+                    "temperature": 0.2,
+                    "max_tokens": 1000,
+                    "stop": []
+                })
+            )
+            
+            # Execute TMR generation asynchronously
+            import asyncio
+            
+            # Create or get event loop
+            try:
+                loop = asyncio.get_event_loop()
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            
+            # Run TMR generation
+            consensus_result = loop.run_until_complete(
+                self.tmr_backend.generate(prompt_spec)
+            )
+            
+            # Return result
+            response_data = consensus_result.to_dict()
+            response_data["timestamp"] = datetime.now(timezone.utc).isoformat()
+            response_data["api_version"] = "tmr-v1.0"
+            
+            if consensus_result.accepted:
+                return response_data, 200
+            else:
+                return response_data, 422  # Unprocessable Entity
+            
+        except Exception as e:
+            return {
+                "error": f"TMR generation failed: {str(e)}",
+                "status": "internal_error",
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }, 500
 
 
 if FLASK_AVAILABLE:
@@ -543,6 +628,11 @@ if FLASK_AVAILABLE:
             @self.app.route('/health', methods=['GET'])
             def health_check():
                 return jsonify({"status": "healthy", "timestamp": datetime.now(timezone.utc).isoformat()})
+            
+            @self.app.route('/tmr/generate', methods=['POST'])
+            def tmr_generate():
+                """TMR generation endpoint with 2oo3 consensus"""
+                return self.api.tmr_generate(request)
         
         def run(self, host='0.0.0.0', port=8080, debug=False):
             """Run the Flask server"""
@@ -566,6 +656,7 @@ def main():
         print("   GET /amedeo/ai-spec/validation/<pipeline_id>")
         print("   GET /schemas/<schema_name>")
         print("   GET /health")
+        print("   POST /tmr/generate - TMR generation with 2oo3 consensus")
         server.run(debug=True)
     else:
         print("⚠️  Flask not available, install with: pip install flask flask-cors")
