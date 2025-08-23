@@ -10,7 +10,6 @@ from typing import Dict, List, Tuple, Optional
 import time
 import math
 import json
-import random
 
 
 @dataclass
@@ -116,7 +115,17 @@ class QuantumAssistedOptimizer:
     def _calculate_cost_landscape(self, cells: List[str], positions: List[float]) -> List[float]:
         """Calculate cost landscape for classical reconfiguration optimization"""
         # Quantum algorithms optimize this classical cost function
-    return [random.uniform(0.1, 1.0) for _ in range(len(cells))]
+        import random
+        return [random.uniform(0.1, 1.0) for _ in range(len(cells))]
+
+    def _calculate_fidelity(self, original_state: List[float], teleported_state: List[float]) -> float:
+        """Calculate quantum fidelity between original and teleported states"""
+        # Simplified fidelity calculation (inner product squared)
+        if len(original_state) != len(teleported_state):
+            return 0.0
+
+        dot_product = sum(a * b for a, b in zip(original_state, teleported_state))
+        return min(1.0, max(0.0, dot_product ** 2))
 
 
 class AeromorphicLattice:

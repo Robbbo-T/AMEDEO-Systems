@@ -1,0 +1,36 @@
+# Model and training parameters
+pretrain_params:
+  model: transformer_tcn
+  hidden_dim: 256
+  layers: 4
+  lr: 3e-4
+  epochs: 10
+  tasks:
+    - masked_reconstruction
+    - next_step_prediction
+
+finetune_params:
+  heads:
+    weather: {type: classifier, loss: cross_entropy}
+    safety: {type: classifier, loss: focal}
+    efficiency: {type: regressor, loss: huber}
+  lr: 1e-4
+  epochs: 5
+
+feature_params:
+  phase_segmentation: true
+  turbulence_proxies: [edr, shear, ri]
+  safety_precursors: [unstable_approach, exceedances, fuel_margin]
+
+evaluation_params:
+  weather: {brier: 0.10, auroc: 0.92, ece: 0.03}
+  safety: {auroc: 0.90, pr_auc: 0.35, fn_at_tpr80: 0.10}
+  efficiency: {mape: 0.03}
+  generalization_gap: 0.03
+
+policy_params:
+  rl: {offline: true, constraints: cs25}
+  mining: {method: fpg, top_k: 50}
+
+output_paths:
+  rule_cards: outputs/rule_cards/
