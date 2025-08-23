@@ -29,7 +29,7 @@ class ReconfigurationMode(Enum):
     AUTOGENESIS = "autogenesis"
 
 
-@dataclass
+@dataclass(frozen=True)
 class OptimizationConfig:
     det_logging: bool = True
 
