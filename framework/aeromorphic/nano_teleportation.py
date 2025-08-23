@@ -116,26 +116,16 @@ class QuantumAssistedOptimizer:
         """Calculate cost landscape for classical reconfiguration optimization"""
         # Quantum algorithms optimize this classical cost function
         import random
-<<<<<<< HEAD
         return [random.uniform(0.1, 1.0) for _ in range(len(cells))]
-=======
-        noise_level = 0.01
-        for i in range(len(teleported_state)):
-            teleported_state[i] += random.uniform(-noise_level, noise_level)
-            
-        # Renormalize
-        norm = math.sqrt(sum(x**2 for x in teleported_state))
-        return [x/norm for x in teleported_state] if norm > 0 else state
-    
+
     def _calculate_fidelity(self, original_state: List[float], teleported_state: List[float]) -> float:
         """Calculate quantum fidelity between original and teleported states"""
         # Simplified fidelity calculation (inner product squared)
         if len(original_state) != len(teleported_state):
             return 0.0
-            
+
         dot_product = sum(a * b for a, b in zip(original_state, teleported_state))
         return min(1.0, max(0.0, dot_product ** 2))
->>>>>>> origin/main
 
 
 class AeromorphicLattice:
