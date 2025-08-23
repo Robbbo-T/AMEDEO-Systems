@@ -61,7 +61,7 @@ class TeleportationMode(Enum):
     HYBRID_FLOCK = "hybrid_flock"      # Bio-inspired distributed mode
     EMERGENCY_DEGRADED = "emergency"    # Emergency safe mode
 
-@dataclass
+@dataclass(frozen=True)
 class AeromorphicConfig:
     """Configuration for aeromorphic nano-teleportation"""
     # Safety constraints
