@@ -243,7 +243,7 @@ class CertificationEvidencePipeline:
 # WISDOM TO PROMPT TRANSLATION
 # ============================================================================
 
-@dataclass
+@dataclass(frozen=True)
 class WisdomObject:
     """Pre-EIS wisdom object with certification stamps"""
     utcs_mi_id: str
