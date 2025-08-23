@@ -539,12 +539,12 @@ class AeromorphicTeleporter:
         """Change operation mode with safety checks"""
         
         # Safety: Can only enable quantum modes if system is healthy
-        if mode != TeleportationMode.CLASSICAL_ONLY:
-            if self.safety_system:
-                health = await self.safety_system.get_system_health()
-                if not health.quantum_systems_healthy:
-                    logging.warning("Quantum systems unhealthy - staying in classical mode")
-                    return False
+        if mode != TeleportationMode.CLASSICAL_ONLY and self.safety_system:
+            health = await self.safety_system.get_system_health()
+            if not health.quantum_systems_healthy:
+                logging.warning("Quantum systems unhealthy - staying in classical mode")
+                return False
+
         
         self.current_mode = mode
         
