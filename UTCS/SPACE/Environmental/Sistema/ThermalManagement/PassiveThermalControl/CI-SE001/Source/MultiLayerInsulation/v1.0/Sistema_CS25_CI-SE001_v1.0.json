@@ -1,0 +1,43 @@
+{
+  "system_id": "CI-SE001",
+  "system_name": "MultiLayerInsulation",
+  "regulation": "CS25",
+  "version": "v1.0",
+  "description": "Multi-layer insulation system for spacecraft thermal protection",
+  "interfaces": [
+    "spacecraft_structure_interface",
+    "thermal_monitoring_interface",
+    "deployment_mechanism_interface"
+  ],
+  "requirements": [
+    "REQ-SE001-001: Provide thermal insulation with effective emissivity < 0.03",
+    "REQ-SE001-002: Maintain insulation performance in space environment",
+    "REQ-SE001-003: Withstand micrometeorite impacts without degradation"
+  ],
+  "test_cases": [
+    "TC-SE001-001: Thermal performance test",
+    "TC-SE001-002: Space environment exposure test",
+    "TC-SE001-003: Impact resistance test"
+  ],
+  "certification_evidence": [
+    "MLI_thermal_test_report.pdf",
+    "MLI_space_qualification_report.pdf"
+  ],
+  "safety_assessment": {
+    "failure_conditions": [
+      "Insulation degradation",
+      "Thermal protection loss"
+    ],
+    "safety_objectives": [
+      "Maintain thermal protection integrity",
+      "Prevent thermal damage to spacecraft components"
+    ],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [],
+  "configuration": {
+    "insulation_layers": 15,
+    "materials": ["aluminized_mylar", "dacron_spacer"],
+    "operating_temperature_range": [-150, 120]
+  }
+}

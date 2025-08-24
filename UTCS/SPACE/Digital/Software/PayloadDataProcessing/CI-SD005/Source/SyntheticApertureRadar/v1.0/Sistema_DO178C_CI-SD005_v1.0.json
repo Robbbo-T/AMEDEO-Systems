@@ -1,0 +1,46 @@
+{
+  "system_id": "CI-SD005",
+  "system_name": "SyntheticApertureRadar",
+  "regulation": "DO178C",
+  "version": "v1.0",
+  "description": "Synthetic Aperture Radar system for high-resolution Earth observation",
+  "interfaces": [
+    "radar_antenna_interface",
+    "signal_processor_interface", 
+    "data_storage_interface",
+    "downlink_interface"
+  ],
+  "requirements": [
+    "REQ-SD005-001: Generate high-resolution radar images with sub-meter accuracy",
+    "REQ-SD005-002: Process radar signals in real-time",
+    "REQ-SD005-003: Store processed imagery for later transmission"
+  ],
+  "test_cases": [
+    "TC-SD005-001: Image resolution test",
+    "TC-SD005-002: Signal processing performance test",
+    "TC-SD005-003: Data storage capacity test"
+  ],
+  "certification_evidence": [
+    "SAR_verification_report.pdf",
+    "SAR_image_quality_analysis.pdf"
+  ],
+  "safety_assessment": {
+    "failure_conditions": [
+      "Loss of radar imagery capability",
+      "Data corruption during processing"
+    ],
+    "safety_objectives": [
+      "Maintain radar system operational capability",
+      "Ensure data integrity throughout processing"
+    ],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [
+    "CI-SD039"
+  ],
+  "configuration": {
+    "radar_bands": ["L-band", "C-band", "X-band"],
+    "resolution_modes": ["stripmap", "spotlight", "scansar"],
+    "polarizations": ["HH", "VV", "HV", "VH"]
+  }
+}

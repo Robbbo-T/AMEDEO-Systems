@@ -1,0 +1,45 @@
+{
+  "system_id": "CI-SO027",
+  "system_name": "CanadarmSystem",
+  "regulation": "ARP4754A",
+  "version": "v1.0",
+  "description": "Robotic manipulator arm system for spacecraft operations and payload handling",
+  "interfaces": [
+    "spacecraft_mount_interface",
+    "end_effector_interface",
+    "joint_control_interface",
+    "operator_control_interface"
+  ],
+  "requirements": [
+    "REQ-SO027-001: Manipulate payloads up to 30,000 kg mass",
+    "REQ-SO027-002: Achieve positioning accuracy within 2.5 cm",
+    "REQ-SO027-003: Operate in all spacecraft attitude configurations"
+  ],
+  "test_cases": [
+    "TC-SO027-001: Payload handling test",
+    "TC-SO027-002: Positioning accuracy test",
+    "TC-SO027-003: Multi-axis operation test"
+  ],
+  "certification_evidence": [
+    "canadarm_performance_report.pdf",
+    "robotic_arm_safety_analysis.pdf"
+  ],
+  "safety_assessment": {
+    "failure_conditions": [
+      "Joint mechanism failure",
+      "Loss of position control"
+    ],
+    "safety_objectives": [
+      "Prevent uncontrolled arm movement",
+      "Maintain safe operation around crew and spacecraft"
+    ],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [],
+  "configuration": {
+    "arm_length": "17.6_meters",
+    "degrees_of_freedom": 6,
+    "joint_types": ["shoulder_yaw", "shoulder_pitch", "elbow_pitch", "wrist_pitch", "wrist_yaw", "wrist_roll"],
+    "control_modes": ["manual", "computer_assisted", "automatic"]
+  }
+}

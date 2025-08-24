@@ -1,0 +1,13 @@
+{
+  "utcs_mi_id": "EstándarUniversal:Sistema-Desarrollo-ARP4754A-001.00-AerospaceSpaceOperating-0027-v1.0-AMEDEOSystems-GeneracionHumana-SPACE-AmedeoPelliccia-ci-so027-RestoDeVidaUtil",
+  "component_id": "CI-SO027",
+  "component_name": "CanadarmSystem",
+  "version": "v1.0",
+  "category": "AerospaceSpaceOperating",
+  "certification_level": "ARP4754A", 
+  "design_assurance_level": "DAL-C",
+  "created_by": "Amedeo Pelliccia",
+  "program": "AMEDEO Systems",
+  "domain": "SPACE",
+  "lifecycle": "RestoDeVidaUtil"
+}

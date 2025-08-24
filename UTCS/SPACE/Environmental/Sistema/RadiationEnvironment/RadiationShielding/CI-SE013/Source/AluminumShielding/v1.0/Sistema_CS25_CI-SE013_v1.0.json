@@ -1,0 +1,18 @@
+{
+  "system_id": "CI-SE013",
+  "system_name": "AluminumShielding",
+  "regulation": "CS25",
+  "version": "v1.0",
+  "description": "Aluminum radiation shielding system for spacecraft protection",
+  "interfaces": [],
+  "requirements": [],
+  "test_cases": [],
+  "certification_evidence": [],
+  "safety_assessment": {
+    "failure_conditions": [],
+    "safety_objectives": [],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [],
+  "configuration": {}
+}
