@@ -1,0 +1,10 @@
+# Software Requirements Specification - Flight Modes
+# CI-AD010 AutopilotComputer
+# SRS-APC-FlightModes.docx
+# 
+# This document defines the high-level software requirements for flight mode
+# management in the Autopilot Computer for UTCS/AIR systems.
+# 
+# Document Version: 1.0
+# Created: 2024
+# Classification: DAL-C Compliance

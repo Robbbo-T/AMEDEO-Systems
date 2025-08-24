@@ -1,0 +1,39 @@
+{
+  "aircraft_tail_number": "F-WWAH",
+  "component_id": "CI-AD010",
+  "component_name": "AutopilotComputer",
+  "serial_number": "APC-001-2024-001",
+  "manufacturing_date": "2024-01-15",
+  "installation_date": "2024-02-10",
+  "current_software_version": "1.0",
+  "configuration_record": {
+    "hardware_revision": "Rev-C",
+    "firmware_version": "1.0.0",
+    "calibration_data": {
+      "pitch_gains": {
+        "proportional": 0.8,
+        "integral": 0.1,
+        "derivative": 0.05
+      },
+      "roll_gains": {
+        "proportional": 0.75,
+        "integral": 0.12,
+        "derivative": 0.04
+      }
+    },
+    "last_maintenance": "2024-02-20",
+    "next_maintenance_due": "2024-08-20",
+    "flight_hours": 1250.5,
+    "power_cycles": 847
+  },
+  "modification_history": [
+    {
+      "date": "2024-02-10",
+      "modification": "Initial installation",
+      "authority": "EASA",
+      "documentation": "STC-001-2024"
+    }
+  ],
+  "certification_status": "DAL-C Compliant",
+  "last_updated": "2024-02-20T14:30:00Z"
+}

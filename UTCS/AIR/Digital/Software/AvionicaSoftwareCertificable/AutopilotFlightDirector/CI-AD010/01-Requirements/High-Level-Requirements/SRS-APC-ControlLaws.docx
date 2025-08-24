@@ -1,0 +1,10 @@
+# Software Requirements Specification - Control Laws
+# CI-AD010 AutopilotComputer
+# SRS-APC-ControlLaws.docx
+# 
+# This document defines the high-level software requirements for control law
+# implementation in the Autopilot Computer for UTCS/AIR systems.
+# 
+# Document Version: 1.0
+# Created: 2024
+# Classification: DAL-C Compliance

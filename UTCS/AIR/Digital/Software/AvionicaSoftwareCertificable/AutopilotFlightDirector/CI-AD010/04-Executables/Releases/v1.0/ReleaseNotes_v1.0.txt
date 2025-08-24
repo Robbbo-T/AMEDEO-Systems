@@ -1,0 +1,33 @@
+# CI-AD010 AutopilotComputer Release Notes v1.0
+# UTCS/AIR System
+# DAL-C Compliant Release
+
+## Release Information
+- Version: 1.0
+- Release Date: 2024
+- Certification Level: DAL-C
+- Component: CI-AD010 AutopilotComputer
+
+## Features
+- Pitch damper control law implementation
+- Altitude hold mode logic
+- Basic autopilot functionality
+- DO-178C compliant development process
+
+## Verification Summary
+- All high-level requirements verified
+- All low-level requirements verified
+- Statement and decision coverage achieved
+- Integration testing completed
+
+## Known Limitations
+- Initial release with basic functionality
+- Advanced flight modes to be added in future releases
+
+## Installation
+- Deploy binary to target hardware
+- Verify checksum matches provided SHA256
+- Follow installation procedures in CMM
+
+## Contact
+For technical support, contact UTCS/AIR certification team.

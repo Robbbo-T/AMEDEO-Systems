@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testHarnessConfiguration>
+    <harness>
+        <name>CI-AD010 Test Harness</name>
+        <version>1.0</version>
+        <target>AutopilotComputer</target>
+        <classification>DAL-C Compliance</classification>
+    </harness>
+    
+    <environment>
+        <testFramework>Unity</testFramework>
+        <mockFramework>CMock</mockFramework>
+        <coverageAnalyzer>Gcov</coverageAnalyzer>
+        <buildSystem>Make</buildSystem>
+    </environment>
+    
+    <testConfiguration>
+        <unitTests>
+            <enabled>true</enabled>
+            <coverageThreshold>95</coverageThreshold>
+            <testDirectory>../05-Tests/UnitTests</testDirectory>
+        </unitTests>
+        <integrationTests>
+            <enabled>true</enabled>
+            <testDirectory>../05-Tests/IntegrationTests</testDirectory>
+        </integrationTests>
+        <systemTests>
+            <enabled>true</enabled>
+            <testDirectory>../05-Tests/SystemTests</testDirectory>
+        </systemTests>
+    </testConfiguration>
+    
+    <reportGeneration>
+        <formats>
+            <xml>enabled</xml>
+            <html>enabled</html>
+            <junit>enabled</junit>
+        </formats>
+        <outputDirectory>../05-Tests/Reports</outputDirectory>
+    </reportGeneration>
+</testHarnessConfiguration>

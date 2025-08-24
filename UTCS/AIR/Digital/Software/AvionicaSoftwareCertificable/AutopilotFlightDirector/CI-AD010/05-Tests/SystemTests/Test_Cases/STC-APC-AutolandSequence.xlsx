@@ -1,0 +1,17 @@
+# System Test Cases - APC Autoland Sequence
+# CI-AD010 AutopilotComputer
+# STC-APC-AutolandSequence.xlsx
+# 
+# This document contains system test cases for autoland sequence functionality
+# in the Autopilot Computer for UTCS/AIR systems.
+# 
+# Test Cases:
+# STC001: Autoland approach initiation
+# STC002: Autoland guidance tracking
+# STC003: Autoland flare execution
+# STC004: Autoland rollout control
+# STC005: Autoland abort scenarios
+# 
+# Document Version: 1.0
+# Created: 2024
+# Classification: DAL-C Compliance
