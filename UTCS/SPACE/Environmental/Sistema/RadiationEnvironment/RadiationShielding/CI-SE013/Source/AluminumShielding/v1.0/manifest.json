@@ -1,0 +1,13 @@
+{
+  "utcs_mi_id": "EstándarUniversal:Sistema-Desarrollo-CS25-001.00-AerospaceSpaceEnvironmental-0013-v1.0-AMEDEOSystems-GeneracionHumana-SPACE-AmedeoPelliccia-ci-se013-RestoDeVidaUtil",
+  "component_id": "CI-SE013",
+  "component_name": "AluminumShielding",
+  "version": "v1.0",
+  "category": "AerospaceSpaceEnvironmental",
+  "certification_level": "CS25",
+  "design_assurance_level": "DAL-C",
+  "created_by": "Amedeo Pelliccia",
+  "program": "AMEDEO Systems",
+  "domain": "SPACE",
+  "lifecycle": "RestoDeVidaUtil"
+}

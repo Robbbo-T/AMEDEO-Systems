@@ -1,0 +1,45 @@
+{
+  "system_id": "CI-SO005",
+  "system_name": "IonThruster",
+  "regulation": "ARP4754A",
+  "version": "v1.0",
+  "description": "Ion thruster system for spacecraft electric propulsion",
+  "interfaces": [
+    "power_processing_unit_interface",
+    "propellant_feed_interface",
+    "thrust_vector_control_interface",
+    "telemetry_interface"
+  ],
+  "requirements": [
+    "REQ-SO005-001: Generate thrust of 200mN ± 5% at nominal operating conditions",
+    "REQ-SO005-002: Achieve specific impulse > 3000 seconds",
+    "REQ-SO005-003: Operate continuously for mission duration of 10 years"
+  ],
+  "test_cases": [
+    "TC-SO005-001: Thrust performance test",
+    "TC-SO005-002: Specific impulse verification test",
+    "TC-SO005-003: Long duration endurance test"
+  ],
+  "certification_evidence": [
+    "ion_thruster_performance_report.pdf",
+    "life_test_results.pdf"
+  ],
+  "safety_assessment": {
+    "failure_conditions": [
+      "Thruster ignition failure",
+      "Propellant system leak"
+    ],
+    "safety_objectives": [
+      "Ensure safe thruster operation",
+      "Prevent propellant contamination"
+    ],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [],
+  "configuration": {
+    "propellant": "xenon",
+    "beam_voltage": "3000V",
+    "discharge_voltage": "30V",
+    "mass_flow_rate": "5.2mg/s"
+  }
+}

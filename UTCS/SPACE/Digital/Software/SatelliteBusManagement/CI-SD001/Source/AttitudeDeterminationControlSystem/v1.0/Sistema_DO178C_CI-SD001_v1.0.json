@@ -1,0 +1,49 @@
+{
+  "system_id": "CI-SD001",
+  "system_name": "AttitudeDeterminationControlSystem",
+  "regulation": "DO178C",
+  "version": "v1.0",
+  "description": "Satellite attitude determination and control system for precise spacecraft orientation",
+  "interfaces": [
+    "star_tracker_interface",
+    "sun_sensor_interface", 
+    "reaction_wheel_interface",
+    "magnetorquer_interface"
+  ],
+  "requirements": [
+    "REQ-SD001-001: Determine spacecraft attitude within 0.1 degree accuracy",
+    "REQ-SD001-002: Control spacecraft pointing within 0.05 degree precision",
+    "REQ-SD001-003: Maintain attitude control during all mission phases"
+  ],
+  "test_cases": [
+    "TC-SD001-001: Attitude determination accuracy test",
+    "TC-SD001-002: Pointing control precision test",
+    "TC-SD001-003: Fault tolerance test"
+  ],
+  "certification_evidence": [
+    "ADCS_verification_report.pdf",
+    "ADCS_validation_test_results.pdf"
+  ],
+  "safety_assessment": {
+    "failure_conditions": [
+      "Loss of attitude control",
+      "Incorrect pointing direction"
+    ],
+    "safety_objectives": [
+      "Maintain safe attitude in all operational modes",
+      "Prevent collision with other spacecraft"
+    ],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [
+    "CI-SD009",
+    "CI-SD010", 
+    "CI-SD011",
+    "CI-SD012"
+  ],
+  "configuration": {
+    "attitude_sensors": ["star_tracker", "sun_sensor", "gyroscope"],
+    "actuators": ["reaction_wheels", "magnetorquers"],
+    "control_modes": ["fine_pointing", "safe_mode", "slew_mode"]
+  }
+}

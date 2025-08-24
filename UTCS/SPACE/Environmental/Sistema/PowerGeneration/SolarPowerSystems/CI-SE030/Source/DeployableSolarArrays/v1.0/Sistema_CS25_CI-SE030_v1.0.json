@@ -1,0 +1,48 @@
+{
+  "system_id": "CI-SE030",
+  "system_name": "DeployableSolarArrays",
+  "regulation": "CS25",
+  "version": "v1.0",
+  "description": "Deployable solar array system for spacecraft power generation",
+  "interfaces": [
+    "power_distribution_interface",
+    "deployment_mechanism_interface",
+    "attitude_control_interface",
+    "thermal_management_interface"
+  ],
+  "requirements": [
+    "REQ-SE030-001: Generate minimum 5kW power at beginning of life",
+    "REQ-SE030-002: Deploy solar arrays within 30 minutes after launch",
+    "REQ-SE030-003: Maintain power generation efficiency > 85% throughout mission"
+  ],
+  "test_cases": [
+    "TC-SE030-001: Power generation test",
+    "TC-SE030-002: Deployment mechanism test",
+    "TC-SE030-003: Efficiency degradation test"
+  ],
+  "certification_evidence": [
+    "solar_array_performance_report.pdf",
+    "deployment_test_results.pdf"
+  ],
+  "safety_assessment": {
+    "failure_conditions": [
+      "Solar array deployment failure",
+      "Power generation loss"
+    ],
+    "safety_objectives": [
+      "Ensure reliable power generation",
+      "Maintain spacecraft operational capability"
+    ],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [
+    "CI-SO032",
+    "CI-SO033"
+  ],
+  "configuration": {
+    "array_type": "triple_junction_gaas",
+    "deployment_method": "spring_driven",
+    "power_output": "5000W_BOL",
+    "array_area": "50_m2"
+  }
+}

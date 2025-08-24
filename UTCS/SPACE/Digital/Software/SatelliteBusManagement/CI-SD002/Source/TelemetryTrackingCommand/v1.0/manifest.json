@@ -1,0 +1,13 @@
+{
+  "utcs_mi_id": "EstándarUniversal:Sistema-Desarrollo-DO178C-001.00-AerospaceSpaceDigital-0002-v1.0-AMEDEOSystems-GeneracionHumana-SPACE-AmedeoPelliccia-ci-sd002-RestoDeVidaUtil",
+  "component_id": "CI-SD002",
+  "component_name": "TelemetryTrackingCommand",
+  "version": "v1.0",
+  "category": "AerospaceSpaceDigital",
+  "certification_level": "DO-178C",
+  "design_assurance_level": "DAL-C",
+  "created_by": "Amedeo Pelliccia",
+  "program": "AMEDEO Systems",
+  "domain": "SPACE",
+  "lifecycle": "RestoDeVidaUtil"
+}
