@@ -30,7 +30,7 @@ class TestUTCSAIRStructure:
     def test_digital_software_structure(self):
         """Test Digital/Software/AvionicaSoftwareCertificable structure"""
         base_path = f"{BASE_DIR}/Digital/Software/AvionicaSoftwareCertificable"
-        assert os.path.exists(base_path), f"Digital software base path does not exist"
+        assert os.path.exists(base_path), "Digital software base path does not exist"
         
         # Check for FlightManagementSystem components
         fms_path = f"{base_path}/FlightManagementSystem"
