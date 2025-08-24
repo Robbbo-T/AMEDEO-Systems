@@ -1,0 +1,13 @@
+component:
+  id: CI-AD002
+  name: BackupFlightManagement
+  version: v1.0
+configuration:
+  diagnostic_parameters: {}
+  interface_settings: {}
+  operational_parameters: {}
+  safety_limits: {}
+validation:
+  acceptance_criteria: []
+  test_scenarios: []
+  verification_methods: []

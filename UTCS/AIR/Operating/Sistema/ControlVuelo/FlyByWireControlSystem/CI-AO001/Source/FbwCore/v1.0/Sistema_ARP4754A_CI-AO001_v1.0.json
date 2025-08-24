@@ -1,0 +1,18 @@
+{
+  "system_id": "CI-AO001",
+  "system_name": "FbwCore",
+  "regulation": "ARP4754A",
+  "version": "v1.0",
+  "description": "System definition for FbwCore",
+  "interfaces": [],
+  "requirements": [],
+  "test_cases": [],
+  "certification_evidence": [],
+  "safety_assessment": {
+    "failure_conditions": [],
+    "safety_objectives": [],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [],
+  "configuration": {}
+}

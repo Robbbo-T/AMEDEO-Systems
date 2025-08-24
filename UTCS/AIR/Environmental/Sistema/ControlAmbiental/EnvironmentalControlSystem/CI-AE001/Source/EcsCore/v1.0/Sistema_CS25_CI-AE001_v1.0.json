@@ -1,0 +1,18 @@
+{
+  "system_id": "CI-AE001",
+  "system_name": "EcsCore",
+  "regulation": "CS25",
+  "version": "v1.0",
+  "description": "System definition for EcsCore",
+  "interfaces": [],
+  "requirements": [],
+  "test_cases": [],
+  "certification_evidence": [],
+  "safety_assessment": {
+    "failure_conditions": [],
+    "safety_objectives": [],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [],
+  "configuration": {}
+}
