@@ -1,0 +1,13 @@
+{
+  "utcs_mi_id": "Est\u00e1ndarUniversal:Sistema-Desarrollo-DO178C-005.00-AerospaceOperating-0001-v1.0-AMEDEOSystems-GeneracionHumana-AIR-AmedeoPelliccia-ci-ao005-RestoDeVidaUtil",
+  "component_id": "CI-AO005",
+  "component_name": "OpticalControlSignals",
+  "version": "v1.0",
+  "category": "AerospaceOperating",
+  "certification_level": "DO-178C",
+  "design_assurance_level": "DAL-C",
+  "created_by": "Amedeo Pelliccia",
+  "program": "AMEDEO Systems",
+  "domain": "AIR",
+  "lifecycle": "RestoDeVidaUtil"
+}

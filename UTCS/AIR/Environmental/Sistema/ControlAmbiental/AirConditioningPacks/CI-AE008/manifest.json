@@ -1,0 +1,13 @@
+{
+  "utcs_mi_id": "Est\u00e1ndarUniversal:Sistema-Desarrollo-DO178C-008.00-AerospaceEnvironmental-0001-v1.0-AMEDEOSystems-GeneracionHumana-AIR-AmedeoPelliccia-ci-ae008-RestoDeVidaUtil",
+  "component_id": "CI-AE008",
+  "component_name": "PackController",
+  "version": "v1.0",
+  "category": "AerospaceEnvironmental",
+  "certification_level": "DO-178C",
+  "design_assurance_level": "DAL-C",
+  "created_by": "Amedeo Pelliccia",
+  "program": "AMEDEO Systems",
+  "domain": "AIR",
+  "lifecycle": "RestoDeVidaUtil"
+}

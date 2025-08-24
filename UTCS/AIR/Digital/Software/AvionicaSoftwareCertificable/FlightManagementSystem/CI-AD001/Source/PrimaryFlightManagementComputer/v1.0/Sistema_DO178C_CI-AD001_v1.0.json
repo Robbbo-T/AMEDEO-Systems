@@ -1,0 +1,18 @@
+{
+  "system_id": "CI-AD001",
+  "system_name": "PrimaryFlightManagementComputer",
+  "regulation": "DO178C",
+  "version": "v1.0",
+  "description": "System definition for PrimaryFlightManagementComputer",
+  "interfaces": [],
+  "requirements": [],
+  "test_cases": [],
+  "certification_evidence": [],
+  "safety_assessment": {
+    "failure_conditions": [],
+    "safety_objectives": [],
+    "dal_classification": "DAL-C"
+  },
+  "dependencies": [],
+  "configuration": {}
+}

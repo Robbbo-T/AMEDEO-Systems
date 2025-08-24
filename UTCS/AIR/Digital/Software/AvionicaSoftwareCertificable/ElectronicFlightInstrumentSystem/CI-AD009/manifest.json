@@ -1,0 +1,13 @@
+{
+  "utcs_mi_id": "Est\u00e1ndarUniversal:Sistema-Desarrollo-DO178C-009.00-AerospaceDigital-0001-v1.0-AMEDEOSystems-GeneracionHumana-AIR-AmedeoPelliccia-ci-ad009-RestoDeVidaUtil",
+  "component_id": "CI-AD009",
+  "component_name": "ElectronicCentralizedAircraftMonitor",
+  "version": "v1.0",
+  "category": "AerospaceDigital",
+  "certification_level": "DO-178C",
+  "design_assurance_level": "DAL-C",
+  "created_by": "Amedeo Pelliccia",
+  "program": "AMEDEO Systems",
+  "domain": "AIR",
+  "lifecycle": "RestoDeVidaUtil"
+}
