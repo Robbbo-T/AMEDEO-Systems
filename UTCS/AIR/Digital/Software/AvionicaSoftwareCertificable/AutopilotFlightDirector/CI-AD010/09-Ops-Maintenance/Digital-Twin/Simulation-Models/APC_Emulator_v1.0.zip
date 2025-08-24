@@ -1,0 +1,20 @@
+# APC Emulator v1.0
+# CI-AD010 AutopilotComputer Simulation Model
+# APC_Emulator_v1.0.zip
+# 
+# This archive contains the simulation model and emulator
+# for the CI-AD010 Autopilot Computer system.
+# 
+# Contents:
+# - Emulator executable
+# - Configuration files
+# - Test scenarios
+# - User manual
+# - API documentation
+# 
+# The emulator provides high-fidelity simulation of the
+# Autopilot Computer for training and maintenance purposes.
+# 
+# Version: 1.0
+# Created: 2024
+# Classification: DAL-C Compliance

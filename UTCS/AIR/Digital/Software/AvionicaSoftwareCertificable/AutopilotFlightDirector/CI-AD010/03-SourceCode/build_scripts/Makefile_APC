@@ -1,0 +1,47 @@
+# Makefile for CI-AD010 AutopilotComputer
+# UTCS/AIR System
+# DAL-C Compliant Build
+
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99 -O2 -DDAL_C_COMPLIANCE
+INCLUDES = -I../inc -I../inc/ControlLaws -I../inc
+SRCDIR = ../src
+OBJDIR = obj
+BINDIR = ../../04-Executables/Releases/v1.0
+
+# Source files
+SOURCES = $(SRCDIR)/core/apc_main.c \
+          $(SRCDIR)/modules/ControlLaws/pitch_damper.c \
+          $(SRCDIR)/modules/ModeLogic/altitude_hold.c
+
+# Object files
+OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+
+# Target executable
+TARGET = $(BINDIR)/apc_app_v1.0.bin
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS) | $(BINDIR)
+	$(CC) $(OBJECTS) -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(BINDIR):
+	mkdir -p $(BINDIR)
+
+clean:
+	rm -rf $(OBJDIR)
+	rm -f $(TARGET)
+
+.PHONY: test
+test:
+	@echo "Running unit tests..."
+	@echo "Tests would be executed here"

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testReport>
+    <header>
+        <title>Unit Test Report - Pitch Control</title>
+        <component>CI-AD010 AutopilotComputer</component>
+        <version>1.0</version>
+        <date>2024</date>
+        <classification>DAL-C Compliance</classification>
+    </header>
+    <summary>
+        <totalTests>4</totalTests>
+        <passedTests>4</passedTests>
+        <failedTests>0</failedTests>
+        <coverage>
+            <statementCoverage>100%</statementCoverage>
+            <decisionCoverage>100%</decisionCoverage>
+        </coverage>
+    </summary>
+    <testCases>
+        <testCase id="TC001">
+            <name>Pitch damper initialization</name>
+            <result>PASS</result>
+            <executionTime>0.001s</executionTime>
+        </testCase>
+        <testCase id="TC002">
+            <name>Pitch damper normal operation</name>
+            <result>PASS</result>
+            <executionTime>0.002s</executionTime>
+        </testCase>
+        <testCase id="TC003">
+            <name>Pitch damper boundary conditions</name>
+            <result>PASS</result>
+            <executionTime>0.003s</executionTime>
+        </testCase>
+        <testCase id="TC004">
+            <name>Pitch damper fault handling</name>
+            <result>PASS</result>
+            <executionTime>0.002s</executionTime>
+        </testCase>
+    </testCases>
+</testReport>

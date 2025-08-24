@@ -1,0 +1,16 @@
+# Unit Test Cases - APC Pitch Control
+# CI-AD010 AutopilotComputer
+# UTC-APC-PitchControl.xlsx
+# 
+# This document contains unit test cases for pitch control functionality
+# in the Autopilot Computer for UTCS/AIR systems.
+# 
+# Test Cases:
+# TC001: Pitch damper initialization
+# TC002: Pitch damper normal operation
+# TC003: Pitch damper boundary conditions
+# TC004: Pitch damper fault handling
+# 
+# Document Version: 1.0
+# Created: 2024
+# Classification: DAL-C Compliance

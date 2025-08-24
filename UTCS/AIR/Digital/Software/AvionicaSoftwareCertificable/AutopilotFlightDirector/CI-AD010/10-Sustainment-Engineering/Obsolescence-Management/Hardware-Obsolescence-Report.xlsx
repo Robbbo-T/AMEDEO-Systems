@@ -1,0 +1,27 @@
+# Hardware Obsolescence Report
+# CI-AD010 AutopilotComputer
+# Hardware-Obsolescence-Report.xlsx
+# 
+# HARDWARE OBSOLESCENCE TRACKING
+# Component: CI-AD010 Autopilot Computer
+# Report Date: 2024-06-01
+# 
+# CRITICAL COMPONENTS STATUS:
+# 
+# Component | Part Number | Vendor | EOL Status | Risk Level | Action Required
+# ----------|-------------|---------|------------|------------|----------------
+# Main CPU  | ARM926EJ-S  | ARM Ltd | Active     | LOW        | Monitor
+# Memory    | DDR3-1600   | Micron  | Active     | LOW        | Monitor  
+# Flash     | SLC NAND    | Samsung | EOL 2026   | MEDIUM     | Plan replacement
+# Ethernet  | KSZ8851-16  | Microchip| Active    | LOW        | Monitor
+# Power     | TPS65950    | TI      | EOL 2025   | HIGH       | Immediate action
+# 
+# RECOMMENDATIONS:
+# 1. Initiate design refresh for power management IC
+# 2. Qualify alternate flash memory suppliers
+# 3. Continue monitoring all other components
+# 4. Schedule next review for Q4 2024
+# 
+# Document Version: 1.0
+# Created: 2024
+# Classification: DAL-C Compliance
